@@ -12,7 +12,7 @@ const User = db.define('user', {
   fullName:{
     type: Sequelize.VIRTUAL,
     get(){
-      return this.getDataValue(firstName) + ' ' + this.getDataValue(lastName)
+      return this.getDataValue('firstName') + ' ' + this.getDataValue('lastName')
     }
   },
   email: {
