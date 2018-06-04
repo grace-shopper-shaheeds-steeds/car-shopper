@@ -8,6 +8,7 @@ const Session = db.define('session', {
     unique: false,
     allowNull: false
   },
+  
   status: {
       type: Sequelize.STRING,
       unique: false,
