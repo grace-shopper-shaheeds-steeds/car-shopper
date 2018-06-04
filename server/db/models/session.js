@@ -8,16 +8,6 @@ const Session = db.define('session', {
     unique: false,
     allowNull: false
   },
-  userId: {
-      type: Sequelize.INTEGER,
-      unique: false,
-      allowNull: false
-  },
-  productId: {
-      type: Sequelize.INTEGER,
-      unique: false,
-      allowNull: false
-  },
   status: {
       type: Sequelize.STRING,
       unique: false,
