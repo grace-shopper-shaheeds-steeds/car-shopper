@@ -7,7 +7,7 @@ router.post('/', async (req, res, next) => {
         const newProduct = await Product.create(req.body)
         res.json({message: 'Created product successfully!', product: newProduct})
     } catch (err){
-        console.error(err)
+        next(err)
     }
 })
 
