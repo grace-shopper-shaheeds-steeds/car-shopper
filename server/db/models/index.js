@@ -5,6 +5,7 @@ const Order = require('./order')
 const Session = require('./session')
 const OrderItem = require('./orderItem')
 const Address = require('./address')
+const Category = require('./category')
 
 Product.hasMany(Review)
 Review.belongsTo(Product)
@@ -23,6 +24,10 @@ OrderItem.belongsTo(Order)
 
 User.hasMany(Address)
 Address.hasMany(User)
+
+Product.hasMany(Category)
+Category.belongsTo(Product)
+
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
