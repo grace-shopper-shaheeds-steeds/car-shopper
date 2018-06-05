@@ -46,6 +46,31 @@ describe('Product routes', () => {
     
   })
 
+  describe('POST ROUTES', () =>{
+    const sampleProduct2 = {
+      title: 'Prius',
+      description: 'fastest car alive',
+      price: 10.5,
+      inventoryQuantity: 1,
+      photo: 'photoTest',
+      averageRating: 3.5
+    }
+    it('POST /api/products', async () =>{
+      await request(app)
+        .post('/api/products')
+        .send(sampleProduct2)
+        .expect(200)
+        const newProduct = await Product.findOne({
+          where:{
+            title: 'Prius'
+          }
+        })
+        expect(!!newProduct).to.be.equal(true)
+    })
+ 
+  })
+
+
   describe('PUT ROUTES', () => {
     const sampleProduct = {
       title: 'Prius',
