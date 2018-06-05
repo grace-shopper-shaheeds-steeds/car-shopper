@@ -10,3 +10,5 @@ const OrderItem = db.define('orderItem', {
   }
 
 })
+
+module.exports = OrderItem
