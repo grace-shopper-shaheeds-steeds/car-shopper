@@ -8,7 +8,6 @@ const Session = db.define('session', {
     unique: false,
     allowNull: false
   },
-  
   status: {
       type: Sequelize.STRING,
       unique: false,
@@ -16,3 +15,6 @@ const Session = db.define('session', {
   }
 
 })
+
+
+module.exports = Session
