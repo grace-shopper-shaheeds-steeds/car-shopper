@@ -2,14 +2,25 @@ const db = require('../db.js')
 const Sequelize = require('sequelize')
 
 const Product = db.define('product', {
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   description: {
     type: Sequelize.TEXT,
+    allowNull: false
+  },
+  price: {
+    type: Sequelize.FLOAT,
+    allowNull: false
+  },
+  inventoryQuantity: {
+    type: Sequelize.INTEGER,
+    allowNull: false
   },
   photo: {
-    type: Sequelize.TEXT,
-  },
-  categories: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+    type: Sequelize.STRING,
+    defaultValue: 'default_car.png'
   },
   averageRating: {
     type: Sequelize.FLOAT
