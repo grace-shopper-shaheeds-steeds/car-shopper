@@ -46,4 +46,13 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.delete('/:id', async (req, res, next) =>{
+    await Product.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    res.json({message: 'Successfully deleted'})
+})
+
 module.exports = router
