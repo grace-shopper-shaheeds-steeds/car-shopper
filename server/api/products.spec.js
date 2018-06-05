@@ -10,7 +10,7 @@ describe('Product routes', () => {
     return db.sync({force: true})
   })
 
-  describe('/api/products/', () => {
+  describe('GET ROUTES', () => {
     const sampleProduct = {
       title: 'Prius',
       description: 'fastest car alive',
@@ -33,5 +33,69 @@ describe('Product routes', () => {
           expect(res.body[0].title).to.be.equal('Prius')
         })
     })
+
+    it('GET /api/products/1', () => {
+      return request(app)
+        .get('/api/products/1')
+        .expect(200)
+        .then(res => {
+          expect(res.body).to.be.an('object')
+          expect(res.body.title).to.be.equal('Prius')
+        })
+    })
+    
   })
+
+  describe('PUT ROUTES', () => {
+    const sampleProduct = {
+      title: 'Prius',
+      description: 'fastest car alive',
+      price: 10.5,
+      inventoryQuantity: 1,
+      photo: 'photoTest',
+      averageRating: 3.5
+    }
+
+    const newTitle = { title: 'Tesla'}
+
+    beforeEach(() => {
+      return Product.create(sampleProduct)
+    })
+
+    it('PUT /api/products/:id', async () => {
+      await request(app)
+        .put('/api/products/1')
+        .send(newTitle)
+        const res = await Product.findAll()
+        expect(res).to.be.an('array')
+        expect(res[0].title).to.be.equal('Tesla')
+
+    })
+  })
+
+  describe('DELETE ROUTES', () => {
+    const sampleProduct = {
+      title: 'Prius',
+      description: 'fastest car alive',
+      price: 10.5,
+      inventoryQuantity: 1,
+      photo: 'photoTest',
+      averageRating: 3.5
+    }
+
+    beforeEach(() => {
+      return Product.create(sampleProduct)
+    })
+
+    it('DELETE /api/products/:id', async () => {
+      await request(app)
+        .delete('/api/products/1')
+        .expect(200)
+        const res = await Product.findAll()
+        expect(res).to.be.an('array')
+        expect(res.length).to.be.equal(0)
+
+    })
+  })
+
 })
