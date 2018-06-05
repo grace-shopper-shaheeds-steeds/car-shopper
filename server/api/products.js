@@ -7,7 +7,7 @@ router.post('/', async (req, res, next) => {
         const newProduct = await Product.create(req.body)
         res.json({message: 'Created product successfully!', product: newProduct})
     } catch (err){
-        next(err)
+        console.error(err)
     }
 })
 
@@ -44,6 +44,15 @@ router.get('/:id', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
+})
+
+router.delete('/:id', async (req, res, next) =>{
+    await Product.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    res.json({message: 'Successfully deleted'})
 })
 
 module.exports = router
