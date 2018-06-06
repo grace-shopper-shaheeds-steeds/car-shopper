@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router()
-const {Category} = require('../db/models/category')
+const Category = require('../db/models/category')
 module.exports = router
 
 router.param('id', (req, res, next, id) => {
