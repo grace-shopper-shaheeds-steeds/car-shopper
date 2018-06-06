@@ -33,3 +33,9 @@ export const addNewProduct = newProduct => {
         dispatch(addProduct(createdProduct))
     }
 }
+
+export const updateProductThunk = updatedProduct =>{
+    return async (dispatch) =>{
+        await axios.put(`/api/products/${updatedProduct.id}`, updatedProduct)
+    }
+}

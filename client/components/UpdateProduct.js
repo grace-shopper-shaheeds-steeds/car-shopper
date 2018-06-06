@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import {addNewProduct} from '../store'
+import {updateProductThunk} from '../store'
 
-class AddProduct extends Component {
-    constructor() {
+class UpdateProduct extends Component {
+    constructor(){
         super();
         this.state = {
             title: '',
@@ -14,15 +14,16 @@ class AddProduct extends Component {
             inventoryQuantity: '',
         }
     }
+
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
         })
     }
-
     handleSubmit = event => {
-        event.preventDefault()
-        this.props.createProduct(this.state)
+        event.preventDefault();
+        this.props.updateProduct(this.state)
+
     }
 
     render() {
@@ -47,11 +48,11 @@ class AddProduct extends Component {
             </form>
         )
     }
-
 }
 
 
-const mapDispatchToProps = dispatch => {
-    return {createProduct: (newProduct) => dispatch(addNewProduct(newProduct))}
+const mapDispatchToProps = dispatch =>{
+    return {updateProduct: (updatedProduct) => dispatch(updateProductThunk(updatedProduct))}
 }
-export default connect(null, mapDispatchToProps)(AddProduct)
+
+export default connect(null, mapDispatchToProps)(UpdateProduct)
