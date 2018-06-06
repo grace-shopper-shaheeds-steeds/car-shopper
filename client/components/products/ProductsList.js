@@ -2,22 +2,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import CategoryFilter from './CategoryFilter'
 import ProductCard from './ProductCard'
-import  { getAllProducts } from '../../store'
-
-import { demoCategories } from './tempProductData'
+import  { getAllProducts, getAllCategories } from '../../store'
 
 export class ProductsList extends Component {
 
   constructor(){
     super()
     this.state = {
-      categories: demoCategories,
       display: 'all'
     }
   }
 
   componentDidMount () {
     this.props.fetchProducts()
+    this.props.fetchCategories()
   }
 
   handleCategoryClick = (event) => {
@@ -31,7 +29,7 @@ export class ProductsList extends Component {
   }
 
   render(){
-    const products = this.props.products
+    const { products, categories } = this.props
     return (
       <div className="container">
 
@@ -40,10 +38,13 @@ export class ProductsList extends Component {
         </div>
 
         <div className="row">
-          <CategoryFilter
-            catSelect={this.handleCategoryClick}
-            categories={this.state.categories}
-          />
+          {
+            categories &&
+            <CategoryFilter
+              catSelect={this.handleCategoryClick}
+              categories={categories}
+            />
+          }
         </div>
 
         <div className="row">
@@ -65,7 +66,8 @@ export class ProductsList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.productReducer.allProducts
+    products: state.productReducer.allProducts,
+    categories: state.productReducer.allCategories
   }
 }
 
@@ -73,6 +75,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchProducts: () => {
       dispatch(getAllProducts())
+    },
+    fetchCategories: () => {
+      dispatch(getAllCategories())
     }
   }
 }
