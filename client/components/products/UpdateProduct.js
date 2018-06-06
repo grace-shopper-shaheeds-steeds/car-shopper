@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import {updateProductThunk} from '../store'
+import {updateProductThunk} from '../../store'
 
 class UpdateProduct extends Component {
     constructor(){
@@ -20,14 +20,17 @@ class UpdateProduct extends Component {
             [event.target.name]: event.target.value
         })
     }
-    handleSubmit = event => {
+    handleSubmit = async event => {
         event.preventDefault();
-        this.props.updateProduct(this.state)
-
+        const id = this.props.match.params.productId
+        this.props.updateProduct(this.state, id)
+        //await axios.put(`/api/products/${id}`, this.state)
     }
 
     render() {
         return (
+            <div>
+            <h1>Update Form</h1>
             <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
                 <label htmlFor="title">title:</label>
                 <input name="title" type="text"  />
@@ -46,13 +49,14 @@ class UpdateProduct extends Component {
 
                 <button type="submit">Submit</button>
             </form>
+            </div>
         )
     }
 }
 
 
 const mapDispatchToProps = dispatch =>{
-    return {updateProduct: (updatedProduct) => dispatch(updateProductThunk(updatedProduct))}
+    return {updateProduct: (updatedProduct, productId) => dispatch(updateProductThunk(updatedProduct, productId))}
 }
 
 export default connect(null, mapDispatchToProps)(UpdateProduct)
