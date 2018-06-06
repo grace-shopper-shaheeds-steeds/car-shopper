@@ -12,7 +12,7 @@ const Categories = ({categories, catSelect}) => {
       <li className="nav-item">
         <a
           onClick={(event) => { catSelect(event) }}
-          id="all"
+          id={0}
           className="nav-link active"
           href="#">All</a>
       </li>

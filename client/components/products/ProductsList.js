@@ -9,7 +9,7 @@ export class ProductsList extends Component {
   constructor(){
     super()
     this.state = {
-      display: 'all'
+      display: 0
     }
   }
 
@@ -20,11 +20,12 @@ export class ProductsList extends Component {
 
   handleCategoryClick = (event) => {
     event.preventDefault()
+    const catId = event.target.id
 
-    console.log(`Category ${event.target.id} selected!`)
+    console.log(`Category ${catId} selected!`)
 
     this.setState({
-      display: event.target.id
+      display: catId
     })
   }
 
@@ -48,15 +49,22 @@ export class ProductsList extends Component {
         </div>
 
         <div className="row">
-          { products &&
-            products.map((product) => {
+          {
+            products &&
+            products.filter((product) => {
+              if (this.state.display) {
+                return product.categories[0].id === Number(this.state.display)
+              }
+            })
+            .map((item) => {
               return (
-                <div key={product.id} className="col-md-auto">
-                  <ProductCard product={product} />
+                <div key={item.id} className="col-md-auto">
+                  <ProductCard product={item} />
                 </div>
               )
             })
           }
+
         </div>
 
       </div>
