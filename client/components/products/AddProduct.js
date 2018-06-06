@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import {addNewProduct} from '../store'
+import {addNewProduct} from '../../store'
 
 class AddProduct extends Component {
     constructor() {
@@ -22,16 +22,7 @@ class AddProduct extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        console.log('this.state: ', this.state)
-        console.log('this.props.createProduct: ', this.props.addCreatProduct)
         this.props.createProduct(this.state)
-        // this.setState({
-        //     title: '',
-        //     description: '',
-        //     price: '',
-        //     inventoryQuantity: '',
-        //     photo: null,
-        // })
     }
 
     render() {

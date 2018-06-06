@@ -32,7 +32,6 @@ export class ProductsList extends Component {
 
   render(){
     const products = this.props.products
-    console.log(products)
     return (
       <div className="container">
 

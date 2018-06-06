@@ -1,6 +1,3 @@
-import { createStore, applyMiddleware } from 'redux';
-import loggingMiddleware from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
 import axios from 'axios'
 
 const ADD_PRODUCT = 'ADD_PRODUCT'
