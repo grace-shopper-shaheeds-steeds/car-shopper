@@ -1,15 +1,15 @@
 
 [
   [
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/dPjEQa1.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "productCategory": 1 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/dPjEQa1.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/dPjEQa1.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/dPjEQa1.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/dPjEQa1.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/dPjEQa1.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/dPjEQa1.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/dPjEQa1.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/dPjEQa1.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 }
+    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "productCategory": 1 },
+    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
+    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
+    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
+    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
+    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
+    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
+    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 },
+    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1 }
   ],
   [
     {"category": "Muscle Car" },

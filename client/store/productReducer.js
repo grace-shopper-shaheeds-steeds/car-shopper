@@ -1,9 +1,8 @@
-import { createStore, applyMiddleware } from 'redux';
-import loggingMiddleware from 'redux-logger'; 
-import thunkMiddleware from 'redux-thunk';
 import axios from 'axios'
 
 const ADD_PRODUCT = 'ADD_PRODUCT'
+const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
+const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 
 const addProduct = newProduct => {
     return {
@@ -12,30 +11,65 @@ const addProduct = newProduct => {
     }
 }
 
-const initialState = {
-    allProducts: [],
-    singleProduct: {}
+const gotAllProducts = (products) => {
+  return {
+    type: GET_ALL_PRODUCTS,
+    products
+  }
 }
 
-export const productReducer = (state=initialState, action) =>{
-    switch(action.type){
-        case ADD_PRODUCT:
-            return {...state, allProducts: [...state.allProducts, action.newProduct]}
-        default:
-            return state
-    }
+const gotAllCategories = (categories) => {
+  return {
+    type: GET_ALL_CATEGORIES,
+    categories
+  }
 }
 
 export const addNewProduct = newProduct => {
-    return async(dispatch) =>{
+    return async(dispatch) => {
         const res = await axios.post('/api/products', newProduct)
         const createdProduct = res.data
         dispatch(addProduct(createdProduct))
     }
 }
+export const getAllProducts = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get('/api/products')
+    const action = gotAllProducts(data)
+    dispatch(action)
+  }
+}
+
+export const getAllCategories = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get('/api/categories')
+    const action = gotAllCategories(data)
+    dispatch(action)
+  }
+}
 
 export const updateProductThunk = updatedProduct =>{
-    return async (dispatch) =>{
-        await axios.put(`/api/products/${updatedProduct.id}`, updatedProduct)
-    }
+  return async (dispatch) =>{
+      await axios.put(`/api/products/${updatedProduct.id}`, updatedProduct)
+  }
 }
+
+const initialState = {
+  allProducts: [],
+  allCategories: [],
+  singleProduct: {}
+}
+
+export const productReducer = ( state = initialState, action) =>{
+  switch (action.type){
+      case ADD_PRODUCT:
+          return {...state, allProducts: [...state.allProducts, action.newProduct]}
+      case GET_ALL_PRODUCTS:
+        return {...state, allProducts: action.products}
+      case GET_ALL_CATEGORIES:
+        return {...state, allCategories: action.categories}
+      default:
+          return state
+  }
+}
+
