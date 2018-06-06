@@ -33,5 +33,3 @@ export const addNewProduct = newProduct => {
         dispatch(addProduct(createdProduct))
     }
 }
-
-

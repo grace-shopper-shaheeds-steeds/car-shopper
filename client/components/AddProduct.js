@@ -26,13 +26,13 @@ class AddProduct extends Component {
         console.log('this.state: ', this.state)
         console.log('this.props.createProduct: ', this.props.addCreatProduct)
         this.props.createProduct(this.state)
-        this.setState({
-            title: '',
-            description: '',
-            price: '',
-            inventoryQuantity: '',
-            photo: null,
-        })
+        // this.setState({
+        //     title: '',
+        //     description: '',
+        //     price: '',
+        //     inventoryQuantity: '',
+        //     photo: null,
+        // })
     }
 
     render() {
