@@ -10,12 +10,21 @@ export class ProductsList extends Component {
     super()
     this.state = {
       products: demoProducts,
-      categories: demoCategories
+      categories: demoCategories,
+      display: 'all'
     }
   }
 
-  render(){
+  handleCategoryClick = (event) => {
+    event.preventDefault()
+    this.setState({
+      display: event.target.id
+    }, () => {
+      console.log(this.state)
+    })
+  }
 
+  render(){
     return (
       <div className="container">
 
@@ -24,7 +33,10 @@ export class ProductsList extends Component {
         </div>
 
         <div className="row">
-          <CategoryFilter categories={this.state.categories} />
+          <CategoryFilter
+            catSelect={this.handleCategoryClick}
+            categories={this.state.categories}
+          />
         </div>
 
         <div className="row">

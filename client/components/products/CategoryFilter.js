@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Categories = ({categories}) => {
+const Categories = ({categories, catSelect}) => {
 
   return (
     <ul className="nav">
@@ -8,11 +8,24 @@ const Categories = ({categories}) => {
       <li className="nav-item">
         <a className="nav-link disabled" href="#">Sort:</a>
       </li>
+
+      <li className="nav-item">
+        <a
+          onClick={(event) => { catSelect(event) }}
+          className="nav-link active"
+          href="#">All</a>
+      </li>
       {
         categories.map((cat) => {
           return (
             <li key={cat.id} className="nav-item">
-              <a className="nav-link active" href="#">{cat.category}</a>
+              <a
+                onClick={(event) => { catSelect(event) }}
+                id={cat.id}
+                className="nav-link"
+                href="/">
+                {cat.category}
+              </a>
             </li>
           )
         })
