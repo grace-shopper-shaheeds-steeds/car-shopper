@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+
 
 const style = {
   component: {
@@ -17,7 +19,8 @@ const ProductCard = ({product}) => {
       <div className="card-body">
         <h5 className="card-title">{product.title}</h5>
         <p className="card-text">{product.description}</p>
-        <a href="#" className="float-left" style={style.link}>edit</a>
+        {/* <a href="#" className="float-left" style={style.link}>edit</a> */}
+        <Link to={`/updateProduct/${product.id}`} className="float-left" style={style.link}>edit</Link>
         <a href="#" className="btn btn-primary float-right">Add to cart</a>
       </div>
     </div>

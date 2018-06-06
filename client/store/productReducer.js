@@ -3,6 +3,7 @@ import axios from 'axios'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
+const UPDATED_PRODUCT = 'UPDATED_PRODUCT'
 
 const addProduct = newProduct => {
     return {
@@ -10,6 +11,7 @@ const addProduct = newProduct => {
         newProduct
     }
 }
+
 
 const gotAllProducts = (products) => {
   return {
@@ -48,9 +50,13 @@ export const getAllCategories = () => {
   }
 }
 
-export const updateProductThunk = updatedProduct =>{
+export const updateProductThunk = (updatedProduct, productId) =>{
   return async (dispatch) =>{
-      await axios.put(`/api/products/${updatedProduct.id}`, updatedProduct)
+    console.log('productId: ', productId)
+      await axios.put(`/api/products/${productId}`, updatedProduct)
+      const res = await axios.get(`/api/products`)
+      const updatedProductList = res.data;
+      dispatch(gotAllProducts(updatedProductList))
   }
 }
 
