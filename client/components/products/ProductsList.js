@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import CategoryFilter from './CategoryFilter'
 import ProductCard from './ProductCard'
 
-import { demoProducts } from './tempProductData'
+import { demoProducts, demoCategories } from './tempProductData'
 
 export class ProductsList extends Component {
 
   constructor(){
     super()
     this.state = {
-      products: demoProducts
+      products: demoProducts,
+      categories: demoCategories
     }
   }
 
@@ -23,11 +24,10 @@ export class ProductsList extends Component {
         </div>
 
         <div className="row">
-          <CategoryFilter />
+          <CategoryFilter categories={this.state.categories} />
         </div>
 
         <div className="row">
-
           {
             this.state.products.map((product) => {
               return (
@@ -37,7 +37,6 @@ export class ProductsList extends Component {
               )
             })
           }
-
         </div>
 
       </div>
