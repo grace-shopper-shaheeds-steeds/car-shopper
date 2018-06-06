@@ -32,7 +32,6 @@ export const addNewProduct = newProduct => {
         dispatch(addProduct(createdProduct))
     }
 }
-
 export const getAllProducts = () => {
   return async (dispatch) => {
     const { data } = await axios.get('/api/products')
@@ -46,6 +45,12 @@ export const getAllCategories = () => {
     const { data } = await axios.get('/api/categories')
     const action = gotAllCategories(data)
     dispatch(action)
+  }
+}
+
+export const updateProductThunk = updatedProduct =>{
+  return async (dispatch) =>{
+      await axios.put(`/api/products/${updatedProduct.id}`, updatedProduct)
   }
 }
 
@@ -67,3 +72,4 @@ export const productReducer = ( state = initialState, action) =>{
           return state
   }
 }
+
