@@ -23,6 +23,7 @@ class AddProduct extends Component {
     handleSubmit = event => {
         event.preventDefault()
         this.props.createProduct(this.state)
+        //this.props.history.push("/productList")
     }
 
     render() {
