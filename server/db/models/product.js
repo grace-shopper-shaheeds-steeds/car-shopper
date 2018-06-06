@@ -10,10 +10,12 @@ const Product = db.define('product', {
     type: Sequelize.TEXT,
     allowNull: false
   },
+  // REVIEW: price as float?
   price: {
     type: Sequelize.FLOAT,
     allowNull: false
   },
+  // REVIEW: how do you plan to track inventory
   inventoryQuantity: {
     type: Sequelize.INTEGER,
     allowNull: false

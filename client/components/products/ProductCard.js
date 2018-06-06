@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-
+// REVIEW: is this being styled with css or inlined styles?
 const style = {
   component: {
     width: '15rem',

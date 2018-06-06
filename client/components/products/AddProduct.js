@@ -23,6 +23,8 @@ class AddProduct extends Component {
     handleSubmit = event => {
         event.preventDefault()
         this.props.createProduct(this.state)
+      // REVIEW: what happens when product is created successfully
+      //         what is the plan to make this an administrator only feature?
     }
 
     render() {
