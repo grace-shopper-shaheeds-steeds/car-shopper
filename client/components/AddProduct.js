@@ -11,8 +11,7 @@ class AddProduct extends Component {
             title: '',
             description: '',
             price: '',
-            inventoryQuantity: '',
-            photo: null,
+            inventoryQuantity: ''
         }
     }
     handleChange = event => {

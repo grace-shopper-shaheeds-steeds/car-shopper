@@ -1,30 +1,38 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import CategoryFilter from './CategoryFilter'
 import ProductCard from './ProductCard'
+import  { getAllProducts } from '../../store'
 
-import { demoProducts, demoCategories } from './tempProductData'
+import { demoCategories } from './tempProductData'
 
 export class ProductsList extends Component {
 
   constructor(){
     super()
     this.state = {
-      products: demoProducts,
       categories: demoCategories,
       display: 'all'
     }
   }
 
+  componentDidMount () {
+    this.props.fetchProducts()
+  }
+
   handleCategoryClick = (event) => {
     event.preventDefault()
+
+    console.log(`Category ${event.target.id} selected!`)
+
     this.setState({
       display: event.target.id
-    }, () => {
-      console.log(this.state)
     })
   }
 
   render(){
+    const products = this.props.products
+    console.log(products)
     return (
       <div className="container">
 
@@ -40,8 +48,8 @@ export class ProductsList extends Component {
         </div>
 
         <div className="row">
-          {
-            this.state.products.map((product) => {
+          { products &&
+            products.map((product) => {
               return (
                 <div key={product.id} className="col-md-auto">
                   <ProductCard product={product} />
@@ -56,4 +64,18 @@ export class ProductsList extends Component {
   }
 }
 
-export default ProductsList
+const mapStateToProps = (state) => {
+  return {
+    products: state.productReducer.allProducts
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProducts: () => {
+      dispatch(getAllProducts())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsList)
