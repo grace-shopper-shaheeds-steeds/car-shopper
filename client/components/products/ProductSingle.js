@@ -12,11 +12,21 @@ export class ProductSingle extends Component {
   render () {
     const { product } = this.props
     return (
-      <div>
-        {
-          product &&
-          <h3>made it! {product.title}</h3>
-        }
+      <div className="container">
+          {
+            product &&
+            <div className="row">
+              <div className="col-8">
+                <img src={product.photo} />
+              </div>
+              <div className="col-4">
+                <h5>ID: {product.id} - {product.title}</h5>
+                <h5>Price: ${product.price}</h5>
+                <p>Description: {product.description}</p>
+                <button type="button" className="btn btn-primary">Add to cart</button>
+              </div>
+            </div>
+          }
       </div>
     )
   }
