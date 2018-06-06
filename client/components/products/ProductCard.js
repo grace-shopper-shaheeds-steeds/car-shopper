@@ -17,6 +17,7 @@ const ProductCard = ({product}) => {
       <div className="card-body">
         <h5 className="card-title">{product.title}</h5>
         <p className="card-text">{product.categories[0].category}</p>
+        <p className="card-text">ID: {product.id}</p>
         <p className="card-text">{product.description}</p>
         <a href="#" className="float-left" style={style.link}>edit</a>
         <a href="#" className="btn btn-primary float-right">Add to cart</a>

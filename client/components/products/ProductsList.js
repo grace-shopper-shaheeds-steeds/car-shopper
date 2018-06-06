@@ -20,10 +20,7 @@ export class ProductsList extends Component {
 
   handleCategoryClick = (event) => {
     event.preventDefault()
-    const catId = event.target.id
-
-    console.log(`Category ${catId} selected!`)
-
+    const catId = Number(event.target.id)
     this.setState({
       display: catId
     })
@@ -55,6 +52,7 @@ export class ProductsList extends Component {
               if (this.state.display) {
                 return product.categories[0].id === Number(this.state.display)
               }
+              return product
             })
             .map((item) => {
               return (

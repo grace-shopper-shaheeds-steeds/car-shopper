@@ -14,7 +14,9 @@ const Categories = ({categories, catSelect}) => {
           onClick={(event) => { catSelect(event) }}
           id={0}
           className="nav-link active"
-          href="#">All</a>
+          href="#">
+          All
+        </a>
       </li>
       {
         categories.map((cat) => {
