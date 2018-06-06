@@ -4,6 +4,7 @@ const Category = require('../db/models/category')
 module.exports = router
 
 router.param('id', (req, res, next, id) => {
+  // REVIEW: consistency of indentation
     Category.findById(id)
       .then(item => {
         // if no item found, send 404
@@ -28,6 +29,7 @@ router.get('/', (req, res, next ) => {
 
 // post a new category to product
 router.post('/', (req, res, next ) => {
+  // REVIEW: unsafe use of req.body
     Category.create(req.body)
       .then(product => {
         res.send(product);
@@ -40,7 +42,7 @@ router.get('/:id', (req, res, next) => {
     // router.param has now taken care of this!!
     res.send(req.item);
   });
-  
+
 // update a particular category
 router.put('/:id', (req, res, next) => {
     // we already got a category from the db with router.param
@@ -51,9 +53,10 @@ router.put('/:id', (req, res, next) => {
     .catch(next);
 });
 
-  
+
 // post a new category to product
 router.delete('/:id', (req, res, next) => {
+  // REVIEW: Authorization
     req.item.destroy()
     .then(item => {
     res.sendStatus(202);
@@ -61,4 +64,4 @@ router.delete('/:id', (req, res, next) => {
     .catch(next);
 });
 
-    
+

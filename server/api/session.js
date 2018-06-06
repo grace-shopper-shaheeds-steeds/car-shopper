@@ -15,9 +15,10 @@ router.param('id', (req, res, next, id) => {
       })
       .catch(next);
   });
-  
+
 // post a new item to cart
 // req.body is the item object
+// REVIEW: let's talk about the use of session
 router.post('/session', (req, res, next) => {
     Session.create(req.body)
       .then(item => {
@@ -25,7 +26,7 @@ router.post('/session', (req, res, next) => {
       })
       .catch(next);
   });
-  
+
 router.delete('/session/:id', (req, res, next) => {
     req.item.remove()
     .then(item => {
@@ -41,4 +42,4 @@ router.put('/session/:id', (req, res, next) => {
         })
         .catch(next);
     });
-    
+

@@ -56,7 +56,21 @@ class UpdateProduct extends Component {
 
 
 const mapDispatchToProps = dispatch =>{
+  // REVIEW: LONG BOYE
     return {updateProduct: (updatedProduct, productId) => dispatch(updateProductThunk(updatedProduct, productId))}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export default connect(null, mapDispatchToProps)(UpdateProduct)

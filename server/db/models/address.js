@@ -18,6 +18,7 @@ const Address = db.define('address', {
         type: Sequelize.STRING
     },
     addressType: {
+      // REVIEW: home vs shipping
         type: Sequelize.ENUM('billing', 'home')
     }
 

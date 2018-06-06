@@ -43,7 +43,7 @@ describe('Product routes', () => {
           expect(res.body.title).to.be.equal('Prius')
         })
     })
-    
+
   })
 
   describe('POST ROUTES', () =>{
@@ -60,6 +60,8 @@ describe('Product routes', () => {
         .post('/api/products')
         .send(sampleProduct2)
         .expect(200)
+      // REVIEW: are we using then or async/await?
+      //  also, indentation here is a little confusing
         const newProduct = await Product.findOne({
           where:{
             title: 'Prius'
@@ -67,7 +69,7 @@ describe('Product routes', () => {
         })
         expect(!!newProduct).to.be.equal(true)
     })
- 
+
   })
 
 
