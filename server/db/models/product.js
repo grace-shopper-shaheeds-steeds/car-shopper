@@ -20,7 +20,7 @@ const Product = db.define('product', {
   },
   photo: {
     type: Sequelize.STRING,
-    defaultValue: 'default_car.png'
+    defaultValue: 'https://i.imgur.com/dPjEQa1.png'
   },
   averageRating: {
     type: Sequelize.FLOAT

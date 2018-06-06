@@ -1,25 +1,27 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const style = {
   component: {
     width: '15rem',
     marginBottom: 10
+  },
+  link: {
+    paddingTop: '.375rem'
   }
 }
 
-export class ProductCard extends Component {
-  render(){
-    return (
-      <div className="card" style={style.component}>
-        <img className="card-img-top" src="https://i.imgur.com/dPjEQa1.png" alt="Card image cap" />
-        <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" className="btn btn-primary">Go somewhere</a>
-        </div>
+const ProductCard = ({product}) => {
+  return (
+    <div className="card" style={style.component}>
+      <img className="card-img-top" src={product.photo} alt={product.title} />
+      <div className="card-body">
+        <h5 className="card-title">{product.title}</h5>
+        <p className="card-text">{product.description}</p>
+        <a href="#" className="float-left" style={style.link}>edit</a>
+        <a href="#" className="btn btn-primary float-right">Add to cart</a>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default ProductCard
