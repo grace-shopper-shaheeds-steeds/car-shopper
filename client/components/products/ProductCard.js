@@ -18,7 +18,11 @@ const ProductCard = ({product}) => {
     <div className="card" style={style.component}>
       <img className="card-img-top" src={product.photo} alt={product.title} />
       <div className="card-body">
-        <h5 className="card-title">{product.title}</h5>
+        {/* <h5 className="card-title">{product.title}</h5> */}
+        <h5>
+          <Link to={`/products/${product.id}`}>{product.title}</Link>
+        </h5>
+
         {
           product.categories.length > 0 &&
           <p className="card-text">{product.categories[0].category}</p>

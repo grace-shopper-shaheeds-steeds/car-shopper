@@ -74,7 +74,7 @@ export const getSingleProduct = productId =>{
     const res = await axios.get(`/api/products/${productId}`)
     const singleProduct = res.data
     dispatch(gotSingleProduct(singleProduct))
-    
+
   }
 }
 
@@ -92,7 +92,7 @@ export const productReducer = ( state = initialState, action) =>{
         return {...state, allProducts: action.products}
       case GET_ALL_CATEGORIES:
         return {...state, allCategories: action.categories}
-      case GET_SINGLE_PRODUCT: 
+      case GET_SINGLE_PRODUCT:
         return {...state, singleProduct: action.product}
       default:
           return state

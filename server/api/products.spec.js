@@ -35,7 +35,7 @@ describe('Product routes', () => {
         })
     })
 
-    it('GET /api/products/1', () => {
+    it('GET /api/products/:id', () => {
       return request(app)
         .get('/api/products/1')
         .expect(200)
