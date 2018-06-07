@@ -1,91 +1,116 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import { Link, withRouter } from 'react-router-dom';
+
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {updateProductThunk, getSingleProduct} from '../../store'
 
-class UpdateProduct extends Component {
-    constructor(){
-        super();
-        this.state = {
-            title: '',
-            description: '',
-            price: '',
-            inventoryQuantity: '',
-        }
+export class UpdateProduct extends Component { // eslint-disable-line react/no-deprecated
+  constructor(){
+    super();
+    this.state = {
+      title: '',
+      description: '',
+      price: '',
+      inventoryQuantity: ''
     }
+  }
 
-    componentDidMount = () => {
-        const id = this.props.match.params.productId;
-        this.props.displaySingleProduct(id);
-        console.log('this.props: ', this.props)
-        this.setState({
-            title: this.props.singleProduct.title,
-            description: this.props.singleProduct.description,
-            price: this.props.singleProduct.price,
-            inventoryQuantity: this.props.singleProduct.inventoryQuantity,
-        })
-    }
+  componentDidMount = () => {
+    const id = this.props.match.params.productId
+    this.props.displaySingleProduct(id)
 
-    handleChange = event => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
-    handleSubmit = event => {
-        event.preventDefault();
-        const id = this.props.match.params.productId
-        this.props.updateProduct(this.state, id)
-    }
 
-    componentWillReceiveProps = nextProps =>{
-        this.setState({
-            title: nextProps.singleProduct.title,
-            description: nextProps.singleProduct.description,
-            price: nextProps.singleProduct.price,
-            inventoryQuantity: nextProps.singleProduct.inventoryQuantity,
-        })
-    }
+    const { title, description, price, inventoryQuantity} = this.props.singleProduct
+    this.setState({
+      title,
+      description,
+      price,
+      inventoryQuantity
+    })
+  }
 
-    render() {
-        console.log('We made it to the updateComponent')
-        return (
-            <div>
-            <h1>Update Form</h1>
-            <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-                <label htmlFor="title">title:</label>
-                <input name="title" type="text"  value={this.state.title}/>
 
-                <label htmlFor="description">Description:</label>
-                <input name="description" type="text"  value={this.state.description}/>
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
-                <label htmlFor="price">Price:</label>
-                <input name="price" type="number"  step="any" value={this.state.price}/>
 
-                <label htmlFor="inventoryQuantity">Inventory Quantity:</label>
-                <input name="inventoryQuantity" type="number" step="any"  value={this.state.inventoryQuantity}/>
+  handleSubmit = event => {
+    event.preventDefault();
+    const id = this.props.match.params.productId
+    this.props.updateProduct(this.state, id)
+    this.props.history.push(`/products/${id}`)
+  }
 
-                <label htmlFor="photo">Photo Url:</label>
-                <input name="photo" type="text"  />
 
-                <button type="submit">Submit</button>
-            </form>
+  componentWillReceiveProps = nextProps => {
+    this.setState({
+      title: nextProps.singleProduct.title,
+      description: nextProps.singleProduct.description,
+      price: nextProps.singleProduct.price,
+      inventoryQuantity: nextProps.singleProduct.inventoryQuantity,
+    })
+  }
+
+  render() {
+    return (
+      <div className="container">
+
+        <h2 className="text-center">Update Product</h2>
+
+        <div className="row justify-content-md-center">
+        <div className="col col-md-6">
+
+          <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+            <div className="form-group">
+              <label htmlFor="title">Title</label>
+              <input placeholder="Title" className="form-control" name="title" type="text" value={this.state.title} />
             </div>
-        )
-    }
+
+            <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <input placeholder="Description" className="form-control" name="description" type="text"  value={this.state.description} />
+            </div>
+
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label htmlFor="price">Price</label>
+                <input placeholder="Price" className="form-control" name="price" type="number"  step="any" value={this.state.price} />
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="inventoryQuantity">Inventory Quantity</label>
+                <input placeholder="Inventory Quantity" className="form-control" name="inventoryQuantity" type="number" step="any"  value={this.state.inventoryQuantity} />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="photo">Photo Url</label>
+              <input placeholder="Photo Url"className="form-control" name="photo" type="text"  />
+            </div>
+
+            <button className="btn btn-primary" type="submit">Submit</button>
+          </form>
+
+        </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    singleProduct: state.productReducer.singleProduct
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateProduct: (updatedProduct, productId) => dispatch(updateProductThunk(updatedProduct, productId)),
+    displaySingleProduct: (singleProductId) => dispatch(getSingleProduct(singleProductId))
+  }
 }
 
 
-const mapStateToProps = state =>{
-    console.log('state: ', state)
-    return {singleProduct: state.productReducer.singleProduct}
-}
-
-const mapDispatchToProps = dispatch =>{
-    return {
-        updateProduct: (updatedProduct, productId) => dispatch(updateProductThunk(updatedProduct, productId)),
-        displaySingleProduct: (singleProductId) => dispatch(getSingleProduct(singleProductId))
-    }
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UpdateProduct))
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateProduct)

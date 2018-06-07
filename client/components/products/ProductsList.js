@@ -49,11 +49,19 @@ export class ProductsList extends Component {
           {
             products &&
             products.filter((product) => {
-              if (this.state.display && product.categories.length > 0) {
-                return product.categories[0].id === Number(this.state.display)
-              }
-              if (this.state.display === 0) {
-                return product
+              const quantity = product.inventoryQuantity - product.soldQuantity
+              if (quantity > 0){
+
+                // Category to display
+                if (this.state.display && product.categories.length > 0) {
+                  return product.categories[0].id === Number(this.state.display)
+                }
+
+                // Display all
+                if (this.state.display === 0) {
+                  return product
+                }
+
               }
             })
             .map((item) => {
