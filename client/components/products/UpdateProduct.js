@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import {updateProductThunk, getSingleProduct} from '../../store'
 
 class UpdateProduct extends Component {
@@ -36,7 +36,6 @@ class UpdateProduct extends Component {
         event.preventDefault();
         const id = this.props.match.params.productId
         this.props.updateProduct(this.state, id)
-        this.props.history.push("/productList")
     }
 
     componentWillReceiveProps = nextProps =>{
@@ -49,6 +48,7 @@ class UpdateProduct extends Component {
     }
 
     render() {
+        console.log('We made it to the updateComponent')
         return (
             <div>
             <h1>Update Form</h1>
@@ -88,4 +88,4 @@ const mapDispatchToProps = dispatch =>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateProduct)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UpdateProduct))
