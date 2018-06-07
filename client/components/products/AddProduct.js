@@ -93,5 +93,7 @@ const mapDispatchToProps = dispatch => {
     return { 
         createProduct: (newProduct) => dispatch(addNewProduct(newProduct)),
         displayCategories: () => dispatch(getAllCategories()) 
+    }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddProduct)
