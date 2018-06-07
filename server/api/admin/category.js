@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router()
-const Category = require('../db/models/category')
+const Category = require('../../db/models/category')
 module.exports = router
 
 router.param('id', (req, res, next, id) => {
@@ -28,6 +28,7 @@ router.get('/', (req, res, next ) => {
 
 // post a new category to product
 router.post('/', (req, res, next ) => {
+  console.log('req.body in category post route: ', req.body)
     Category.create(req.body)
       .then(product => {
         res.send(product);
