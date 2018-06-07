@@ -4,6 +4,7 @@ const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
 const Product = db.model('product')
+const User = db.model('user')
 
 describe('Product routes', () => {
   beforeEach(() => {
@@ -34,7 +35,7 @@ describe('Product routes', () => {
         })
     })
 
-    it('GET /api/products/1', () => {
+    it('GET /api/products/:id', () => {
       return request(app)
         .get('/api/products/1')
         .expect(200)
@@ -55,9 +56,19 @@ describe('Product routes', () => {
       photo: 'photoTest',
       averageRating: 3.5
     }
-    it('POST /api/products', async () =>{
+    const sampleUser ={
+      firstName: 'Dan',
+      lastName: 'Gutt',
+      email: 'dgutt@email.com',
+      password: '12345',
+      userType: 'administrator'
+    }
+    beforeEach(() =>{
+      return User.create(sampleUser)
+    })
+    it('POST /api/admin/products', async () =>{
       await request(app)
-        .post('/api/products')
+        .post('/api/admin/products')
         .send(sampleProduct2)
         .expect(200)
         const newProduct = await Product.findOne({
@@ -89,7 +100,7 @@ describe('Product routes', () => {
 
     it('PUT /api/products/:id', async () => {
       await request(app)
-        .put('/api/products/1')
+        .put('/api/admin/products/1')
         .send(newTitle)
         const res = await Product.findAll()
         expect(res).to.be.an('array')
@@ -112,7 +123,7 @@ describe('Product routes', () => {
       return Product.create(sampleProduct)
     })
 
-    it('DELETE /api/products/:id', async () => {
+    it('DELETE /api/admin/products/:id', async () => {
       await request(app)
         .delete('/api/products/1')
         .expect(200)

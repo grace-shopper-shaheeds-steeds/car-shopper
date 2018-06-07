@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {updateProductThunk, getSingleProduct} from '../../store'
@@ -17,6 +18,7 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
     const id = this.props.match.params.productId
     this.props.displaySingleProduct(id)
 
+
     const { title, description, price, inventoryQuantity} = this.props.singleProduct
     this.setState({
       title,
@@ -26,11 +28,13 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
     })
   }
 
+
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     })
   }
+
 
   handleSubmit = event => {
     event.preventDefault();
@@ -38,6 +42,7 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
     this.props.updateProduct(this.state, id)
     this.props.history.push(`/products/${id}`)
   }
+
 
   componentWillReceiveProps = nextProps => {
     this.setState({
@@ -106,5 +111,6 @@ const mapDispatchToProps = dispatch => {
     displaySingleProduct: (singleProductId) => dispatch(getSingleProduct(singleProductId))
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateProduct)
