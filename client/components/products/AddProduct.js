@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import {addNewProduct} from '../../store'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { addNewProduct, getAllCategories} from '../../store'
+
 
 class AddProduct extends Component {
     constructor() {
@@ -12,18 +15,21 @@ class AddProduct extends Component {
             inventoryQuantity: ''
         }
     }
+    componentDidMount = () =>{
+        this.props.displayCategories();
+    }
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
         })
     }
-
     handleSubmit = event => {
       event.preventDefault()
       this.props.createProduct(this.state)
     }
 
     render() {
+        console.log('this.props.allCategories: ', this.props.allCategories)
         return (
           <div className="container">
 
@@ -43,6 +49,7 @@ class AddProduct extends Component {
                   <textarea placeholder="Description" className="form-control" name="description" type="text"  />
                 </div>
 
+
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="price">Price</label>
@@ -60,6 +67,12 @@ class AddProduct extends Component {
                   <input placeholder="Photo Url"className="form-control" name="photo" type="text"  />
                 </div>
 
+                <select name="category">
+                    <option>Select Category</option>
+                    {this.props.allCategories.map(category => {
+                        return <option>{category.name}</option>
+                    })}
+                </select>
                   <button className="btn btn-primary" type="submit">Submit</button>
               </form>
 
@@ -71,9 +84,14 @@ class AddProduct extends Component {
 
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-      createProduct: (newProduct) => dispatch(addNewProduct(newProduct))
-    }
+
+const mapStateToProps = state =>{
+    return {allCategories: state.productReducer.allCategories}
 }
-export default connect(null, mapDispatchToProps)(AddProduct)
+
+const mapDispatchToProps = dispatch => {
+    return { 
+        createProduct: (newProduct) => dispatch(addNewProduct(newProduct)),
+        displayCategories: () => dispatch(getAllCategories()) 
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddProduct)

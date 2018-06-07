@@ -23,8 +23,12 @@ Order.hasMany(OrderItem)
 User.belongsToMany(Address, { through: 'userAddress' })
 Address.belongsToMany(User, { through: 'userAddress' })
 
-Category.belongsToMany(Product, { through: 'productCategory' })
-Product.belongsToMany(Category, { through: 'productCategory' })
+
+Product.belongsTo(Category)
+Category.hasMany(Product)
+
+// Category.belongsToMany(Product, { through: 'productCategory' })
+// Product.belongsToMany(Category, { through: 'productCategory' })
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,

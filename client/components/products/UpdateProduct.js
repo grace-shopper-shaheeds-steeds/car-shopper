@@ -1,7 +1,10 @@
 
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import {updateProductThunk, getSingleProduct} from '../../store'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import { Link, withRouter } from 'react-router-dom';
+import {updateProductThunk, getSingleProduct, getAllCategories, removeProductCategory} from '../../store'
+
 
 export class UpdateProduct extends Component { // eslint-disable-line react/no-deprecated
   constructor(){
@@ -13,10 +16,19 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
       inventoryQuantity: ''
     }
   }
-
-  componentDidMount = () => {
-    const id = this.props.match.params.productId
-    this.props.displaySingleProduct(id)
+  
+    componentDidMount = () => {
+        const id = this.props.match.params.productId;
+        this.props.displaySingleProduct(id);
+        this.props.displayCategories();
+        console.log('this.props: ', this.props)
+        this.setState({
+            title: this.props.singleProduct.title,
+            description: this.props.singleProduct.description,
+            price: this.props.singleProduct.price,
+            inventoryQuantity: this.props.singleProduct.inventoryQuantity,
+        })
+    }
 
 
     const { title, description, price, inventoryQuantity} = this.props.singleProduct
@@ -29,13 +41,11 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
   }
 
 
-  handleChange = event => {
+ handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     })
   }
-
-
   handleSubmit = event => {
     event.preventDefault();
     const id = this.props.match.params.productId
@@ -52,6 +62,18 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
       inventoryQuantity: nextProps.singleProduct.inventoryQuantity,
     })
   }
+  
+   deleteCategory = () =>{
+        const id = this.props.match.params.productId;
+        this.props.removeACategory(id, {
+            title: this.state.title,
+            description: this.state.description,
+            price: this.state.price,
+            inventoryQuantity: this.state.inventoryQuantity,
+            categoryId: null
+        })
+    }
+
 
   render() {
     return (
@@ -66,6 +88,7 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
             <div className="form-group">
               <label htmlFor="title">Title</label>
               <input placeholder="Title" className="form-control" name="title" type="text" value={this.state.title} />
+
             </div>
 
             <div className="form-group">
@@ -89,8 +112,22 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
               <input placeholder="Photo Url"className="form-control" name="photo" type="text"  />
             </div>
 
+
+            <select name="category">
+                  <option>Select Category</option>
+                  {this.props.allCategories.map(category => {
+                      return <option>{category.name}</option>
+                 })}
+            </select>
+
             <button className="btn btn-primary" type="submit">Submit</button>
-          </form>
+            </form>
+            {!!this.props.singleProduct.category ?
+                <div>
+                    <h3>Current Category: {this.props.singleProduct.category.name}</h3>
+                    <button onClick={this.deleteCategory}>Remove Category</button>
+                </div> : null
+            }
 
         </div>
         </div>
@@ -99,18 +136,23 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    singleProduct: state.productReducer.singleProduct
-  }
+}
+const mapStateToProps = state =>{
+    console.log('state: ', state)
+    return {
+        singleProduct: state.productReducer.singleProduct,
+        allCategories: state.productReducer.allCategories
+    }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateProduct: (updatedProduct, productId) => dispatch(updateProductThunk(updatedProduct, productId)),
-    displaySingleProduct: (singleProductId) => dispatch(getSingleProduct(singleProductId))
-  }
-}
+const mapDispatchToProps = dispatch =>{
+    return {
+        updateProduct: (updatedProduct, productId) => dispatch(updateProductThunk(updatedProduct, productId)),
+        displaySingleProduct: (singleProductId) => dispatch(getSingleProduct(singleProductId)),
+        displayCategories: () => dispatch(getAllCategories()),
+        removeACategory: (productId, updatedProduct) => dispatch(removeProductCategory(productId, updatedProduct))
+    }
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateProduct)

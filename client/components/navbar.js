@@ -20,6 +20,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
               <Link className="nav-link" to="/addProduct">Add Product</Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to="/addCategory">Add Category</Link>
+            </li>
+            <li className="nav-item">
               <a className="nav-link" href="#" onClick={handleClick}>Logout</a>
             </li>
         </ul>
