@@ -2,7 +2,7 @@ const User = require('./user')
 const Product = require('./product')
 const Review = require('./review')
 const Order = require('./order')
-
+const Cart = require('./cart')
 const OrderItem = require('./orderItem')
 const Address = require('./address')
 const Category = require('./category')
@@ -39,5 +39,6 @@ module.exports = {
   Order,
   OrderItem,
   Category,
-  Address
+  Address,
+  Cart
 }
