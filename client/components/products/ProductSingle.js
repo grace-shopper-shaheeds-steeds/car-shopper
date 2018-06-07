@@ -11,6 +11,7 @@ export class ProductSingle extends Component {
 
   render () {
     const { product } = this.props
+    const quantity = product.inventoryQuantity - product.soldQuantity
     return (
       <div className="container">
           {
@@ -24,10 +25,14 @@ export class ProductSingle extends Component {
                 <h5>Price: ${product.price}</h5>
                 <p>Description: {product.description}</p>
                 {
-                  product.inventoryQuantity > 0 ? (
-                    <button type="button" className="btn btn-primary">Add to cart</button>
+                  quantity ? (
+                    <button type="button" className="btn btn-primary">
+                      Add to cart
+                    </button>
                   ) : (
-                    <button type="button" className="btn btn-secondary" disabled>Out of stock</button>
+                    <button type="button" className="btn btn-secondary" disabled>
+                      Out of stock
+                    </button>
                   )
                 }
               </div>

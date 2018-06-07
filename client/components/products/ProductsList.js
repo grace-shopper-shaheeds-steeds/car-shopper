@@ -49,7 +49,8 @@ export class ProductsList extends Component {
           {
             products &&
             products.filter((product) => {
-              if (product.inventoryQuantity > 0){
+              const quantity = product.inventoryQuantity - product.soldQuantity
+              if (quantity > 0){
 
                 // Category to display
                 if (this.state.display && product.categories.length > 0) {
