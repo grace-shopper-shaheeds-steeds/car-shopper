@@ -28,7 +28,8 @@ router.put('/:id', async (req, res, next) =>{
 
 
 router.get('/', async (req, res, next) => {
-  try {
+    // console.log('Object.keys', Object.keys(req.session.cookie))
+    try {
     const allProducts = await Product.findAll()
     res.json(allProducts)
   } catch (err) {
