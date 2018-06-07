@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
-import {updateProductThunk, getSingleProduct} from '../../store'
+import {updateProductThunk, getSingleProduct, getAllCategories, removeProductCategory} from '../../store'
 
 class UpdateProduct extends Component {
     constructor(){
@@ -18,6 +18,7 @@ class UpdateProduct extends Component {
     componentDidMount = () => {
         const id = this.props.match.params.productId;
         this.props.displaySingleProduct(id);
+        this.props.displayCategories();
         console.log('this.props: ', this.props)
         this.setState({
             title: this.props.singleProduct.title,
@@ -47,8 +48,19 @@ class UpdateProduct extends Component {
         })
     }
 
+    deleteCategory = () =>{
+        const id = this.props.match.params.productId;
+        this.props.removeACategory(id, {
+            title: this.state.title,
+            description: this.state.description,
+            price: this.state.price,
+            inventoryQuantity: this.state.inventoryQuantity,
+            categoryId: null
+        })
+    }
+
     render() {
-        console.log('We made it to the updateComponent')
+        console.log('this.props.singleProduct: ', this.props.singleProduct)
         return (
             <div>
             <h1>Update Form</h1>
@@ -68,8 +80,21 @@ class UpdateProduct extends Component {
                 <label htmlFor="photo">Photo Url:</label>
                 <input name="photo" type="text"  />
 
+                <select name="category">
+                    <option>Select Category</option>
+                    {this.props.allCategories.map(category => {
+                        return <option>{category.name}</option>
+                    })}
+                </select>
+
                 <button type="submit">Submit</button>
             </form>
+            {!!this.props.singleProduct.category ?
+                <div>
+                    <h3>Current Category: {this.props.singleProduct.category.name}</h3>
+                    <button onClick={this.deleteCategory}>Remove Category</button>
+                </div> : null
+            }
             </div>
         )
     }
@@ -78,13 +103,18 @@ class UpdateProduct extends Component {
 
 const mapStateToProps = state =>{
     console.log('state: ', state)
-    return {singleProduct: state.productReducer.singleProduct}
+    return {
+        singleProduct: state.productReducer.singleProduct,
+        allCategories: state.productReducer.allCategories
+    }
 }
 
 const mapDispatchToProps = dispatch =>{
     return {
         updateProduct: (updatedProduct, productId) => dispatch(updateProductThunk(updatedProduct, productId)),
-        displaySingleProduct: (singleProductId) => dispatch(getSingleProduct(singleProductId))
+        displaySingleProduct: (singleProductId) => dispatch(getSingleProduct(singleProductId)),
+        displayCategories: () => dispatch(getAllCategories()),
+        removeACategory: (productId, updatedProduct) => dispatch(removeProductCategory(productId, updatedProduct))
     }
 }
 

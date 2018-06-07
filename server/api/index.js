@@ -16,7 +16,7 @@ async function adminGateway(req, res, next){
 router.use('/users', require('./users'))
 router.use('/products', require('./products'))
 router.use('/admin', adminGateway, require('./admin'))
-router.use('/categories', require('./category'))
+//router.use('/categories', require('./category'))
 router.use('/orders', require('./order'))
 router.use((req, res, next) => {
   const error = new Error('Not Found')

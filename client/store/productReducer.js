@@ -6,6 +6,7 @@ const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 const UPDATED_PRODUCT = 'UPDATED_PRODUCT'
 const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
+const ADD_CATEGORY = 'ADD_CATEGORY'
 
 const addProduct = newProduct => {
     return {
@@ -36,6 +37,13 @@ const gotSingleProduct = product =>{
   }
 }
 
+const addCategory = category =>{
+  return {
+    type: ADD_CATEGORY,
+    category
+  }
+}
+
 export const addNewProduct = newProduct => {
     return async(dispatch) => {
         const res = await axios.post('/api/admin/products', newProduct)
@@ -53,7 +61,8 @@ export const getAllProducts = () => {
 
 export const getAllCategories = () => {
   return async (dispatch) => {
-    const { data } = await axios.get('/api/categories')
+    const { data } = await axios.get('/api/admin/category')
+    console.log('data in thunk: ', data)
     const action = gotAllCategories(data)
     dispatch(action)
   }
@@ -78,10 +87,30 @@ export const getSingleProduct = productId =>{
   }
 }
 
+export const addNewCategory = newCategory => {
+  return async dispatch =>{
+    const res = await axios.post('/api/admin/category', newCategory)
+    const category = res.data
+    dispatch(addCategory(category))
+  }
+}
+
+export const removeProductCategory = (productId, updatedProduct) =>{
+  console.log('productId in remove product thunk: ', productId);
+  return async dispatch =>{
+    await axios.put(`/api/admin/products/${productId}`, updatedProduct)
+    const {data} = await axios.get('/api/products')
+    dispatch(gotAllCategories(data))
+    //history.push("/productList")
+  }
+}
+
+
 const initialState = {
   allProducts: [],
   allCategories: [],
-  singleProduct: {}
+  singleProduct: {},
+  allCategory: []
 }
 
 export const productReducer = ( state = initialState, action) =>{
@@ -94,6 +123,8 @@ export const productReducer = ( state = initialState, action) =>{
         return {...state, allCategories: action.categories}
       case GET_SINGLE_PRODUCT: 
         return {...state, singleProduct: action.product}
+      case ADD_CATEGORY: 
+        return {...state, allCategory: [...state.allCategory, action.category]}
       default:
           return state
   }
