@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router()
-const Order = require('../db/models/order')
+const OrderItem = require('../db/models/orderItem')
 module.exports = router
 
 router.param('id', (req, res, next, id) => {
-    Order.findById(id)
+  OrderItem.findById(id)
       .then(item => {
         // if no item found, send 404
         if (!item) res.sendStatus(404);
@@ -19,7 +19,7 @@ router.param('id', (req, res, next, id) => {
 
   // retrieve all orders
 router.get('/', (req, res, next ) => {
-    Order.findAll({
+  OrderItem.findAll({
       include: {all: true}
     })
       .then(results => {
@@ -28,21 +28,21 @@ router.get('/', (req, res, next ) => {
       .catch(next);
   });
 
-// get order by id
+// get orderItem by id
 router.get('/:id', (req, res, next) => {
     // router.param has now taken care of this!!
     res.send(req.item);
   });
 
-// post a new order to product
+// post a new orderItem
 router.post('/', (req, res, next ) => {
   console.log(req.body)
 
-    Order.create(req.body)
-      .then(product => {
-        res.send(product);
-      })
-      .catch(next);
+  OrderItem.create(req.body)
+    .then(item => {
+      res.send(item);
+    })
+    .catch(next);
   });
 
 

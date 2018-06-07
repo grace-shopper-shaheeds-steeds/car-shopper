@@ -3,5 +3,4 @@ const productRouter = require('./product')
 
 router.use('/products', productRouter)
 
-
 module.exports = router
