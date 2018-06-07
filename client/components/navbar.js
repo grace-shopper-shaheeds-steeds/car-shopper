@@ -14,7 +14,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
         <ul className="navbar-nav ml-auto">
            {/* The navbar will show these links after you log in */}
             <li className="nav-item">
-              <Link className="nav-link" to="/products">Products</Link>
+              <Link className="nav-link" to="/productList">Products</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/addProduct">Add Product</Link>

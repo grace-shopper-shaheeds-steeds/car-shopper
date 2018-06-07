@@ -29,7 +29,7 @@ const User = db.define('user', {
     }
   },
   userType: {
-    type: Sequelize.ENUM('administrator', 'guest', 'authorizedUser')
+    type: Sequelize.ENUM('administrator', 'user')
   },
   salt: {
     type: Sequelize.STRING,
@@ -66,6 +66,18 @@ User.encryptPassword = function (plainText, salt) {
     .update(plainText)
     .update(salt)
     .digest('hex')
+}
+
+
+User.isAdmin = async function (userId){
+  const user = await User.findById(userId)
+  console.log('user.userType: ', user.userType)
+  if(user.userType === 'administrator'){
+    console.log(true)
+    return true;
+  } 
+  console.log(false)
+  return false
 }
 
 /**

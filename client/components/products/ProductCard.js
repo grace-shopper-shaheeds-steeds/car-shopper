@@ -13,6 +13,7 @@ const style = {
 }
 
 const ProductCard = ({product}) => {
+  console.log('product: ', product)
   return (
     <div className="card" style={style.component}>
       <img className="card-img-top" src={product.photo} alt={product.title} />

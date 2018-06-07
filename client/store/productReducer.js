@@ -38,7 +38,7 @@ const gotSingleProduct = product =>{
 
 export const addNewProduct = newProduct => {
     return async(dispatch) => {
-        const res = await axios.post('/api/products', newProduct)
+        const res = await axios.post('/api/admin/products', newProduct)
         const createdProduct = res.data
         dispatch(addProduct(createdProduct))
     }
@@ -61,10 +61,11 @@ export const getAllCategories = () => {
 
 export const updateProductThunk = (updatedProduct, productId) =>{
   return async (dispatch) =>{
-      await axios.put(`/api/products/${productId}`, updatedProduct)
+      await axios.put(`/api/admin/products/${productId}`, updatedProduct)
       const res = await axios.get(`/api/products`)
       const updatedProductList = res.data;
       dispatch(gotAllProducts(updatedProductList))
+      history.push("/productList")
   }
 }
 
@@ -73,7 +74,7 @@ export const getSingleProduct = productId =>{
     const res = await axios.get(`/api/products/${productId}`)
     const singleProduct = res.data
     dispatch(gotSingleProduct(singleProduct))
-    history.push("/productList")
+    
   }
 }
 
