@@ -4,10 +4,11 @@ const db = require('../db')
 
 const OrderItem = db.define('orderItem', {
   status: {
-      type: Sequelize.STRING,
+      type: Sequelize.ENUM('open', 'filled', 'cancelled'),
       unique: false,
-      allowNull: false
-  }
+      allowNull: false,
+      defaultValue: 'open'
+    }
 
 })
 

@@ -17,6 +17,7 @@ User.hasMany(Review)
 Order.belongsTo(User)
 User.hasMany(Order)
 
+OrderItem.belongsTo(Product)
 OrderItem.belongsTo(Order)
 Order.hasMany(OrderItem)
 
