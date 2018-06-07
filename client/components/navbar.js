@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import { ProductSearch } from './products'
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -37,7 +38,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             </li>
           </ul>
         )
-			}
+      }
+
+      <ProductSearch />
 
   </nav>
 )
