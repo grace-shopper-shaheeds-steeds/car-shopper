@@ -31,15 +31,6 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
     }
 
 
-    const { title, description, price, inventoryQuantity} = this.props.singleProduct
-    this.setState({
-      title,
-      description,
-      price,
-      inventoryQuantity
-    })
-  }
-
 
  handleChange = event => {
     this.setState({
@@ -136,7 +127,6 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
   }
 }
 
-}
 const mapStateToProps = state =>{
     console.log('state: ', state)
     return {
@@ -152,6 +142,7 @@ const mapDispatchToProps = dispatch =>{
         displayCategories: () => dispatch(getAllCategories()),
         removeACategory: (productId, updatedProduct) => dispatch(removeProductCategory(productId, updatedProduct))
     }
+}
 
 
 
