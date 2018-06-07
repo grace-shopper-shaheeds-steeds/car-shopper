@@ -19,9 +19,8 @@ class AddProduct extends Component {
     }
 
     handleSubmit = event => {
-        event.preventDefault()
-        this.props.createProduct(this.state)
-        //this.props.history.push("/productList")
+      event.preventDefault()
+      this.props.createProduct(this.state)
     }
 
     render() {
@@ -33,8 +32,9 @@ class AddProduct extends Component {
             <div className="row justify-content-md-center">
             <div className="col col-md-6">
               <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+
                 <div className="form-group">
-                <label htmlFor="title">Title</label>
+                  <label htmlFor="title">Title</label>
                   <input placeholder="Title" className="form-control" name="title" type="text"  />
                 </div>
 
