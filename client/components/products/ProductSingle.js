@@ -23,7 +23,13 @@ export class ProductSingle extends Component {
                 <h5>ID: {product.id} - {product.title}</h5>
                 <h5>Price: ${product.price}</h5>
                 <p>Description: {product.description}</p>
-                <button type="button" className="btn btn-primary">Add to cart</button>
+                {
+                  product.inventoryQuantity > 0 ? (
+                    <button type="button" className="btn btn-primary">Add to cart</button>
+                  ) : (
+                    <button type="button" className="btn btn-secondary" disabled>Out of stock</button>
+                  )
+                }
               </div>
             </div>
           }
