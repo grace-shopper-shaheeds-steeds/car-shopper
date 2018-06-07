@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const Product = require('../db/models/product')
+const Category = require('../db/models/category')
 
 router.post('/', async (req, res, next) => {
     try{
@@ -28,9 +29,10 @@ router.put('/:id', async (req, res, next) =>{
 
 
 router.get('/', async (req, res, next) => {
-    // console.log('Object.keys', Object.keys(req.session.cookie))
-    try {
-    const allProducts = await Product.findAll()
+  try {
+    const allProducts = await Product.findAll({
+      include: [{model: Category}]
+    })
     res.json(allProducts)
   } catch (err) {
     next(err)
