@@ -1,20 +1,22 @@
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
 import {updateProductThunk, getSingleProduct, getAllCategories, removeProductCategory} from '../../store'
 
-class UpdateProduct extends Component {
-    constructor(){
-        super();
-        this.state = {
-            title: '',
-            description: '',
-            price: '',
-            inventoryQuantity: '',
-        }
-    }
 
+export class UpdateProduct extends Component { // eslint-disable-line react/no-deprecated
+  constructor(){
+    super();
+    this.state = {
+      title: '',
+      description: '',
+      price: '',
+      inventoryQuantity: ''
+    }
+  }
+  
     componentDidMount = () => {
         const id = this.props.match.params.productId;
         this.props.displaySingleProduct(id);
@@ -28,27 +30,40 @@ class UpdateProduct extends Component {
         })
     }
 
-    handleChange = event => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
-    handleSubmit = event => {
-        event.preventDefault();
-        const id = this.props.match.params.productId
-        this.props.updateProduct(this.state, id)
-    }
 
-    componentWillReceiveProps = nextProps =>{
-        this.setState({
-            title: nextProps.singleProduct.title,
-            description: nextProps.singleProduct.description,
-            price: nextProps.singleProduct.price,
-            inventoryQuantity: nextProps.singleProduct.inventoryQuantity,
-        })
-    }
+    const { title, description, price, inventoryQuantity} = this.props.singleProduct
+    this.setState({
+      title,
+      description,
+      price,
+      inventoryQuantity
+    })
+  }
 
-    deleteCategory = () =>{
+
+ handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+  handleSubmit = event => {
+    event.preventDefault();
+    const id = this.props.match.params.productId
+    this.props.updateProduct(this.state, id)
+    this.props.history.push(`/products/${id}`)
+  }
+
+
+  componentWillReceiveProps = nextProps => {
+    this.setState({
+      title: nextProps.singleProduct.title,
+      description: nextProps.singleProduct.description,
+      price: nextProps.singleProduct.price,
+      inventoryQuantity: nextProps.singleProduct.inventoryQuantity,
+    })
+  }
+  
+   deleteCategory = () =>{
         const id = this.props.match.params.productId;
         this.props.removeACategory(id, {
             title: this.state.title,
@@ -59,35 +74,53 @@ class UpdateProduct extends Component {
         })
     }
 
-    render() {
-        console.log('this.props.singleProduct: ', this.props.singleProduct)
-        return (
-            <div>
-            <h1>Update Form</h1>
-            <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-                <label htmlFor="title">title:</label>
-                <input name="title" type="text"  value={this.state.title}/>
 
-                <label htmlFor="description">Description:</label>
-                <input name="description" type="text"  value={this.state.description}/>
+  render() {
+    return (
+      <div className="container">
 
-                <label htmlFor="price">Price:</label>
-                <input name="price" type="number"  step="any" value={this.state.price}/>
+        <h2 className="text-center">Update Product</h2>
 
-                <label htmlFor="inventoryQuantity">Inventory Quantity:</label>
-                <input name="inventoryQuantity" type="number" step="any"  value={this.state.inventoryQuantity}/>
+        <div className="row justify-content-md-center">
+        <div className="col col-md-6">
 
-                <label htmlFor="photo">Photo Url:</label>
-                <input name="photo" type="text"  />
+          <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+            <div className="form-group">
+              <label htmlFor="title">Title</label>
+              <input placeholder="Title" className="form-control" name="title" type="text" value={this.state.title} />
 
-                <select name="category">
-                    <option>Select Category</option>
-                    {this.props.allCategories.map(category => {
-                        return <option>{category.name}</option>
-                    })}
-                </select>
+            </div>
 
-                <button type="submit">Submit</button>
+            <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <input placeholder="Description" className="form-control" name="description" type="text"  value={this.state.description} />
+            </div>
+
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label htmlFor="price">Price</label>
+                <input placeholder="Price" className="form-control" name="price" type="number"  step="any" value={this.state.price} />
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="inventoryQuantity">Inventory Quantity</label>
+                <input placeholder="Inventory Quantity" className="form-control" name="inventoryQuantity" type="number" step="any"  value={this.state.inventoryQuantity} />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="photo">Photo Url</label>
+              <input placeholder="Photo Url"className="form-control" name="photo" type="text"  />
+            </div>
+
+
+            <select name="category">
+                  <option>Select Category</option>
+                  {this.props.allCategories.map(category => {
+                      return <option>{category.name}</option>
+                 })}
+            </select>
+
+            <button className="btn btn-primary" type="submit">Submit</button>
             </form>
             {!!this.props.singleProduct.category ?
                 <div>
@@ -95,12 +128,15 @@ class UpdateProduct extends Component {
                     <button onClick={this.deleteCategory}>Remove Category</button>
                 </div> : null
             }
-            </div>
-        )
-    }
+
+        </div>
+        </div>
+      </div>
+    )
+  }
 }
 
-
+}
 const mapStateToProps = state =>{
     console.log('state: ', state)
     return {
@@ -116,6 +152,7 @@ const mapDispatchToProps = dispatch =>{
         displayCategories: () => dispatch(getAllCategories()),
         removeACategory: (productId, updatedProduct) => dispatch(removeProductCategory(productId, updatedProduct))
     }
-}
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UpdateProduct))
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateProduct)
