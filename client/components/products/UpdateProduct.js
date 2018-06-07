@@ -14,14 +14,15 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
   }
 
   componentDidMount = () => {
-    const id = this.props.match.params.productId;
+    const id = this.props.match.params.productId
     this.props.displaySingleProduct(id)
 
+    const { title, description, price, inventoryQuantity} = this.props.singleProduct
     this.setState({
-      title: this.props.singleProduct.title,
-      description: this.props.singleProduct.description,
-      price: this.props.singleProduct.price,
-      inventoryQuantity: this.props.singleProduct.inventoryQuantity
+      title,
+      description,
+      price,
+      inventoryQuantity
     })
   }
 
@@ -35,7 +36,7 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
     event.preventDefault();
     const id = this.props.match.params.productId
     this.props.updateProduct(this.state, id)
-    this.props.history.push('/productList')
+    this.props.history.push(`/products/${id}`)
   }
 
   componentWillReceiveProps = nextProps => {
