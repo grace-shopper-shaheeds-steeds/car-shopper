@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {addNewProduct} from '../../store'
 
 class AddProduct extends Component {
@@ -28,31 +26,54 @@ class AddProduct extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-                <label htmlFor="title">title:</label>
-                <input name="title" type="text"  />
+          <div className="container">
 
-                <label htmlFor="description">Description:</label>
-                <input name="description" type="text"  />
+            <h2 className="text-center">Add New Product</h2>
 
-                <label htmlFor="price">Price:</label>
-                <input name="price" type="number"  step="any"/>
+            <div className="row justify-content-md-center">
+            <div className="col col-md-6">
+              <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+                <div className="form-group">
+                <label htmlFor="title">Title</label>
+                  <input placeholder="Title" className="form-control" name="title" type="text"  />
+                </div>
 
-                <label htmlFor="inventoryQuantity">Inventory Quantity:</label>
-                <input name="inventoryQuantity" type="number" step="any"  />
+                <div className="form-group">
+                  <label htmlFor="description">Description</label>
+                  <textarea placeholder="Description" className="form-control" name="description" type="text"  />
+                </div>
 
-                <label htmlFor="photo">Photo Url:</label>
-                <input name="photo" type="text"  />
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="price">Price</label>
+                    <input placeholder="Price" className="form-control" name="price" type="number" min="0" step="any" />
+                  </div>
 
-                <button type="submit">Submit</button>
-            </form>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="inventoryQuantity">Inventory Quantity</label>
+                    <input placeholder="Inventory Quantity" className="form-control" name="inventoryQuantity" type="number" min="0" step="any" />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="photo">Photo Url</label>
+                  <input placeholder="Photo Url"className="form-control" name="photo" type="text"  />
+                </div>
+
+                  <button className="btn btn-primary" type="submit">Submit</button>
+              </form>
+
+            </div>
+            </div>
+          </div>
         )
     }
 
 }
 
-
 const mapDispatchToProps = dispatch => {
-    return {createProduct: (newProduct) => dispatch(addNewProduct(newProduct))}
+    return {
+      createProduct: (newProduct) => dispatch(addNewProduct(newProduct))
+    }
 }
 export default connect(null, mapDispatchToProps)(AddProduct)
