@@ -2,7 +2,7 @@ const db = require('../db.js')
 const Sequelize = require('sequelize')
 
 const Category = db.define('category', {
-   category: {
+   name: {
      type: Sequelize.STRING,
      unique: false,
     }
