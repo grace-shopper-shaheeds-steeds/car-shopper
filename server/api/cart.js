@@ -18,71 +18,80 @@ router.get('/:userId/products', async (req, res, next) => {
   try {
     const foundUser = await User.findById(req.params.userId)
     const foundCart = await Cart.findById(foundUser.cartId)
-    const foundProducts = foundCart.products.map( async (productId) => {
-      const foundSingleProduct = await Product.findById(productId)
-      return foundSingleProduct
+    let arr = []
+    const foundProducts = foundCart.products.forEach( async (productId) => {
+      arr.push(Product.findById(productId))
     })
-    res.json(foundProducts)
+    let holder = await Promise.all(arr)
+    res.json(holder)
   } catch (err){
     next(err)
   }
 })
 
-router.post('/', async (req, res, next) => {
-  try {
-    const foundCart = await Cart.create()
-    res.json(foundCart)
-  } catch (err){
-    next(err)
-  }
-})
 
-// router.put('/:userId/add', async (req, res, next) => {
+// 'ROUTE FOR CREATING NEW CART!!! WILL NEED LATER FOR USERS WHO ARE NOT SIGNED IN!!!!!!!!!!!!!'
+// router.post('/', async (req, res, next) => {
 //   try {
-//     let carId = req.body.carId
-//     const foundUser = await User.findById(req.params.userId)
-//     const foundCart = await Cart.findById(foundUser.cartId)
-//     const carToRemove = await Product.findById(carId)
-
-//     let updatedCart = await foundCart.update({
-//       products: foundCart.products.filter(product => product !== carId),
-//       total: foundCart.total -= carToRemove.price
-//     })
-
-//     res.json(updatedCart)
+//     const foundCart = await Cart.create()
+//     res.json(foundCart)
 //   } catch (err){
 //     next(err)
 //   }
 // })
 
-// router.put('/:userId/subtract', async (req, res, next) => {
-//   try {
-//     let carId = req.body.carId
-//     const foundUser = await User.findById(req.params.userId)
-//     const foundCart = await Cart.findById(foundUser.cartId)
-//     const carToRemove = await Product.findById(carId)
-
-//     let updatedCart = await foundCart.update({
-//       products: foundCart.products.filter(product => product !== carId),
-//       total: foundCart.total -= carToRemove.price
-//     })
-
-//     res.json(updatedCart)
-//   } catch (err){
-//     next(err)
-//   }
-// })
-
-router.delete('/:userId', async (req, res, next) => {
+router.put('/:userId/add', async (req, res, next) => {
   try {
+    console.log('req.body', req.body)
     let carId = req.body.carId
     const foundUser = await User.findById(req.params.userId)
     const foundCart = await Cart.findById(foundUser.cartId)
-    const carToRemove = await Product.findById(carId)
+    let updatedCart
+    if (foundCart.products) {
+      updatedCart = await foundCart.update({
+        products: [...foundCart.products, carId],
+      })
+    } else {
+      updatedCart = await foundCart.update({
+        products: [carId]
+      })
+    }
+    
+    res.json(updatedCart)
+  } catch (err){
+    next(err)
+  }
+})
 
+router.put('/:userId/subtract', async (req, res, next) => {
+  try {
+    let remover = true
+    let carId = req.body.carId
+    const foundUser = await User.findById(req.params.userId)
+    const foundCart = await Cart.findById(foundUser.cartId)
+    let updatedCart = await foundCart.update({
+      products: foundCart.products.filter(productId => {
+        if (productId === carId && remover) {
+          remover = !remover
+          return false
+        }
+        return true
+      })
+    })
+    res.json(updatedCart)
+  } catch (err){
+    next(err)
+  }
+})
+
+router.delete('/:userId/delete', async (req, res, next) => {
+  try {
+    console.log('req.body', req.body)
+    let carId = req.body.carId
+    const foundUser = await User.findById(req.params.userId)
+    const foundCart = await Cart.findById(foundUser.cartId)
     let updatedCart = await foundCart.update({
       products: foundCart.products.filter(product => product !== carId),
-      total: foundCart.total -= carToRemove.price
     })
 
     res.json(updatedCart)
