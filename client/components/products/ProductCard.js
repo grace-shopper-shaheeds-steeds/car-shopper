@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { updateWithAdded } from '../../store/cart'
 
 
 const style = {
@@ -13,38 +14,67 @@ const style = {
   }
 }
 
-const ProductCard = (props) => {
-  const { product, user } = props
-  return (
-    <div className="card" style={style.component}>
-      <img className="card-img-top" src={product.photo} alt={product.title} />
-      <div className="card-body">
+export class ProductCard extends Component {
 
-        <h5>
-          <Link to={`/products/${product.id}`}>{product.title}</Link>
-        </h5>
+  handleCartAdd= (event) => {
+    event.preventDefault()
 
-        { product.category !== null &&
-          <p className="card-text">{product.category.name}</p>
-        }
+    const info = {
+      userId: this.props.user.id,
+      carId: this.props.product.id
+    }
 
-        <p className="card-text">ID: {product.id}</p>
-        <p className="card-text">{product.description}</p>
+    this.props.addToCart(info)
+  }
 
-        { user.userType === 'administrator' &&
-          <Link to={`/updateProduct/${product.id}`} className="float-left" style={style.link}>edit</Link>
-        }
+  render(){
+    const { product, user } = this.props
 
-        <a href="#" className="btn btn-primary float-right">Add to cart</a>
+    return (
+      <div className="card" style={style.component}>
+        <img className="card-img-top" src={product.photo} alt={product.title} />
+        <div className="card-body">
+
+          <h5>
+            <Link to={`/products/${product.id}`}>{product.title}</Link>
+          </h5>
+
+          { product.category !== null &&
+            <p className="card-text">{product.category.name}</p>
+          }
+
+          <p className="card-text">ID: {product.id}</p>
+          <p className="card-text">{product.description}</p>
+
+          { user.userType === 'administrator' &&
+            <Link to={`/updateProduct/${product.id}`} className="float-left" style={style.link}>edit</Link>
+          }
+
+          <button
+            onClick={this.handleCartAdd}
+            type="button"
+            className="btn btn-primary float-right">
+            Add to cart
+          </button>
+
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
-const setStateOnProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     user: state.user
   }
 }
 
-export default connect(setStateOnProps)(ProductCard)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (info) => {
+      dispatch(updateWithAdded(info))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)

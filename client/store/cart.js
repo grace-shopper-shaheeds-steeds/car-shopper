@@ -75,7 +75,7 @@ export const updateWithAdded = (info) => {
     const data = response.data
     const action = inrementItemToCart(data)
     dispatch(action)
-    
+
     const nextResponse = await axios.get(`/api/cart/${info.userId}/products`)
     const nextData = nextResponse.data
     const secondAction = getCart(data)
@@ -89,7 +89,7 @@ export const updateWithSubtracted = (info) => {
     const data = response.data
     const action = inrementItemToCart(data)
     dispatch(action)
-    
+
     const nextResponse = await axios.get(`/api/cart/${info.userId}/products`)
     const nextData = nextResponse.data
     const secondAction = getCart(data)
