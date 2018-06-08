@@ -5,29 +5,32 @@ import { searchingAllProducts } from '../../store'
 
 export class ProductSearchResults extends Component {
 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
-      query: ''
+      query: props.match.params.value
     }
   }
 
   componentDidMount () {
     const query = this.props.match.params.value
     this.props.searchProducts(query)
-    this.setState({
-      query
-    })
   }
 
-  componentWillReceiveProps (nextProps) {
-    if(nextProps.match.params.value !== this.props.match.params.value) {
-      const query = nextProps.match.params.value
-      this.setState({
-        query
-      })
+  componentDidUpdate (prevProps) {
+    if (prevProps.match.params.value !== this.props.match.params.value) {
+      const query = this.props.match.params.value
       this.props.searchProducts(query)
     }
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.match.params.value !== state.query) {
+      return {
+        query: props.match.params.value
+      };
+    }
+    return null;
   }
 
   render(){
