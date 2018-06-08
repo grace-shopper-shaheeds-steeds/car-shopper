@@ -4,14 +4,15 @@ const db = require('../db')
 
 const Order = db.define('order', {
   totalAmt: {
-      type: Sequelize.INTEGER,
-      unique: false,
-      allowNull: false
+		type: Sequelize.INTEGER,
+		unique: false,
+		allowNull: false
   },
   status: {
-      type: Sequelize.STRING,
-      unique: false,
-      allowNull: false
+		type: Sequelize.ENUM('open', 'filled', 'cancelled'),
+		unique: false,
+		allowNull: false,
+		defaultValue: 'open'
   }
 
 })
