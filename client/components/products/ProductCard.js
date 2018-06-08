@@ -19,20 +19,19 @@ const ProductCard = (props) => {
     <div className="card" style={style.component}>
       <img className="card-img-top" src={product.photo} alt={product.title} />
       <div className="card-body">
-        {/* <h5 className="card-title">{product.title}</h5> */}
+
         <h5>
           <Link to={`/products/${product.id}`}>{product.title}</Link>
         </h5>
 
-        {
-          product.category !== null &&
+        { product.category !== null &&
           <p className="card-text">{product.category.name}</p>
         }
+
         <p className="card-text">ID: {product.id}</p>
         <p className="card-text">{product.description}</p>
 
-        {
-          user.userType === 'administrator' &&
+        { user.userType === 'administrator' &&
           <Link to={`/updateProduct/${product.id}`} className="float-left" style={style.link}>edit</Link>
         }
 
