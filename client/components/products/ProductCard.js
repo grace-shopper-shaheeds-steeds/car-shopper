@@ -13,7 +13,6 @@ const style = {
 }
 
 const ProductCard = ({product}) => {
-  console.log('product: ', product)
   return (
     <div className="card" style={style.component}>
       <img className="card-img-top" src={product.photo} alt={product.title} />
@@ -24,8 +23,8 @@ const ProductCard = ({product}) => {
         </h5>
 
         {
-          product.categories.length > 0 &&
-          <p className="card-text">{product.categories[0].category}</p>
+          product.category !== null &&
+          <p className="card-text">{product.category.name}</p>
         }
         <p className="card-text">ID: {product.id}</p>
         <p className="card-text">{product.description}</p>
