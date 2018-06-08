@@ -31,11 +31,11 @@ export class ProductsList extends Component {
     return (
       <div className="container">
 
-        <div className="row">
-          <h1 className="text-center">Cars Catalog</h1>
-        </div>
+        <h2 className="text-center">Cars Catalog</h2>
 
-        <div className="row">
+        { products[0] ? (
+        <div>
+          <div className="row">
           {
             categories &&
             <CategoryFilter
@@ -43,9 +43,9 @@ export class ProductsList extends Component {
               categories={categories}
             />
           }
-        </div>
+          </div>
 
-        <div className="row">
+          <div className="row">
           {
             products &&
             products.filter((product) => {
@@ -72,8 +72,12 @@ export class ProductsList extends Component {
               )
             })
           }
-
+          </div>
         </div>
+          ) : (
+            <h3 className="text-center">Sorry! No products in the catalog</h3>
+          )
+        }
 
       </div>
     )
