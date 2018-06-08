@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 
 const style = {
@@ -12,7 +13,8 @@ const style = {
   }
 }
 
-const ProductCard = ({product}) => {
+const ProductCard = (props) => {
+  const { product, user } = props
   return (
     <div className="card" style={style.component}>
       <img className="card-img-top" src={product.photo} alt={product.title} />
@@ -28,12 +30,22 @@ const ProductCard = ({product}) => {
         }
         <p className="card-text">ID: {product.id}</p>
         <p className="card-text">{product.description}</p>
-        {/* <a href="#" className="float-left" style={style.link}>edit</a> */}
-        <Link to={`/updateProduct/${product.id}`} className="float-left" style={style.link}>edit</Link>
+
+        {
+          user.userType === 'administrator' &&
+          <Link to={`/updateProduct/${product.id}`} className="float-left" style={style.link}>edit</Link>
+        }
+
         <a href="#" className="btn btn-primary float-right">Add to cart</a>
       </div>
     </div>
   )
 }
 
-export default ProductCard
+const setStateOnProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(setStateOnProps)(ProductCard)
