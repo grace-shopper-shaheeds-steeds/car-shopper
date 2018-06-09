@@ -29,8 +29,9 @@ class AddProduct extends Component {
     }
 
     render() {
-        console.log('this.props.allCategories: ', this.props.allCategories)
+        
         return (
+            this.props.user.userType === 'administrator' ?
           <div className="container">
 
             <h2 className="text-center">Add New Product</h2>
@@ -78,6 +79,9 @@ class AddProduct extends Component {
 
             </div>
             </div>
+          </div>: 
+          <div>
+              <h1>You are not an admin</h1>
           </div>
         )
     }
@@ -86,7 +90,10 @@ class AddProduct extends Component {
 
 
 const mapStateToProps = state =>{
-    return {allCategories: state.productReducer.allCategories}
+    return {
+        allCategories: state.productReducer.allCategories,
+        user: state.user
+    }
 }
 
 const mapDispatchToProps = dispatch => {

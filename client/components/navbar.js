@@ -5,7 +5,12 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import { ProductSearch } from './products'
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
+const Navbar = ({ handleClick, isLoggedIn, userId, cart, user }) => {
+
+  // const { userId, cart } = props
+  console.log('before crash what is quant', cart.totalQuant)
+  return (
+
   <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
 
     <a className="navbar-brand" href="/">Shaheed's Steeds</a>
@@ -18,10 +23,19 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
               <Link className="nav-link" to="/products">Products</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/addProduct">Add Product</Link>
+            {
+              user.userType === 'administrator' ?
+              <Link className="nav-link" to="/addProduct">Add Product</Link>:null
+            }
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/addCategory">Add Category</Link>
+            {
+              user.userType === 'administrator' ?
+              <Link className="nav-link" to="/addCategory">Add Category</Link>: null
+            }
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to={`/cart/${userId}`}>Cart{cart.totalQuant}</Link>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#" onClick={handleClick}>Logout</a>
@@ -44,16 +58,20 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       }
 
       <ProductSearch />
-
   </nav>
-)
+
+  )
+}
 
 /**
  * CONTAINER
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    userId: state.user.id,
+    isLoggedIn: !!state.user.id,
+    cart: state.cart.cart,
+    user: state.user
   }
 }
 
