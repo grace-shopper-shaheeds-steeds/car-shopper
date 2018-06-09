@@ -6,7 +6,6 @@ const Category = require('../../db/models/category')
 
 router.post('/', async (req, res, next) => {
     try{
-        console.log('req.body in admin post route: ', req.body)
         let newProduct = null;
         if(!!req.body.category){
             const category = await Category.findOne({
@@ -30,7 +29,7 @@ router.post('/', async (req, res, next) => {
             })
         }
         
-        res.json({message: 'Created product successfully!', product: newProduct})
+        res.status(201).json({message: 'Created product successfully!', product: newProduct})
     } catch (err){
         next(err)
     }
@@ -39,13 +38,14 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) =>{
     try{
+        // console.log('req.body in admin put route: ', req.body)
         if(!!req.body.category){
             const category = await Category.findOne({
                 where: {
                     name: req.body.category
                 }, 
             })
-            await Product.update({
+            const instance = await Product.update({
                 title: req.body.title,
                 description: req.body.description,
                 price: req.body.price,
@@ -55,8 +55,8 @@ router.put('/:id', async (req, res, next) =>{
                      id: req.params.id
                  }
              })
-        } else if(req.body.categoryId === null){
-            await Product.update({
+        } if(req.body.categoryId === null){
+           const instance =  await Product.update({
                 title: req.body.title,
                 description: req.body.description,
                 price: req.body.price,
@@ -66,27 +66,18 @@ router.put('/:id', async (req, res, next) =>{
                      id: req.params.id
                  }
              })
-        } else {
-            await Product.update({
+        } 
+           const instance = await Product.update({
                 title: req.body.title,
                 description: req.body.description,
                 price: req.body.price,
                 inventoryQuantity: req.body.inventoryQuantity,
             }, {where: {
                      id: req.params.id
-                 }
+                 }, 
+                 returning: true
              })
-        }
-        // if(!!req.body.removeCategory){
-        //     await Product.update({
-        //         categoryId: null
-        //     }, {
-        //         where: {
-        //             id: req.params.id
-        //         }
-        //     })
-        // }
-        res.json({message: 'Updated product successfully'})
+        res.json({message: 'Updated product successfully', product: instance[1][0]})
     } catch(err){
         next(err)
     }

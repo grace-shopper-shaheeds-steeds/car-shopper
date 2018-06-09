@@ -4,6 +4,9 @@ const categoryRouter = require('./category')
 
 router.use('/products', productRouter)
 router.use('/category', categoryRouter)
+router.use('/', (req, res, next) =>{
+    console.log('req.path: ', req.path)
+})
 
 
 module.exports = router

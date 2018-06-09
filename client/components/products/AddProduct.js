@@ -29,7 +29,7 @@ class AddProduct extends Component {
     }
 
     render() {
-        console.log('this.props.allCategories: ', this.props.allCategories)
+        
         return (
           <div className="container">
 
@@ -86,7 +86,10 @@ class AddProduct extends Component {
 
 
 const mapStateToProps = state =>{
-    return {allCategories: state.productReducer.allCategories}
+    return {
+        allCategories: state.productReducer.allCategories,
+        user: state.user
+    }
 }
 
 const mapDispatchToProps = dispatch => {
