@@ -9,10 +9,11 @@ const Order = db.define('order', {
       allowNull: false
   },
   status: {
-      type: Sequelize.STRING,
-      unique: false,
-      allowNull: false
-  }
+    type: Sequelize.ENUM('Open', 'Pending', 'Complete', 'Cancelled'),
+    unique: false,
+    allowNull: false,
+    defaultValue: 'Open'
+}
 
 })
 
