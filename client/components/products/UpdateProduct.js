@@ -68,6 +68,7 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
 
   render() {
     return (
+      this.props.user.userType === 'administrator' ?
       <div className="container">
 
         <h2 className="text-center">Update Product</h2>
@@ -122,16 +123,19 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
 
         </div>
         </div>
+      </div>: 
+      <div>
+        <h1>You are not an admin</h1>
       </div>
     )
   }
 }
 
 const mapStateToProps = state =>{
-    console.log('state: ', state)
     return {
         singleProduct: state.productReducer.singleProduct,
-        allCategories: state.productReducer.allCategories
+        allCategories: state.productReducer.allCategories,
+        user: state.user
     }
 }
 

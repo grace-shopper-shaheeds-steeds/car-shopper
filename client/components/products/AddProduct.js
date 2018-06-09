@@ -31,6 +31,7 @@ class AddProduct extends Component {
     render() {
         
         return (
+            this.props.user.userType === 'administrator' ?
           <div className="container">
 
             <h2 className="text-center">Add New Product</h2>
@@ -78,6 +79,9 @@ class AddProduct extends Component {
 
             </div>
             </div>
+          </div>: 
+          <div>
+              <h1>You are not an admin</h1>
           </div>
         )
     }

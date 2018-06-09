@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import { ProductSearch } from './products'
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
+const Navbar = ({ handleClick, isLoggedIn, user }) => (
   <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
 
     <a className="navbar-brand" href="/">Shaheed's Steeds</a>
@@ -18,10 +18,16 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
               <Link className="nav-link" to="/products">Products</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/addProduct">Add Product</Link>
+            {
+              user.userType === 'administrator' ?
+              <Link className="nav-link" to="/addProduct">Add Product</Link>:null
+            }
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/addCategory">Add Category</Link>
+            {
+              user.userType === 'administrator' ?
+              <Link className="nav-link" to="/addCategory">Add Category</Link>: null
+            }
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#" onClick={handleClick}>Logout</a>
@@ -53,7 +59,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 
