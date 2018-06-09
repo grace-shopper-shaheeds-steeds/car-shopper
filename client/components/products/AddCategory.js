@@ -27,19 +27,27 @@ class AddCategory extends Component {
 
     render() {
         return (
+            this.props.user.userType === 'administrator' ?
             <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
                 <label htmlFor="name">Category Name: </label>
                 <input name="name" type="text"  />
 
                 <button type="submit">Submit</button>
-            </form>
+            </form>: 
+            <div>
+                <h1>You are not an admin</h1>
+            </div>
         )
     }
 
+}
+
+const mapStateToProps = state =>{
+    return {user: state.user}
 }
 
 const mapDispatchToProps = dispatch =>{
     return {createCategory: (newCategory) => dispatch(addNewCategory(newCategory))}
 }
 
-export default connect(null, mapDispatchToProps)(AddCategory)
+export default connect(mapStateToProps, mapDispatchToProps)(AddCategory)

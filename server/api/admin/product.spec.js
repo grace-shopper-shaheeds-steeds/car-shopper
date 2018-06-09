@@ -66,7 +66,6 @@ describe('Admin Product Routes', () =>{
                    return Category.create({name: 'SUV'})
                })
                .then((createdCategory)=>{
-                   console.log('createdCategory in put route test: ', createdCategory)
                    category = createdCategory
                })
 
@@ -98,7 +97,6 @@ describe('Admin Product Routes', () =>{
                     .send(newTitle)
                     .expect(200)
                     .then((res) =>{
-                        console.log('res.body in put route test: ', res.body)
                         expect(res.body.product.title).to.equal('Tesla')
                     })
             })
@@ -108,8 +106,6 @@ describe('Admin Product Routes', () =>{
                     .send(addCategory)
                     .expect(200)
                     .then((res) =>{
-                        console.log('res.body in put route test: ', res.body)
-                        console.log('category in the update category test: ', category)
                         expect(res.body.product.categoryId).to.equal(category.id)
                     })
             })
@@ -119,32 +115,107 @@ describe('Admin Product Routes', () =>{
                     .send(removeCategory)
                     .expect(200)
                     .then((res) =>{
-                        console.log('res.body in put route test: ', res.body)
-                        console.log('category in the update category test: ', category)
                         expect(res.body.product.categoryId).to.equal(null)
                     })
             })
         })
     })
     describe('non-admin user', () =>{
+        const nonAdminUser = request.agent(app)
+        beforeEach(() =>{
+            return nonAdminUser
+                .post('/auth/login')
+                .send({email: 'shshamsi@email.com', password:'6789'})
+        })
+        describe('POST /api/admin/products', () => {
+            const sampleProduct = {
+                title: 'Prius',
+                description: 'fastest car alive',
+                price: 11,
+                inventoryQuantity: 1,
+            };
+            it('non-admin cannot add a product', () => {
+                return nonAdminUser
+                    .post('/api/admin/products')
+                    .send(sampleProduct)
+                    .expect(403)
+                    .then((res)=>{
+                        expect(res.body).to.eql({})
+                    })
+            })
+        })
+        describe('PUT /api/admin/products', ()=>{
+            let product;
+            let category;
+            const sampleProduct = {
+                title: 'Prius',
+                description: 'fastest car alive',
+                price: 11,
+                inventoryQuantity: 1,
+            };
+            beforeEach(()=>{
+               return Product.create(sampleProduct)
+               .then((createdProduct)=>{
+                    product = createdProduct
+               })
+               .then(()=>{
+                   return Category.create({name: 'SUV'})
+               })
+               .then((createdCategory)=>{
+                   category = createdCategory
+               })
 
+            })
+
+            const newTitle = {
+                title: 'Tesla',
+                description: 'fastest car alive',
+                price: 11,
+                inventoryQuantity: 1,
+            }
+            const addCategory = {
+                title: 'Tesla',
+                description: 'fastest car alive',
+                price: 11,
+                inventoryQuantity: 1,
+                category: 'SUV'
+            }
+            const removeCategory = {
+                title: 'Tesla',
+                description: 'fastest car alive',
+                price: 11,
+                inventoryQuantity: 1,
+                categoryId: null
+            }
+            it('Non-Admin cannot update', ()=>{
+                return nonAdminUser
+                    .put(`/api/admin/products/${product.id}`)
+                    .send(newTitle)
+                    .expect(403)
+                    .then((res) =>{
+                        console.log('res.body in put route test: ', res.body)
+                        expect(res.body).to.eql({})
+                    })
+            })
+            it('Non-admin cannot add a category', ()=>{
+                return nonAdminUser
+                    .put(`/api/admin/products/${product.id}`)
+                    .send(addCategory)
+                    .expect(403)
+                    .then((res) =>{
+                        expect(res.body).to.eql({})
+                    })
+            })
+            it('non-admin cannot remove a category', ()=>{
+                return nonAdminUser
+                    .put(`/api/admin/products/${product.id}`)
+                    .send(removeCategory)
+                    .expect(403)
+                    .then((res) =>{
+                        expect(res.body).to.eql({})
+                    })
+            })
+        })
     })
 
-    // describe('POST Route', () =>{
-    //     const user1 = request.agent()
-    //     const sampleProduct = {
-    //         title: 'Prius',
-    //         description: 'fastest car alive',
-    //         price: 10.5,
-    //         inventoryQuantity: 1,
-    //         photo: 'photoTest',
-    //         averageRating: 3.5
-    //     }
-    //     user1
-    //         .post('http://localhost:8080/signup')
-    //         .send(sampleUser1)
-    //         .end(function(err, response){
-    //             if(err) throw err
-    //         })
-    // })
 })
