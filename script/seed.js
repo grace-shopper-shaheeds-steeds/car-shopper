@@ -2,7 +2,7 @@
 
 const db = require('../server/db')
 const seedData = require('./data.json')
-const { Product, Category } = require('../server/db/models')
+const { Product, Category, User, Order, OrderItem, Address } = require('../server/db/models')
 
 async function seed () {
 
@@ -17,11 +17,31 @@ async function seed () {
   await Promise.all(
     seedData[0].map( async (product) => {
       const newProduct = await Product.create(product)
-      await newProduct.addCategory(Math.ceil(Math.random() * seedData[1].length))
+      await newProduct.setCategory(Math.ceil(Math.random() * seedData[1].length))
     })
   )
 
   console.log(`Products seeded!`)
+
+  await Promise.all(seedData[2].map( async (address) => {
+    await Address.create(address)
+  }))
+  console.log(`Addresses seeded!`)
+  
+  await Promise.all(seedData[5].map( async (user) => {
+    await User.create(user)
+  }))
+  console.log(`User seeded!`)
+
+  await Promise.all(seedData[3].map( async (order) => {
+    await Order.create(order)
+  }))
+  console.log(`Orders seeded!`)
+  
+  await Promise.all(seedData[4].map( async (orderItem) => {
+    await OrderItem.create(orderItem)
+  }))
+  console.log(`OrderItem seeded!`)
 
 }
 
