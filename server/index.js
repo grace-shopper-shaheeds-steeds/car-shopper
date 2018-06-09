@@ -34,6 +34,7 @@ const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
 
+
   // body parsing middleware
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: true }))
@@ -54,6 +55,7 @@ const createApp = () => {
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
+
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))

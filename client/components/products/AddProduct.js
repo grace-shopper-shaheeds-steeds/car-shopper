@@ -86,7 +86,10 @@ class AddProduct extends Component {
 
 
 const mapStateToProps = state =>{
-    return {allCategories: state.productReducer.allCategories}
+    return {
+        allCategories: state.productReducer.allCategories,
+        user: state.user
+    }
 }
 
 const mapDispatchToProps = dispatch => {

@@ -89,6 +89,11 @@ User.isAdmin = async function (userId){
   return false
 }
 
+User.prototype.isAdmin = function (){
+  if (this.userType === 'administrator') return true
+  return false
+}
+
 /**
  * hooks
  */
