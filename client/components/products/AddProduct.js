@@ -29,7 +29,7 @@ class AddProduct extends Component {
     }
 
     render() {
-        console.log('this.props.allCategories: ', this.props.allCategories)
+        
         return (
           <div className="container">
 

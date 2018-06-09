@@ -27,6 +27,13 @@ const Cart = db.define('cart', {
   },
   total: {
     type: Sequelize.INTEGER,
+  },
+  totalQuant: {
+    type: Sequelize.VIRTUAL,
+    get () {
+      if (!this.products.length) return ''
+      return ' (' + this.products.length + ')'
+    }
   }
 })
 

@@ -22,12 +22,6 @@ class Cart extends React.Component {
     this.props.fetchCartProductInfoMethod({ userId: this.props.match.params.userId})
   }
 
-  // createCart() {
-  //   // this.props.
-
-  //   // local.setItem('cartId', newCart.id)
-  // }
-
   handleIncrement(carId) {
     let obj = {
       userId: this.props.match.params.userId,
@@ -53,25 +47,8 @@ class Cart extends React.Component {
   }
 
   render() {
-
-    // console.log('lateststatest', this.props)
     const { isLoggedIn, firstName, cart, cartProducts, currentUser } = this.props
-    // console.log('local storage object WOOOOOOOO', local.tester)
-    if (!isLoggedIn && !local.getItem('cartId')) {
-      this.createCart()
-    }
     let notUnique = []
-
-    
-
-
-    console.log('uniques', uniqueProducts)
-    // console.log('props in render', this.props)
-    // if ()
-    // if (!cart) return <div>rendering...</div>
-    console.log('cart before crash', cart)
-    // console.log('quantttt', cart.quantity)
-
 
     const uniqueProducts = cartProducts.filter(product => {
       if (notUnique.indexOf(product.id) === -1) {
@@ -81,20 +58,19 @@ class Cart extends React.Component {
       return false
     })
 
-
-    console.log('cart', !cart)
-    console.log('quantity', cart)
     return (
     <div>
       {
-        (!cart) ? <div>cart not rendering man!</div> : <div>sdf</div>
+        (!cart) ? <div>Rendering...</div> : ''
       }
       <h3>Cart for User {currentUser.email}</h3>
       {
         uniqueProducts.map(product => {
           const subTotal = product.price * cart.quantity[product.id]
+
+          if (!subTotal) return ''
           return (
-            <div key={product.id}>
+            <div key={product.id} className='container'>
               <img src={product.photo} />
               <div>
                 <div>
