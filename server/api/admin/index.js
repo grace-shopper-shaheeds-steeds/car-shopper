@@ -1,9 +1,11 @@
 const router = require('express').Router()
 const productRouter = require('./product')
 const categoryRouter = require('./category')
+const orderRouter = require('./order')
 
 router.use('/products', productRouter)
 router.use('/category', categoryRouter)
+router.use('/orders', orderRouter)
 router.use('/', (req, res, next) =>{
     console.log('req.path: ', req.path)
 })

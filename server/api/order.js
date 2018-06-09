@@ -1,7 +1,12 @@
 const express = require('express');
 const router = express.Router()
 const Order = require('../db/models/order')
+const Product = require('../db/models/product')
+const User = require('../db/models/user')
+const Address = require('../db/models/address')
 const OrderItem = require('../db/models/orderItem')
+
+
 module.exports = router
 
 router.param('id', (req, res, next, id) => {
@@ -20,46 +25,62 @@ router.param('id', (req, res, next, id) => {
 
   // retrieve all orders
 router.get('/', (req, res, next ) => {
-    Order.findAll()
-      .then(results => {
-        res.send(results);
-      })
-      .catch(next);
-  });
-
-// post a new order to product
-router.post('/', (req, res, next ) => {
-    Order.create(req.body)
-      .then(product => {
-        res.send(product);
-      })
-      .catch(next);
+    Order.findAll({
+      include: [
+        {model: User, attributes: ["id", "firstName", "lastName", "email" ]},
+        {model: Address},
+        {model: OrderItem, include: [{model: Product}]},
+      ]
+    })
+    .then(results => {
+      res.send(results);
+    })
+    .catch(next);
   });
 
 // get order by id
 router.get('/:id', (req, res, next) => {
+  Order.findOne({ 
+    where: { id: req.params.id },
+    include: [
+      {model: User, attributes: ["id", "firstName", "lastName", "email" ]},
+      {model: Address},
+      {model: OrderItem, include: [{model: Product}]},
+    ]
+  })
+  .then( order => {
     // router.param has now taken care of this!!
-    res.send(req.item);
-  });
-  
-// update a particular order
-router.put('/:id', (req, res, next) => {
-    // we already got a order from the db with router.param
-    req.item.update(req.body)
-    .then(updatedOrder => {
-        res.send(updatedOrder);
-    })
-    .catch(next);
+    res.send(order);
+  })
 });
 
-  
-// delete a new order 
-router.delete('/:id', (req, res, next) => {
-    req.item.destroy()
-    .then(item => {
-    res.sendStatus(202);
-    })
-    .catch(next);
+// post a new order to product
+router.post('/', async (req, res, next ) => {
+  console.log(req.body)
+  let {address, addressId, cart, userId, saveAddress} = req.body
+  let products = req.body.cart.products
+
+  try {
+      // first we create the address record if it doesn't exist
+      if(!addressId) {
+        const newAddress = await Address.create(address)
+        addressId = newAddress.id
+      }
+      // if the user wants to save this address, then we'll update the user record with this new address
+
+      const order = {
+        totalAmt: cart.total,
+        addressId: addressId,
+        userId: userId
+      }
+      let newOrder = await Order.create(order)
+      const itemsArray = products.filter(product => {return {productId: product, orderId: newOrder.id} })
+      await OrderItem.bulkCreate(itemsArray)
+      newOrder = await Order.findById(newOrder.id)
+      res.send(newOrder);
+  } catch (err){
+      next(err)
+  }
 });
 
-    
+

@@ -19,7 +19,10 @@ const Address = db.define('address', {
     },
     addressType: {
         type: Sequelize.ENUM('billing', 'home')
-    }
+    },
+    email: {
+        type: Sequelize.STRING
+    },
 
 })
 
