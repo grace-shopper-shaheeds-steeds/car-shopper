@@ -48,7 +48,8 @@ describe('Product routes', () => {
   })
 
 
-  // describe('PUT ROUTES', () => {
+
+  // describe('DELETE ROUTES', () => {
   //   const sampleProduct = {
   //     title: 'Prius',
   //     description: 'fastest car alive',
@@ -58,46 +59,19 @@ describe('Product routes', () => {
   //     averageRating: 3.5
   //   }
 
-  //   const newTitle = { title: 'Tesla'}
-
   //   beforeEach(() => {
   //     return Product.create(sampleProduct)
   //   })
 
-  //   it('PUT /api/products/:id', async () => {
+  //   it('DELETE /api/admin/products/:id', async () => {
   //     await request(app)
-  //       .put('/api/admin/products/1')
-  //       .send(newTitle)
+  //       .delete('/api/products/1')
+  //       .expect(200)
   //       const res = await Product.findAll()
   //       expect(res).to.be.an('array')
-  //       expect(res[0].title).to.be.equal('Tesla')
+  //       expect(res.length).to.be.equal(0)
 
   //   })
   // })
-
-//   describe('DELETE ROUTES', () => {
-//     const sampleProduct = {
-//       title: 'Prius',
-//       description: 'fastest car alive',
-//       price: 10.5,
-//       inventoryQuantity: 1,
-//       photo: 'photoTest',
-//       averageRating: 3.5
-//     }
-
-//     beforeEach(() => {
-//       return Product.create(sampleProduct)
-//     })
-
-//     it('DELETE /api/admin/products/:id', async () => {
-//       await request(app)
-//         .delete('/api/products/1')
-//         .expect(200)
-//         const res = await Product.findAll()
-//         expect(res).to.be.an('array')
-//         expect(res.length).to.be.equal(0)
-
-//     })
-//   })
 
 })

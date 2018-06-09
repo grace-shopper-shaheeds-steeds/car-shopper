@@ -5,7 +5,12 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import { ProductSearch } from './products'
 
-const Navbar = ({ handleClick, isLoggedIn, user }) => (
+const Navbar = ({ handleClick, isLoggedIn, userId, cart, user }) => {
+
+  // const { userId, cart } = props
+  console.log('before crash what is quant', cart.totalQuant)
+  return (
+
   <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
 
     <a className="navbar-brand" href="/">Shaheed's Steeds</a>
@@ -30,6 +35,9 @@ const Navbar = ({ handleClick, isLoggedIn, user }) => (
             }
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to={`/cart/${userId}`}>Cart{cart.totalQuant}</Link>
+            </li>
+            <li className="nav-item">
               <a className="nav-link" href="#" onClick={handleClick}>Logout</a>
             </li>
         </ul>
@@ -50,16 +58,19 @@ const Navbar = ({ handleClick, isLoggedIn, user }) => (
       }
 
       <ProductSearch />
-
   </nav>
-)
+
+  )
+}
 
 /**
  * CONTAINER
  */
 const mapState = state => {
   return {
+    userId: state.user.id,
     isLoggedIn: !!state.user.id,
+    cart: state.cart.cart,
     user: state.user
   }
 }

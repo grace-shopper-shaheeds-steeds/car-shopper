@@ -24,8 +24,6 @@ class Routes extends Component {
         {/* <Route exact path="/products" component={ProductsList} /> */}
 
 
-        <Route path="/cart" component={Cart} />
-
         <Route exact path="/products/search/:value" component={ProductSearchResults} />
         <Route exact path="/products" component={ProductsList} />
         <Route path="/products/:id" component={ProductSingle} />

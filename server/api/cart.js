@@ -84,16 +84,14 @@ router.put('/:userId/subtract', async (req, res, next) => {
   }
 })
 
-router.delete('/:userId/delete', async (req, res, next) => {
+router.put('/:userId/delete', async (req, res, next) => {
   try {
-    console.log('req.body', req.body)
     let carId = req.body.carId
     const foundUser = await User.findById(req.params.userId)
     const foundCart = await Cart.findById(foundUser.cartId)
     let updatedCart = await foundCart.update({
       products: foundCart.products.filter(product => product !== carId),
     })
-
     res.json(updatedCart)
   } catch (err){
     next(err)

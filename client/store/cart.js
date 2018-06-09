@@ -20,19 +20,6 @@ const getCartProducts = (products) => {
   }
 }
 
-const removeItemFromCart = (newItems) => {
-  return {
-    type: REMOVE_ITEM_FROM_CART,
-    newItems
-  }
-}
-
-const removeItemFromCartProducts = (productToRemoveId) => {
-  return {
-    type: REMOVE_ITEM_FROM_CART_PRODUCTS,
-    productToRemoveId
-  }
-}
 
 export const fetchCartInfo = (info) => {
   return async (dispatch) => {
@@ -79,8 +66,7 @@ export const updateWithSubtracted = (info) => {
 
 export const updatedWithRemoved = (info) => {
   return async (dispatch) => {
-    console.log('what im sending', info)
-    await axios.delete(`/api/cart/${info.userId}/delete`, { carId: info.carId })
+    await axios.put(`/api/cart/${info.userId}/delete`, { carId: info.carId })
     const response = await axios.get(`/api/cart/${info.userId}`)
     const data = response.data
     const action = getCart(data)
@@ -88,17 +74,6 @@ export const updatedWithRemoved = (info) => {
   }
 }
 
-
-// export const updatedWithRemoved = (info) => {
-//   return async (dispatch) => {
-//     const response = await axios.delete(`/api/cart/${info.userId}`, { carId: info.carId })
-//     const data = response.data
-//     const action = removeItemFromCart(data)
-//     const secondAction = removeItemFromCartProducts(info.carId)
-//     dispatch(action)
-//     dispatch(secondAction)
-//   }
-// }
 
 const initialState = {
   cart: {},
@@ -111,10 +86,6 @@ export default function (state = initialState, action) {
       return {...state, cart: action.cart}
     case GET_CART_PRODUCTS:
       return {...state, cartProducts: action.products}
-    // case REMOVE_ITEM_FROM_CART:
-    //   return {...state, cart: action.cart }
-    // case REMOVE_ITEM_FROM_CART_PRODUCTS:
-    //   return {...state, cartProducts: state.cartProducts.filter(product => product.id !== action.productToRemoveId) }
     default:
       return state
   }
