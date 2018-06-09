@@ -17,15 +17,6 @@ router.param('id', (req, res, next, id) => {
       .catch(next);
   });
 
-  // retrieve all categories
-router.get('/', (req, res, next ) => {
-    Category.findAll()
-      .then(results => {
-        res.send(results);
-      })
-      .catch(next);
-  });
-
 // post a new category to product
 router.post('/', (req, res, next ) => {
   console.log('req.body in category post route: ', req.body)
@@ -41,7 +32,7 @@ router.get('/:id', (req, res, next) => {
     // router.param has now taken care of this!!
     res.send(req.item);
   });
-  
+
 // update a particular category
 router.put('/:id', (req, res, next) => {
     // we already got a category from the db with router.param
@@ -52,7 +43,7 @@ router.put('/:id', (req, res, next) => {
     .catch(next);
 });
 
-  
+
 // post a new category to product
 router.delete('/:id', (req, res, next) => {
     req.item.destroy()
@@ -62,4 +53,4 @@ router.delete('/:id', (req, res, next) => {
     .catch(next);
 });
 
-    
+

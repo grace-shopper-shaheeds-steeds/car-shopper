@@ -18,8 +18,8 @@ const Categories = ({categories, catSelect}) => {
           All
         </a>
       </li>
-      {
-        categories.map((cat) => {
+
+      { categories.map((cat) => {
           return (
             <li key={cat.id} className="nav-item">
               <a
@@ -27,12 +27,13 @@ const Categories = ({categories, catSelect}) => {
                 id={cat.id}
                 className="nav-link"
                 href="/">
-                {cat.category}
+                {cat.name}
               </a>
             </li>
           )
         })
       }
+
     </ul>
   )
 }
