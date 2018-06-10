@@ -46,7 +46,12 @@ const User = db.define('user', {
   },
   cartId: {
     type: Sequelize.INTEGER
+  },
+  photo: {
+    type: Sequelize.STRING,
+    defaultValue: 'default_person.png'
   }
+
 })
 
 module.exports = User

@@ -6,15 +6,15 @@ const User = require('../../db/models/user')
 router.get('/', async (req, res, next) =>{
     try{
         const userList = await User.findAll({
-            
+            attributes:['id', 'firstName', 'lastName', 'email', 'userType']
         })
-        console.log('userList: ', userList)
         res.json(userList)
     } catch(err){
         console.error(err)
     }
 
 })
+
 router.put('/:id', async (req, res, next) =>{
     try{
         const instance = await User.update({

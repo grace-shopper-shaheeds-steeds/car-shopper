@@ -34,6 +34,6 @@
   ],
   [
     {"firstName": "sue", "lastName": "susan", "email": "sue@sue.com", "password": "c9448b13c0386588afa363bb83739ae02ef3fb1a9a8213ef408aed1c6107cf6d", "salt": "HBs2kheb19Un1Ddn6+BytQ==", "userType": "user" },
-    {"firstName": "bob", "lastName": "bobby", "email": "bob@bob.com", "password": "c9448b13c0386588afa363bb83739ae02ef3fb1a9a8213ef408aed1c6107cf6d", "salt": "HBs2kheb19Un1Ddn6+BytQ==", "userType": "user" }
+    {"firstName": "bob", "lastName": "bobby", "email": "bob@bob.com", "password": "c9448b13c0386588afa363bb83739ae02ef3fb1a9a8213ef408aed1c6107cf6d", "salt": "HBs2kheb19Un1Ddn6+BytQ==", "userType": "administrator" }
   ]
 ]
