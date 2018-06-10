@@ -34,7 +34,6 @@ export class UserList extends Component {
 
 
 const mapStateToProps = state =>{
-    console.log('state in users list: ', state)
     return {userList: state.userManagementReducer.allUsers}
 }
 
