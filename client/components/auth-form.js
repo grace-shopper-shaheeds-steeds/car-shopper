@@ -8,51 +8,68 @@ import {auth} from '../store'
  */
 const AuthForm = (props) => {
   const {name, displayName, handleSubmit, error} = props
-  console.log('props.match: ',props.match )
+
+  const header = (
+    <h2 className="text-center">
+      Account {name === 'login' ? 'Login' : 'Register'}
+    </h2>
+  )
 
   return (
-    props.match.path === '/signup' ? 
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div className="form-group">
-            <label htmlFor="firstName"><small>First Name</small></label>
-            <input className="form-control" name="firstName" type="text" />
-          </div>
+    <div className="container">
+
+      { header}
+
+      <div className="row justify-content-md-center">
+        <div className="col col-md-6">
+
+        <form onSubmit={handleSubmit} name={name}>
+
           <div className="form-group">
-            <label htmlFor="lastName"><small>Last Name</small></label>
-            <input className="form-control" name="lastName" type="text" />
+            <label htmlFor="email"><small>Email</small></label>
+            <input className="form-control" name="email" type="text" />
           </div>
-        <div className="form-group">
-          <label htmlFor="email"><small>Email</small></label>
-          <input className="form-control" name="email" type="text" />
+
+        { name === 'signup' &&
+          <div>
+            <div className="form-group">
+              <label htmlFor="firstName"><small>First Name</small></label>
+                <input className="form-control" name="firstName" type="text" />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="lastName"><small>Last Name</small></label>
+              <input className="form-control" name="lastName" type="text" />
+            </div>
+          </div>
+        }
+
+          <div className="form-group">
+            <label htmlFor="password"><small>Password</small></label>
+            <input className="form-control" name="password" type="password" />
+          </div>
+
+          <div className="form-row">
+
+            <div className="form-group col-md-5">
+              <button className="btn btn-primary btn-lg btn-block" type="submit">{displayName}</button>
+            </div>
+
+            <div className="form-group col-md-2">
+              <h5 className="text-center"><i>or</i></h5>
+            </div>
+
+            <div className="form-group col-md-5">
+              <a href="/auth/google"><img className="google-signin" src="/img/btn_google_signin.png" /></a>
+            </div>
+
+          </div>
+
+          {error && error.response && <div> {error.response.data} </div>}
+        </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="password"><small>Password</small></label>
-          <input className="form-control" name="password" type="password" />
-        </div>
-        <div className="form-group">
-          <button className="btn btn-primary" type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a className="btn" href="/auth/google">{displayName} with Google</a>
-    </div>:
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div className="form-group">
-          <label htmlFor="email"><small>Email</small></label>
-          <input className="form-control" name="email" type="text" />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password"><small>Password</small></label>
-          <input className="form-control" name="password" type="password" />
-        </div>
-        <div className="form-group">
-          <button className="btn btn-primary" type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a className="btn" href="/auth/google">{displayName} with Google</a>
+      </div>
+
     </div>
   )
 }
@@ -84,8 +101,7 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit (evt) {
       evt.preventDefault()
-      //console.log('evt.target.name: ', evt.target.name)
-      if(evt.target.name === 'signup'){
+      if (evt.target.name === 'signup'){
         const formName = evt.target.name
         const firstName = evt.target.firstName.value
         const lastName = evt.target.lastName.value
