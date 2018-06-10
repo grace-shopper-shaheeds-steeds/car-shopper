@@ -7,6 +7,25 @@ a {
 }
 
 /*
+* === Product: Single ===
+*/
+.product-single {
+  margin-top: 2em;
+}
+
+.product-single img {
+  width: 100%
+}
+
+.product-single .description {
+  margin: 1em 0 2em 0;
+}
+
+.product-single .details {
+  margin-bottom: 2em;
+}
+
+/*
 * === Navigation ===
 */
 
