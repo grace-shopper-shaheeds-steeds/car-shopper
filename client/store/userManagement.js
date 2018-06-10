@@ -39,7 +39,6 @@ export const getAllUsersThunk = () => {
 
 export const makeAdminThunk = (id, data) => {
     return async (dispatch) => {
-        console.log('userType in makeAdminThunk', data)
         await axios.put(`/api/admin/user/${id}`, data)
         const res = await axios.get(`/api/admin/user`)
         const users = res.data
@@ -48,7 +47,6 @@ export const makeAdminThunk = (id, data) => {
 }
 
 export const deleteUserThunk = (id) =>{
-    console.log('id in delete thunk: ', id)
     return async (dispatch) =>{
         await axios.delete(`/api/admin/user/${id}`)
         dispatch(deleteUser(id))
