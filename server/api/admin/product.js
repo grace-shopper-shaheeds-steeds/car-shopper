@@ -5,13 +5,14 @@ const Category = require('../../db/models/category')
 
 
 router.post('/', async (req, res, next) => {
+  console.log('in the route!', req.body)
     try{
         let newProduct = null;
         if(!!req.body.category){
             const category = await Category.findOne({
                 where: {
                     name: req.body.category
-                }, 
+                },
             })
             newProduct = await Product.create({
                 title: req.body.title,
@@ -30,7 +31,7 @@ router.post('/', async (req, res, next) => {
                 inventoryQuantity: req.body.inventoryQuantity,
             })
         }
-        
+
         res.status(201).json({message: 'Created product successfully!', product: newProduct})
     } catch (err){
         next(err)
@@ -45,7 +46,7 @@ router.put('/:id', async (req, res, next) =>{
             const category = await Category.findOne({
                 where: {
                     name: req.body.category
-                }, 
+                },
             })
             const instance = await Product.update({
                 title: req.body.title,
@@ -70,7 +71,7 @@ router.put('/:id', async (req, res, next) =>{
                      id: req.params.id
                  }
              })
-        } 
+        }
            const instance = await Product.update({
                 title: req.body.title,
                 description: req.body.description,
@@ -79,7 +80,7 @@ router.put('/:id', async (req, res, next) =>{
                 inventoryQuantity: req.body.inventoryQuantity,
             }, {where: {
                      id: req.params.id
-                 }, 
+                 },
                  returning: true
              })
         res.json({message: 'Updated product successfully', product: instance[1][0]})
