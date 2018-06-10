@@ -35,8 +35,12 @@ export class ProductSearch extends Component {
     return (
       <div>
         <form className="form-inline" onSubmit={this.handleSubmit} onChange={this.handleChange}>
-          <input className="form-control" type="text" placeholder="Search" aria-label="Search" name="search" value={this.state.search} />
-          <button className="btn btn-secondary" type="submit">Search</button>
+          <div className="input-group">
+            <input className="form-control" type="text" placeholder="Search" aria-label="Search" name="search" value={this.state.search} />
+            <div className="input-group-append">
+              <button className="btn btn-secondary" type="submit">Search</button>
+            </div>
+          </div>
         </form>
       </div>
     )
