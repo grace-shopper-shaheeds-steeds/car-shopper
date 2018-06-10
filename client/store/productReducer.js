@@ -70,7 +70,6 @@ export const getAllProducts = () => {
 export const getAllCategories = () => {
   return async (dispatch) => {
     const { data } = await axios.get('/api/admin/category')
-    console.log('data in thunk: ', data)
     const action = gotAllCategories(data)
     dispatch(action)
   }
@@ -132,7 +131,7 @@ export const productReducer = ( state = initialState, action) => {
   switch (action.type){
     case ADD_PRODUCT:
       return {...state, allProducts: [...state.allProducts, action.newProduct]}
-    case ADD_CATEGORY: 
+    case ADD_CATEGORY:
       return {...state, allCategory: [...state.allCategory, action.category]}
     case GET_ALL_PRODUCTS:
       return {...state, allProducts: action.products}

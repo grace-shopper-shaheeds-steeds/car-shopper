@@ -1,12 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getSingleProduct } from '../../store'
+import { getSingleProduct, updateWithAdded } from '../../store'
 
 export class ProductSingle extends Component {
 
   componentDidMount(){
     const id = this.props.match.params.id
     this.props.getSingleProduct(id)
+  }
+
+  handleCartAdd = (event) => {
+    event.preventDefault()
+    const userId = this.props.user.id
+
+    const info = {
+      userId,
+      carId: this.props.product.id
+    }
+
+    this.props.addToCart(info)
   }
 
   render () {
@@ -26,7 +38,10 @@ export class ProductSingle extends Component {
                 <p>Description: {product.description}</p>
                 {
                   quantity ? (
-                    <button type="button" className="btn btn-primary">
+                    <button
+                      onClick={this.handleCartAdd}
+                      type="button"
+                      className="btn btn-primary float-right">
                       Add to cart
                     </button>
                   ) : (
@@ -45,7 +60,8 @@ export class ProductSingle extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    product: state.productReducer.singleProduct
+    product: state.productReducer.singleProduct,
+    user: state.user
   }
 }
 
@@ -53,6 +69,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getSingleProduct: (id) => {
       dispatch(getSingleProduct(id))
+    },
+    addToCart: (info) => {
+      dispatch(updateWithAdded(info))
     }
   }
 }
