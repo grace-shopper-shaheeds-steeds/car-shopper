@@ -11,7 +11,7 @@ const Navbar = ({ handleClick, isLoggedIn, userId, cart, user }) => {
   console.log('before crash what is quant', cart.totalQuant)
   return (
 
-  <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+  <nav className="navbar navbar-expand-sm navbar-dark">
 
     <a className="navbar-brand" href="/">Shaheed's Steeds</a>
 
