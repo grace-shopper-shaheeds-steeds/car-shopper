@@ -3,7 +3,7 @@ const User = require('../db/models/user')
 module.exports = router
 
 async function adminGateway(req, res, next){
-  console.log('req.user: ', req.user)
+  // console.log('req.user: ', req.user)
   console.log('User.isAdmin: ', await User.isAdmin(req.user.id))
   if(req.user && await User.isAdmin(req.user.id)){
     next()

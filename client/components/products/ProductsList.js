@@ -7,7 +7,7 @@ import  { getAllProducts, getAllCategories } from '../../store'
 export class ProductsList extends Component {
 
   constructor(){
-    super()
+    super();
     this.state = {
       display: 0
     }
