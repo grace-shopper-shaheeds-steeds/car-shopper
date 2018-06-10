@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ProductDetails from './ProductDetails'
+import { ReviewsMain } from '../reviews'
 import { getSingleProduct, updateWithAdded, getAllCategories } from '../../store'
 
 export class ProductSingle extends Component {
@@ -69,6 +70,9 @@ export class ProductSingle extends Component {
               </div>
             </div>
           }
+
+          <ReviewsMain productId={product.id} />
+
       </div>
     )
   }
