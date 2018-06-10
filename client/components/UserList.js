@@ -10,7 +10,6 @@ export class UserList extends Component {
         this.props.displayUsers()
     }
     render() {
-        console.log('this.props in user list: ', this.props)
         return (
             this.props.userList.length ?
             <div className="container">
