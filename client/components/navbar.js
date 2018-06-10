@@ -35,6 +35,12 @@ const Navbar = ({ handleClick, isLoggedIn, userId, cart, user }) => {
             }
             </li>
             <li className="nav-item">
+            {
+              user.userType === 'administrator' ?
+              <Link className="nav-link" to="/userList">User Management</Link>: null
+            }
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to={`/cart/${userId}`}>Cart{cart.totalQuant}</Link>
             </li>
             <li className="nav-item">

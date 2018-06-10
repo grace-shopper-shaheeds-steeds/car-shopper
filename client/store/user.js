@@ -18,6 +18,8 @@ const defaultUser = {}
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 
+
+
 /**
  * THUNK CREATORS
  */
