@@ -5,7 +5,6 @@ const Category = require('../../db/models/category')
 
 
 router.post('/', async (req, res, next) => {
-  console.log('in the route!', req.body)
     try{
         let newProduct = null;
         if(!!req.body.category){

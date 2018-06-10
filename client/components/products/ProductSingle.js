@@ -30,7 +30,7 @@ export class ProductSingle extends Component {
             product &&
             <div className="row">
               <div className="col-8">
-                <img src={product.photo} />
+                <img src={`/${product.photo}`} />
               </div>
               <div className="col-4">
                 <h5>ID: {product.id} - {product.title}</h5>
