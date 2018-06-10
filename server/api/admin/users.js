@@ -16,7 +16,6 @@ router.get('/', async (req, res, next) =>{
 })
 
 router.put('/:id', async (req, res, next) =>{
-    console.log('req.body in put route for user: ', req.body)
     try{
         const instance = await User.update({
             userType: req.body.userType
