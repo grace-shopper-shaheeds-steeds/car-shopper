@@ -1,98 +1,118 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import Select from 'react-select'
 import { addNewProduct, getAllCategories} from '../../store'
+import history from '../../history'
 
 
 class AddProduct extends Component {
-    constructor() {
-        super();
-        this.state = {
-            title: '',
-            description: '',
-            price: '',
-            inventoryQuantity: ''
-        }
+
+  constructor() {
+    super();
+    this.state = {
+      title: '',
+      description: '',
+      price: '',
+      inventoryQuantity: ''
     }
-    componentDidMount = () =>{
-        this.props.displayCategories();
-    }
-    handleChange = event => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
-    handleSubmit = event => {
-      event.preventDefault()
-      this.props.createProduct(this.state)
-      this.setState({
-        title: '',
-        description: '',
-        price: '',
-        photo: '',
-        inventoryQuantity: ''
-      })
-    }
+  }
 
-    render() {
-        
-        return (
-            this.props.user.userType === 'administrator' ?
-          <div className="container">
+  componentDidMount = () =>{
+    this.props.displayCategories();
+  }
 
-            <h2 className="text-center">Add New Product</h2>
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
-            <div className="row justify-content-md-center">
-            <div className="col col-md-6">
-              <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+  handleSubmit = async event => {
+    event.preventDefault()
+    await this.props.createProduct(this.state)
 
-                <div className="form-group">
-                  <label htmlFor="title">Title</label>
-                  <input placeholder="Title" className="form-control" name="title" type="text"  value={this.state.title}/>
-                </div>
+    this.setState({
+      title: '',
+      description: '',
+      price: '',
+      photo: '',
+      inventoryQuantity: '',
+      category: ''
+    })
 
-                <div className="form-group">
-                  <label htmlFor="description">Description</label>
-                  <textarea placeholder="Description" className="form-control" name="description" type="text"  value={this.state.description}/>
-                </div>
+    history.push(`/products`)
+  }
 
+  categoryOptions = () => {
+    return this.props.allCategories.map((cat) => {
+      return { value: cat.name, label: cat.name  }
+    })
+  }
 
-                <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <label htmlFor="price">Price</label>
-                    <input placeholder="Price" className="form-control" name="price" type="number" min="0" step="any" value={this.state.price}/>
-                  </div>
+  render() {
+    return ( this.props.user.userType === 'administrator' ?
+      <div className="container">
 
-                  <div className="form-group col-md-6">
-                    <label htmlFor="inventoryQuantity">Inventory Quantity</label>
-                    <input placeholder="Inventory Quantity" className="form-control" name="inventoryQuantity" type="number" min="0" step="any" value={this.state.inventoryQuantity}/>
-                  </div>
-                </div>
+        <h2 className="text-center">Add New Product</h2>
 
-                <div className="form-group">
-                  <label htmlFor="photo">Photo Url</label>
-                  <input placeholder="Photo Url"className="form-control" name="photo" type="text"  value={this.state.photo}/>
-                </div>
+        <div className="row justify-content-md-center">
 
-                <select name="category">
-                    <option>Select Category</option>
-                    {this.props.allCategories.map(category => {
-                        return <option>{category.name}</option>
-                    })}
-                </select>
-                  <button className="btn btn-primary" type="submit">Submit</button>
-              </form>
+          <div className="col col-md-6">
 
+          <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+
+            <div className="form-group">
+              <label htmlFor="title">Title</label>
+              <input placeholder="Title" className="form-control" name="title" type="text"  value={this.state.title}/>
             </div>
+
+            <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <textarea placeholder="Description" className="form-control" name="description" type="text"  value={this.state.description}/>
             </div>
-          </div>: 
-          <div>
-              <h1>You are not an admin</h1>
+
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label htmlFor="price">Price</label>
+                <input placeholder="Price" className="form-control" name="price" type="number" min="0" step="any" value={this.state.price}/>
+              </div>
+
+              <div className="form-group col-md-6">
+                <label htmlFor="inventoryQuantity">Inventory Quantity</label>
+                <input placeholder="Inventory Quantity" className="form-control" name="inventoryQuantity" type="number" min="0" step="any" value={this.state.inventoryQuantity}/>
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label htmlFor="photo">Photo Url</label>
+                <input placeholder="Photo Url"className="form-control" name="photo" type="text"  value={this.state.photo}/>
+              </div>
+
+              <div className="form-group col-md-6">
+                <label htmlFor="category">Category</label>
+                <Select
+                  options={this.categoryOptions()}
+                  value={this.state.value}
+                  onChange={value => this.setState({ category: value.label })}
+                />
+              </div>
+            </div>
+
+            <button className="btn btn-primary" type="submit">Submit</button>
+          </form>
+
           </div>
-        )
-    }
 
+        </div>
+
+      </div> :
+
+      <div>
+          <h1>You are not an admin</h1>
+      </div>
+    )
+  }
 }
 
 
@@ -104,9 +124,9 @@ const mapStateToProps = state =>{
 }
 
 const mapDispatchToProps = dispatch => {
-    return { 
+    return {
         createProduct: (newProduct) => dispatch(addNewProduct(newProduct)),
-        displayCategories: () => dispatch(getAllCategories()) 
+        displayCategories: () => dispatch(getAllCategories())
     }
 }
 
