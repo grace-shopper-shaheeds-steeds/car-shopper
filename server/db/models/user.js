@@ -30,7 +30,8 @@ const User = db.define('user', {
     }
   },
   userType: {
-    type: Sequelize.ENUM('administrator', 'user')
+    type: Sequelize.ENUM('administrator', 'user'),
+    defaultValue: 'user'
   },
   salt: {
     type: Sequelize.STRING,
@@ -89,10 +90,15 @@ User.isAdmin = async function (userId){
   return false
 }
 
-User.prototype.isAdmin = function (){
-  if (this.userType === 'administrator') return true
-  return false
+User.changeStatus = async function(instanceId){
+  const instance = await User.findById(instanceId)
+  instance.userType = 'administrator'
 }
+
+// User.prototype.isAdmin = function (){
+//   if (this.userType === 'administrator') return true
+//   return false
+// }
 
 /**
  * hooks
