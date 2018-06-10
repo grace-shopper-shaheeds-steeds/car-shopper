@@ -26,6 +26,13 @@ class AddProduct extends Component {
     handleSubmit = event => {
       event.preventDefault()
       this.props.createProduct(this.state)
+      this.setState({
+        title: '',
+        description: '',
+        price: '',
+        photo: '',
+        inventoryQuantity: ''
+      })
     }
 
     render() {
@@ -42,30 +49,30 @@ class AddProduct extends Component {
 
                 <div className="form-group">
                   <label htmlFor="title">Title</label>
-                  <input placeholder="Title" className="form-control" name="title" type="text"  />
+                  <input placeholder="Title" className="form-control" name="title" type="text"  value={this.state.title}/>
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="description">Description</label>
-                  <textarea placeholder="Description" className="form-control" name="description" type="text"  />
+                  <textarea placeholder="Description" className="form-control" name="description" type="text"  value={this.state.description}/>
                 </div>
 
 
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="price">Price</label>
-                    <input placeholder="Price" className="form-control" name="price" type="number" min="0" step="any" />
+                    <input placeholder="Price" className="form-control" name="price" type="number" min="0" step="any" value={this.state.price}/>
                   </div>
 
                   <div className="form-group col-md-6">
                     <label htmlFor="inventoryQuantity">Inventory Quantity</label>
-                    <input placeholder="Inventory Quantity" className="form-control" name="inventoryQuantity" type="number" min="0" step="any" />
+                    <input placeholder="Inventory Quantity" className="form-control" name="inventoryQuantity" type="number" min="0" step="any" value={this.state.inventoryQuantity}/>
                   </div>
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="photo">Photo Url</label>
-                  <input placeholder="Photo Url"className="form-control" name="photo" type="text"  />
+                  <input placeholder="Photo Url"className="form-control" name="photo" type="text"  value={this.state.photo}/>
                 </div>
 
                 <select name="category">
