@@ -21,7 +21,7 @@ router.use('/orderitems', require('./orderItem'))
 router.use('/admin', adminGateway, require('./admin'))
 router.use('/addresses', require('./address'))
 
-//router.use('/categories', require('./category'))
+router.use('/categories', require('./category'))
 
 router.use('/cart', require('./cart'))
 

@@ -69,7 +69,7 @@ export const getAllProducts = () => {
 
 export const getAllCategories = () => {
   return async (dispatch) => {
-    const { data } = await axios.get('/api/admin/category')
+    const { data } = await axios.get('/api/categories')
     const action = gotAllCategories(data)
     dispatch(action)
   }
