@@ -8,8 +8,35 @@ import {auth} from '../store'
  */
 const AuthForm = (props) => {
   const {name, displayName, handleSubmit, error} = props
+  console.log('props.match: ',props.match )
 
   return (
+    props.match.path === '/signup' ? 
+    <div>
+      <form onSubmit={handleSubmit} name={name}>
+        <div className="form-group">
+            <label htmlFor="firstName"><small>First Name</small></label>
+            <input className="form-control" name="firstName" type="text" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="lastName"><small>Last Name</small></label>
+            <input className="form-control" name="lastName" type="text" />
+          </div>
+        <div className="form-group">
+          <label htmlFor="email"><small>Email</small></label>
+          <input className="form-control" name="email" type="text" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password"><small>Password</small></label>
+          <input className="form-control" name="password" type="password" />
+        </div>
+        <div className="form-group">
+          <button className="btn btn-primary" type="submit">{displayName}</button>
+        </div>
+        {error && error.response && <div> {error.response.data} </div>}
+      </form>
+      <a className="btn" href="/auth/google">{displayName} with Google</a>
+    </div>:
     <div>
       <form onSubmit={handleSubmit} name={name}>
         <div className="form-group">
@@ -57,10 +84,21 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit (evt) {
       evt.preventDefault()
-      const formName = evt.target.name
-      const email = evt.target.email.value
-      const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      //console.log('evt.target.name: ', evt.target.name)
+      if(evt.target.name === 'signup'){
+        const formName = evt.target.name
+        const firstName = evt.target.firstName.value
+        const lastName = evt.target.lastName.value
+        const email = evt.target.email.value
+        const password = evt.target.password.value
+        dispatch(auth(firstName, lastName, email, password, formName))
+
+      } else {
+        const formName = evt.target.name
+        const email = evt.target.email.value
+        const password = evt.target.password.value
+        dispatch(auth(null, null, email, password, formName))
+      }
     }
   }
 }
