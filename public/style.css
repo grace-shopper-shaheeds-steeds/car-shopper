@@ -6,6 +6,29 @@ a {
   text-decoration: none;
 }
 
+/*
+* === Navigation ===
+*/
+
+nav {
+  margin-bottom: 1em;
+}
+
 nav a {
   margin: 1em;
+}
+
+
+
+/*
+* === Forms ===
+*/
+
+img.google-signin {
+  width: 100%;
+}
+
+img.google-signin:active {
+  position: relative;
+  top: 1px;
 }
