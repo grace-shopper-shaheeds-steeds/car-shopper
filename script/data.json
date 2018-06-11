@@ -2,9 +2,9 @@
 [
   [
     { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
+    { "title": "Tesla Model X", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
+    { "title": "Tesla Model L", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
+    { "title": "Tesla Model T", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
     { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
     { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
     { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
@@ -19,21 +19,27 @@
   ],
   [
     {"street": "666 N. Michigan Ave", "city": "Chicago", "state": "IL", "zipCode": "60456", "country": "USA", "addressType": "billing", "email": "jj@jj.com" },
-    {"street": "123 Main Street", "city": "Urbana", "state": "IL", "zipCode": "62789", "country": "USA", "addressType": "billing", "email": "urbana@urbana.com" }
+    {"street": "123 Main Street", "city": "Urbana", "state": "IL", "zipCode": "62789", "country": "USA", "addressType": "billing", "email": "urbana@urbana.com" },
+    {"street": "25875 El Camino Real", "city": "Huntington Beach", "state": "CA", "zipCode": "94050", "country": "USA", "addressType": "billing", "email": "surfdude@surfdude.com" }
+  ],
+  [
+    {"firstName": "sue", "lastName": "susan", "email": "sue@sue.com", "password": "c9448b13c0386588afa363bb83739ae02ef3fb1a9a8213ef408aed1c6107cf6d", "salt": "HBs2kheb19Un1Ddn6+BytQ==", "userType": "user" },
+    {"firstName": "bob", "lastName": "bobby", "email": "bob@bob.com", "password": "c9448b13c0386588afa363bb83739ae02ef3fb1a9a8213ef408aed1c6107cf6d", "salt": "HBs2kheb19Un1Ddn6+BytQ==", "userType": "administrator" },
+    {"firstName": "james", "lastName": "bond", "email": "james@james.com", "password": "c9448b13c0386588afa363bb83739ae02ef3fb1a9a8213ef408aed1c6107cf6d", "salt": "HBs2kheb19Un1Ddn6+BytQ==", "userType": "user" }
   ],
   [
     {"totalAmt": 4512395, "status": "Open", "addressId": 1, "userId": 1},
-    {"totalAmt": 3599550, "status": "Open", "addressId": 2, "userId": 2}
+    {"totalAmt": 3599550, "status": "Open", "addressId": 2, "userId": 2},
+    {"totalAmt": 7834593, "status": "Open", "addressId": 3, "userId": 3}
   ],
   [
     {"status": "Open", "productId": 1, "orderId": 1},
     {"status": "Open", "productId": 2, "orderId": 1},
     {"status": "Open", "productId": 3, "orderId": 1},
     {"status": "Open", "productId": 2, "orderId": 2},
-    {"status": "Open", "productId": 5, "orderId": 2}
-  ],
-  [
-    {"firstName": "sue", "lastName": "susan", "email": "sue@sue.com", "password": "c9448b13c0386588afa363bb83739ae02ef3fb1a9a8213ef408aed1c6107cf6d", "salt": "HBs2kheb19Un1Ddn6+BytQ==", "userType": "user" },
-    {"firstName": "bob", "lastName": "bobby", "email": "bob@bob.com", "password": "c9448b13c0386588afa363bb83739ae02ef3fb1a9a8213ef408aed1c6107cf6d", "salt": "HBs2kheb19Un1Ddn6+BytQ==", "userType": "administrator" }
+    {"status": "Open", "productId": 5, "orderId": 2},
+    {"status": "Open", "productId": 8, "orderId": 3},
+    {"status": "Open", "productId": 9, "orderId": 3},
+    {"status": "Open", "productId": 7, "orderId": 3}
   ]
 ]
