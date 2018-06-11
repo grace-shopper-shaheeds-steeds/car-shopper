@@ -3,9 +3,13 @@ const User = require('../db/models/user')
 module.exports = router
 
 async function adminGateway(req, res, next){
+
   // console.log('req.user.id: ', req.user.id)
   console.log('User.isAdmin: ', await User.isAdmin(req.user.id))
   if(await User.isAdmin(req.user.id)){
+
+  if(req.user && await User.isAdmin(req.user.id)){
+
     next()
   } else {
     res.status(403).send('Unauthorized')
@@ -21,7 +25,7 @@ router.use('/orderitems', require('./orderItem'))
 router.use('/admin', adminGateway, require('./admin'))
 router.use('/addresses', require('./address'))
 
-//router.use('/categories', require('./category'))
+router.use('/categories', require('./category'))
 
 router.use('/cart', require('./cart'))
 

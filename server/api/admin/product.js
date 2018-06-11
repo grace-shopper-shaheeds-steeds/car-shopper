@@ -11,12 +11,13 @@ router.post('/', async (req, res, next) => {
             const category = await Category.findOne({
                 where: {
                     name: req.body.category
-                }, 
+                },
             })
             newProduct = await Product.create({
                 title: req.body.title,
                 description: req.body.description,
                 price: req.body.price,
+                photo: req.body.photo,
                 inventoryQuantity: req.body.inventoryQuantity,
                 categoryId: category.id
             })
@@ -25,10 +26,11 @@ router.post('/', async (req, res, next) => {
                 title: req.body.title,
                 description: req.body.description,
                 price: req.body.price,
+                photo: req.body.photo,
                 inventoryQuantity: req.body.inventoryQuantity,
             })
         }
-        
+
         res.status(201).json({message: 'Created product successfully!', product: newProduct})
     } catch (err){
         next(err)
@@ -43,12 +45,13 @@ router.put('/:id', async (req, res, next) =>{
             const category = await Category.findOne({
                 where: {
                     name: req.body.category
-                }, 
+                },
             })
             const instance = await Product.update({
                 title: req.body.title,
                 description: req.body.description,
                 price: req.body.price,
+                photo: req.body.photo,
                 inventoryQuantity: req.body.inventoryQuantity,
                 categoryId: category.id
             }, {where: {
@@ -60,21 +63,23 @@ router.put('/:id', async (req, res, next) =>{
                 title: req.body.title,
                 description: req.body.description,
                 price: req.body.price,
+                photo: req.body.photo,
                 inventoryQuantity: req.body.inventoryQuantity,
                 categoryId: null
             }, {where: {
                      id: req.params.id
                  }
              })
-        } 
+        }
            const instance = await Product.update({
                 title: req.body.title,
                 description: req.body.description,
                 price: req.body.price,
+                photo: req.body.photo,
                 inventoryQuantity: req.body.inventoryQuantity,
             }, {where: {
                      id: req.params.id
-                 }, 
+                 },
                  returning: true
              })
         res.json({message: 'Updated product successfully', product: instance[1][0]})

@@ -9,7 +9,7 @@ const Navbar = ({ handleClick, isLoggedIn, userId, cart, user }) => {
 
   return (
 
-  <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+  <nav className="navbar navbar-expand-sm navbar-dark">
 
     <a className="navbar-brand" href="/">Shaheed's Steeds</a>
 
@@ -30,6 +30,12 @@ const Navbar = ({ handleClick, isLoggedIn, userId, cart, user }) => {
             {
               user.userType === 'administrator' ?
               <Link className="nav-link" to="/addCategory">Add Category</Link>: null
+            }
+            </li>
+            <li className="nav-item">
+            {
+              user.userType === 'administrator' ?
+              <Link className="nav-link" to="/userList">User Management</Link>: null
             }
             </li>
             <li className="nav-item">

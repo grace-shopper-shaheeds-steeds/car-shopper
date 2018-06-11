@@ -7,7 +7,7 @@ import  { getAllProducts, getAllCategories } from '../../store'
 export class ProductsList extends Component {
 
   constructor(){
-    super()
+    super();
     this.state = {
       display: 0
     }
@@ -53,8 +53,8 @@ export class ProductsList extends Component {
               if (quantity > 0){
 
                 // Category to display
-                if (this.state.display && product.categories.length > 0) {
-                  return product.categories[0].id === Number(this.state.display)
+                if (this.state.display && product.category.id ) {
+                  return product.category.id === Number(this.state.display)
                 }
 
                 // Display all

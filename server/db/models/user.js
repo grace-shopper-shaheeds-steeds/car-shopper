@@ -30,7 +30,8 @@ const User = db.define('user', {
     }
   },
   userType: {
-    type: Sequelize.ENUM('administrator', 'user')
+    type: Sequelize.ENUM('administrator', 'user'),
+    defaultValue: 'user'
   },
   salt: {
     type: Sequelize.STRING,
@@ -46,6 +47,7 @@ const User = db.define('user', {
   cartId: {
     type: Sequelize.INTEGER
   }
+
 })
 
 module.exports = User
@@ -89,10 +91,6 @@ User.isAdmin = async function (userId){
   return false
 }
 
-User.prototype.isAdmin = function (){
-  if (this.userType === 'administrator') return true
-  return false
-}
 
 /**
  * hooks

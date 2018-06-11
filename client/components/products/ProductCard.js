@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateWithAdded } from '../../store/cart'
 
-
 const style = {
   component: {
     width: '15rem',
@@ -19,8 +18,10 @@ export class ProductCard extends Component {
   handleCartAdd= (event) => {
     event.preventDefault()
 
+    const userId = this.props.user.id
+
     const info = {
-      userId: this.props.user.id,
+      userId,
       carId: this.props.product.id
     }
     if (!this.props.user.id) info.userId = window.localStorage.getItem('tempUserId')
