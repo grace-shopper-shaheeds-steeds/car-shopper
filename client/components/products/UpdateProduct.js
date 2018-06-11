@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Select from 'react-select'
-import {updateProductThunk, getSingleProduct, getAllCategories, removeProductCategory, getAllProducts} from '../../store'
+import {updateProductThunk, getSingleProduct, getAllCategories, removeProductCategory} from '../../store'
 
 export class UpdateProduct extends Component { // eslint-disable-line react/no-deprecated
   constructor(){
@@ -10,25 +10,23 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
       title: '',
       description: '',
       price: '',
-      inventoryQuantity: ''
+      inventoryQuantity: '',
+      defaultCat: ''
     }
   }
 
   componentDidMount = async () => {
     const id = this.props.match.params.productId;
-    console.log('id: ', id)
 
     await this.props.displaySingleProduct(id)
     await this.props.displayCategories()
-    await this.props.displayAllProducts()
-
-    console.log('componentDidMount thisprops.singleProducts: ', this.props.singleProduct)
 
     this.setState({
       title: this.props.singleProduct.title,
       description: this.props.singleProduct.description,
       price: this.props.singleProduct.price,
       inventoryQuantity: this.props.singleProduct.inventoryQuantity,
+      defaultCat: this.props.singleProduct.category.name
     })
   }
 
@@ -58,21 +56,6 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
     return this.props.allCategories.map((cat) => {
       return { value: cat.name, label: cat.name  }
     })
-  }
-
-  getDefaultCat = () => {
-    //await this.displaySingleProduct(this.props.match.params.productId)
-    const { allCategories, singleProduct, allProducts} = this.props
-    console.log('outside if block allProducts: ', allProducts)
-    console.log('outside if block singleProduct: ', singleProduct)
-    console.log('productId: ', this.props.match.params.productId)
-    if(singleProduct.id === +this.props.match.params.productId){
-      console.log('inside if block allCategories: ', allCategories)
-      console.log('inside if block singleProduct: ', singleProduct)
-      let index = allCategories.findIndex(category => category.id === singleProduct.categoryId)
-      console.log('index: ', index)
-      return allCategories[index].name
-    }
   }
 
   render() {
@@ -120,11 +103,11 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
                 <div className="form-group col-md-6">
                   <label htmlFor="category">Category</label>
 
-                  { this.props.allCategories.length > 0 &&
+                  { this.state.defaultCat &&
                     <Select
                       defaultValue={{
-                        label: this.getDefaultCat(),
-                        value: this.getDefaultCat()
+                        label: this.state.defaultCat,
+                        value: this.state.defaultCat
                       }}
                       options={this.categoryOptions()}
                       value={this.state.value}
@@ -167,9 +150,7 @@ const mapDispatchToProps = dispatch => {
     updateProduct: (updatedProduct, productId) => dispatch(updateProductThunk(updatedProduct, productId)),
     displaySingleProduct: (singleProductId) => dispatch(getSingleProduct(singleProductId)),
     displayCategories: () => dispatch(getAllCategories()),
-    removeACategory: (productId, updatedProduct) => dispatch(removeProductCategory(productId, updatedProduct)),
-    displayAllProducts: () => dispatch(getAllProducts())
-    // getDefaultCat: (categoryList, singleCategory) => dispatch()
+    removeACategory: (productId, updatedProduct) => dispatch(removeProductCategory(productId, updatedProduct))
   }
 }
 
