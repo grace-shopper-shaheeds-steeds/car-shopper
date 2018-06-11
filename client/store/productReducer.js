@@ -105,6 +105,8 @@ export const addNewCategory = newCategory => {
     const res = await axios.post('/api/admin/category', newCategory)
     const category = res.data
     dispatch(addCategory(category))
+    history.push("/products")
+
   }
 }
 

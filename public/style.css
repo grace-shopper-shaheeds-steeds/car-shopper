@@ -128,3 +128,7 @@ img.google-signin:active {
 #review-login {
   margin: 2em 0;
 }
+
+#error{
+  color: red
+}
