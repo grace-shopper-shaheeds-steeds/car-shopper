@@ -93,7 +93,9 @@ class Cart extends React.Component {
         })
       }
       <div>Total: {cart.total}</div>
+      <Link to='/orders/create/'>
       <button>Proceed to Checkout</button>
+      </Link>
     </div>
     )
   }

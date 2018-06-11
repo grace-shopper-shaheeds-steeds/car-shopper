@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import  { createOrder, addNewContact } from '../../store'
+import { createOrder, addNewContact } from '../../store'
 import Select from 'react-select'
 import OrderCartDetail from './OrderCartDetail'
 import OrderPayment from './OrderPayment'
+import { fetchCartInfo, fetchCartProductInfo } from '../../store/cart'
 
 class OrderCreate extends Component {
 
@@ -24,7 +25,9 @@ class OrderCreate extends Component {
     // this.countryOptions = this.countryOptions.bind(this)
   }
 
-  componentDidMount () {
+  componentDidMount() {
+    this.props.fetchCartMethod({ userId: this.props.match.params.userId})
+    this.props.fetchCartProductInfoMethod({ userId: this.props.match.params.userId})
   }
 
   handleChange = event => {
@@ -44,20 +47,30 @@ class OrderCreate extends Component {
     this.props.submitOrder(newOrder)
   }
 
-  // countryOptions = () => {
-  //   const countries = [
-  //     {name: 'USA'},
-  //     {name: 'Canada'},
-  //     {name: 'Mexico'}
-  //   ]
-  //   return countries.map((country) => {
-  //     return { value: country.name, label: country.name  }
-  //   })
-  // }
+  countryOptions = () => {
+    const countries = [
+      {name: 'USA'},
+      {name: 'Canada'},
+      {name: 'Mexico'}
+    ]
+    return countries.map((country) => {
+      return { value: country.name, label: country.name  }
+    })
+  }
 
   render(){
-    let cartProducts = this.props.cartProducts
+    const {cartProducts, cart} = this.props
+    console.log('LOGGING Cart:', cart)
+    let notUnique = []
 
+    const uniqueProducts = cartProducts.filter(product => {
+      if (notUnique.indexOf(product.id) === -1) {
+        notUnique.push(product.id)
+        return true
+      }
+      return false
+    })
+    
     return (
       <div>
         <div className="container"> 
@@ -94,11 +107,11 @@ class OrderCreate extends Component {
 
                     <div className="form-group col-md-6">
                     <label htmlFor="country">Country</label>
-                    {/* <Select
+                    <Select
                       options={this.countryOptions()}
                       value={this.state.country}
                       onChange={value => this.setState({ country: value.label })}
-                    /> */}
+                    />
                     </div>
                   </form>
                 </div>
@@ -108,18 +121,18 @@ class OrderCreate extends Component {
             </div>
             
             <div className="col-6"> 
-              <div className="col-12">
-                <h3>Order Items</h3> 
-                {  
-                  {/* cartProducts.map(product => {
+              <div className="cartDetail">
+                <h3>Order Items</h3> {
+                  uniqueProducts.map(product => {
                     return ( <OrderCartDetail product={product} key={product.id} /> )
-                  }) */}
+                  })
                 }
               </div>
 
-              <div className="col-12">
+              <div className="payment">
+              <br/>
                 <h3>Credit Card Payment</h3> 
-                {/* <OrderPayment /> */}
+                {/* <OrderPayment total={cart.total}/> */}
               </div>
             </div>
 
@@ -154,10 +167,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    submitOrder: (newOrder) => {
-      dispatch(addNewContact(newOrder.address, this.state.userId))
-      dispatch(createOrder(newOrder))
-    }
+    fetchCartMethod: (info) => dispatch(fetchCartInfo(info)),
+    fetchCartProductInfoMethod: (info) => dispatch(fetchCartProductInfo(info)),
+    submitOrder: (newOrder) => { dispatch(createOrder(newOrder)) }
   }
 }
 
