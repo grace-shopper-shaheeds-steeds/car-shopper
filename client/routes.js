@@ -4,8 +4,10 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, AddProduct, AddCategory, ProductsList, UpdateProduct, ProductSingle, Cart, ProductSearchResults, UserList, LandingHome} from './components'
 import {me} from './store'
+import { OrderCreate, OrderBilling, OrderCart, OrderPayment, OrderItem, OrdersList, OrderSingle } from './components/orders'
 import { fetchCartInfo } from './store/cart'
 import axios from 'axios'
+
 /**
  * COMPONENT
  */
@@ -48,6 +50,10 @@ class Routes extends Component {
               <Route path="/updateProduct/:productId" component={UpdateProduct} />
               <Route path="/addCategory" component={AddCategory} />
               <Route path="/userList" component={UserList} />
+              <Route path="/orders/create" component={OrderCreate} />
+              <Route path="/orders/addresses" component={OrderBilling} />
+              <Route path="/orders/:id" component={OrderSingle} />
+              <Route path="/orders" component={OrdersList} />
             </Switch>
         }
         {/* Displays our Login component as a fallback */}

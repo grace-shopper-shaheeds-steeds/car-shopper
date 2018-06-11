@@ -7,13 +7,15 @@ import cart from './cart'
 import {productReducer} from './productReducer'
 import {reviewReducer} from './reviewReducer'
 import {userManagementReducer} from './userManagement'
+import {orderReducer} from './orderReducer'
 
 const reducer = combineReducers({
   user,
   productReducer,
   cart,
   userManagementReducer,
-  reviewReducer
+  reviewReducer,
+  orderReducer
 })
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -28,3 +30,4 @@ export * from './productReducer'
 export * from './reviewReducer'
 export * from './cart'
 export * from './userManagement'
+export * from './orderReducer'

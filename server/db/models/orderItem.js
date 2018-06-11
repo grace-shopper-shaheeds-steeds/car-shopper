@@ -5,7 +5,7 @@ const db = require('../db')
 const OrderItem = db.define('orderItem', {
   status: {
       type: Sequelize.ENUM('Open', 'Pending', 'Complete', 'Cancelled'),
-      unique: false,
+      // unique: false,
       allowNull: false,
       defaultValue: 'Open'
   }
