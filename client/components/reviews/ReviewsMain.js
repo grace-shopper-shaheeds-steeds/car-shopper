@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import ReviewSubmit from './ReviewSubmit'
 import ReviewsList from './ReviewsList'
 import ReviewLogin from './ReviewLogin'
-import { getProductReviews } from '../../store'
 
 export class ReviewsMain extends Component {
   constructor(){

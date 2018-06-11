@@ -38,6 +38,17 @@
   ],
   [
     {"content": "Lorem ipsum dolar sit emit", "rating": 4, "productId": 1, "userId": 1},
-    {"content": "Lorem ipsum dolar sit emit", "rating": 3, "productId": 1, "userId": 2}
+    {"content": "Lorem ipsum dolar sit emit", "rating": 3, "productId": 1, "userId": 2},
+    {"content": "Lorem ipsum dolar sit emit", "rating": 4, "productId": 2, "userId": 1},
+    {"content": "Lorem ipsum dolar sit emit", "rating": 3, "productId": 2, "userId": 2},
+    {"content": "Lorem ipsum dolar sit emit", "rating": 4, "productId": 3, "userId": 1},
+    {"content": "Lorem ipsum dolar sit emit", "rating": 3, "productId": 4, "userId": 2},
+    {"content": "Lorem ipsum dolar sit emit", "rating": 3, "productId": 4, "userId": 2},
+    {"content": "Lorem ipsum dolar sit emit", "rating": 3, "productId": 5, "userId": 2},
+    {"content": "Lorem ipsum dolar sit emit", "rating": 3, "productId": 5, "userId": 2},
+    {"content": "Lorem ipsum dolar sit emit", "rating": 3, "productId": 6, "userId": 2},
+    {"content": "Lorem ipsum dolar sit emit", "rating": 3, "productId": 6, "userId": 2},
+    {"content": "Lorem ipsum dolar sit emit", "rating": 3, "productId": 7, "userId": 2},
+    {"content": "Lorem ipsum dolar sit emit", "rating": 3, "productId": 7, "userId": 2}
   ]
 ]
