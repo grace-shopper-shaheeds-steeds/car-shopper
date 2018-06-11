@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import ReviewSubmit from './ReviewSubmit'
 import ReviewsList from './ReviewsList'
+import ReviewLogin from './ReviewLogin'
 
 const reviewsDemo = [
   {id: 1, content: 'lorem ipsum dolar sit emit', rating: 3, productId: 9, userId: 3},
@@ -49,13 +51,16 @@ export class ReviewsMain extends Component {
               productId={this.props.productId}
             />
 
-            { reviewAuthStatus &&
+            { reviewAuthStatus ? (
               <ReviewSubmit
                 user={user}
                 onStarClick={this.onStarClick.bind(this)}
                 rating={this.state.rating}
                 onContentChange={this.handleChange}
               />
+              ) : (
+                <ReviewLogin />
+              )
             }
 
           </div>
