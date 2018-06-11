@@ -30,7 +30,7 @@ router.put('/:id', (req, res, next) => {
 // delete a new order... we won't actually delete the order
 // we'll just update the status to 'X' for deleted order
 router.delete('/:id', (req, res, next) => {
-    req.item.update({ status: 'cancelled' })
+    req.item.update({ status: 'Cancelled' })
     .then(item => {
       res.send(item);
       // res.sendStatus(202);

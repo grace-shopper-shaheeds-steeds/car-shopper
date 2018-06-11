@@ -28,17 +28,17 @@ async function seed () {
   }))
   console.log(`Addresses seeded!`)
   
-  await Promise.all(seedData[5].map( async (user) => {
+  await Promise.all(seedData[3].map( async (user) => {
     await User.create(user)
   }))
   console.log(`User seeded!`)
 
-  await Promise.all(seedData[3].map( async (order) => {
+  await Promise.all(seedData[4].map( async (order) => {
     await Order.create(order)
   }))
   console.log(`Orders seeded!`)
   
-  await Promise.all(seedData[4].map( async (orderItem) => {
+  await Promise.all(seedData[5].map( async (orderItem) => {
     await OrderItem.create(orderItem)
   }))
   console.log(`OrderItem seeded!`)
@@ -54,7 +54,7 @@ if (module === require.main) {
     console.error(err)
     process.exitCode = 1
   })
-  .finally(() => { // `finally` is like then + catch. It runs no matter what.
+  .then(() => { // `finally` is like then + catch. It runs no matter what.
     console.log('closing db connection')
     db.close()
     console.log('db connection closed')
