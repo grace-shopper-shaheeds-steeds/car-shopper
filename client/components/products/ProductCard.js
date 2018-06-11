@@ -23,6 +23,7 @@ export class ProductCard extends Component {
       userId: this.props.user.id,
       carId: this.props.product.id
     }
+    if (!this.props.user.id) info.userId = window.localStorage.getItem('tempUserId')
 
     this.props.addToCart(info)
   }
