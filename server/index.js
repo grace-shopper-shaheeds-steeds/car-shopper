@@ -107,3 +107,7 @@ if (require.main === module) {
 } else {
   createApp()
 }
+
+app.use((err, req, res, next) =>{
+  console.error(err[0].ValidationErrorItem.message)
+})

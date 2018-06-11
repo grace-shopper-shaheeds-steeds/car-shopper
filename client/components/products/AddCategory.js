@@ -8,7 +8,7 @@ import {addNewCategory} from '../../store'
 class AddCategory extends Component {
     constructor (){
         super();
-        this.state ={
+        this.state = {
             name: ''
         }
     }
@@ -22,7 +22,6 @@ class AddCategory extends Component {
         event.preventDefault()
         console.log('this.state: ', this.state)
         this.props.createCategory(this.state)
-        //this.props.history.push("/productList")
     }
 
     render() {
@@ -37,13 +36,17 @@ class AddCategory extends Component {
             <div>
                 <h1>You are not an admin</h1>
             </div>
+
         )
     }
 
 }
 
 const mapStateToProps = state =>{
-    return {user: state.user}
+    return {
+        user: state.user,
+        categoryList: state.allCategories
+    }
 }
 
 const mapDispatchToProps = dispatch =>{

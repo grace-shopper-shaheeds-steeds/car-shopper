@@ -31,6 +31,7 @@ export const fetchCartInfo = (info) => {
 }
 
 export const fetchCartProductInfo = (info) => {
+  console.log('info: ', info)
   return async (dispatch) => {
     const response = await axios.get(`/api/cart/${info.userId}/products`)
     const data = response.data
@@ -41,6 +42,7 @@ export const fetchCartProductInfo = (info) => {
 
 
 export const updateWithAdded = (info) => {
+  console.log('info: ', info)
   return async (dispatch) => {
     await axios.put(`/api/cart/${info.userId}/add`, { carId: info.carId })
     const response = await axios.get(`/api/cart/${info.userId}`)

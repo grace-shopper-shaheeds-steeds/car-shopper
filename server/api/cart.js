@@ -60,6 +60,7 @@ router.get('/:userId/products', async (req, res, next) => {
     const foundProducts = foundCart.products.forEach( async (productId) => {
       arr.push(Product.findById(productId))
     })
+    console.log('foundProducts: ', foundProducts)
     let holder = await Promise.all(arr)
     res.json(holder)
   } catch (err){
