@@ -15,12 +15,19 @@ export class ReviewsMain extends Component {
 
   handleChange = (event) => {
     this.setState({
-      content: event.target.value
+      [event.target.name]: event.target.value
     })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+
+  }
+
   onStarClick(nextValue) {
-    this.setState({rating: nextValue});
+    this.setState({
+      rating: Number(nextValue)
+    })
   }
 
   render () {
@@ -49,6 +56,8 @@ export class ReviewsMain extends Component {
                 onStarClick={this.onStarClick.bind(this)}
                 rating={this.state.rating}
                 onContentChange={this.handleChange}
+                onReviewSubmit={this.handleSubmit}
+                review={this.state}
               />
               ) : (
                 <ReviewLogin />
