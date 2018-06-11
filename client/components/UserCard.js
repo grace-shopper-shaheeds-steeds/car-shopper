@@ -25,16 +25,20 @@ export class UserCard extends Component{
         this.props.makeAdmin(id, data)
     }
     render(){
+        let title = !!this.props.user.firstName ? this.props.user.fullName : this.props.user.email
+        let email = title !== this.props.user.email ?  this.props.user.email : null
         return (
         <div className="card" style={style.component}>
         <img className="card-img-top" src={this.props.user.photo} />
         <div className="card-body">
 
           <h5>
-            <Link to={`/user/${this.props.user.id}`}>{this.props.user.fullName}</Link>
+            <Link to={`/user/${this.props.user.id}`}>{title}</Link>
           </h5>
           <p className="card-text">ID: {this.props.user.id}</p>
-          <p className="card-text">Email: {this.props.user.email}</p>
+          {title !== this.props.user.email ? 
+            <p className="card-text">Email: {email}</p>: null
+          }
           <p className="card-text">User Type: {this.props.user.userType}</p>
           {/* { user.userType === 'administrator' &&
             <Link to={`/updateProduct/${product.id}`} className="float-left" style={style.link}>edit</Link>
