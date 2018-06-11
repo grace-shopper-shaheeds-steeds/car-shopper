@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-const GOT_ALL_REVIEWS = 'GOT_ALL_REVIEWS'
+// const GOT_ALL_REVIEWS = 'GOT_ALL_REVIEWS'
 const GET_SINGLE_PRODUCT_REVIEWS = 'GET_SINGLE_PRODUCT_REVIEWS'
-// const ADD_PRODUCT_REVIEW = 'ADD_PRODUCT_REVIEW'
+const ADD_PRODUCT_REVIEW = 'ADD_PRODUCT_REVIEW'
 
-const gotAllReviews = (reviews) => {
-  return {
-    type: GOT_ALL_REVIEWS,
-    reviews
-  }
-}
+// const gotAllReviews = (reviews) => {
+//   return {
+//     type: GOT_ALL_REVIEWS,
+//     reviews
+//   }
+// }
 
 const gotSingleProductReviews = (reviews) => {
   return {
@@ -18,19 +18,19 @@ const gotSingleProductReviews = (reviews) => {
   }
 }
 
-// const addedProductReview = (review) => {
-//   return {
-//     type: ADD_PRODUCT_REVIEW,
-//     review
-//   }
-// }
-
-export const getAllReviews = () => {
-  return async (dispatch) => {
-    const { data } = await axios.get('/api/reviews')
-    dispatch(gotAllReviews(data))
+const addedProductReview = (review) => {
+  return {
+    type: ADD_PRODUCT_REVIEW,
+    review
   }
 }
+
+// export const getAllReviews = () => {
+//   return async (dispatch) => {
+//     const { data } = await axios.get('/api/reviews')
+//     dispatch(gotAllReviews(data))
+//   }
+// }
 
 export const getProductReviews = (productId) => {
   return async (dispatch) => {
@@ -44,27 +44,27 @@ export const getProductReviews = (productId) => {
   }
 }
 
-// export const addProductReview = (review) => {
-//   return async (dispatch) => {
-//     const { data } = await axios.post('/api/reviews', review)
-//     dispatch(addedProductReview(data))
-//   }
-// }
+export const addProductReview = (review) => {
+  return async (dispatch) => {
+    const { data } = await axios.post('/api/reviews', review)
+    dispatch(addedProductReview(data))
+  }
+}
 
 const initialState = {
-  allReviews: {},
+  latestReview: {},
   singleProductReviews: []
 }
 
 export const reviewReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GOT_ALL_REVIEWS:
-      return {...state, allReviews: action.reviews }
+    // case GOT_ALL_REVIEWS:
+    //   return {...state, allReviews: action.reviews }
     case GET_SINGLE_PRODUCT_REVIEWS: {
       return {...state, singleProductReviews: action.reviews}
     }
-    // case ADD_PRODUCT_REVIEW:
-    //   return {...state, latestReview: action.product}
+    case ADD_PRODUCT_REVIEW:
+      return {...state, latestReview: action.product}
     default:
       return state
   }

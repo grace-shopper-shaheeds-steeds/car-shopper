@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import ReviewSubmit from './ReviewSubmit'
 import ReviewsList from './ReviewsList'
 import ReviewLogin from './ReviewLogin'
+import {addProductReview} from '../../store'
 
 export class ReviewsMain extends Component {
   constructor(){
@@ -21,7 +22,7 @@ export class ReviewsMain extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-
+    this.props.addReview(this.state)
   }
 
   onStarClick(nextValue) {
@@ -78,4 +79,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(ReviewsMain)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addReview: (review) => {
+      dispatch(addProductReview(review))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewsMain)
