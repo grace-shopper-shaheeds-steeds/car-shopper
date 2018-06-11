@@ -10,7 +10,8 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
       title: '',
       description: '',
       price: '',
-      inventoryQuantity: ''
+      inventoryQuantity: '',
+      defaultCat: ''
     }
   }
 
@@ -24,7 +25,8 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
       title: this.props.singleProduct.title,
       description: this.props.singleProduct.description,
       price: this.props.singleProduct.price,
-      inventoryQuantity: this.props.singleProduct.inventoryQuantity
+      inventoryQuantity: this.props.singleProduct.inventoryQuantity,
+      defaultCat: this.props.singleProduct.category.name
     })
   }
 
@@ -54,11 +56,6 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
     return this.props.allCategories.map((cat) => {
       return { value: cat.name, label: cat.name  }
     })
-  }
-
-  getDefaultCat = () => {
-    const { allCategories, singleProduct } = this.props
-    return allCategories[singleProduct.categoryId - 1].name
   }
 
   render() {
@@ -106,11 +103,11 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
                 <div className="form-group col-md-6">
                   <label htmlFor="category">Category</label>
 
-                  { this.props.allCategories.length > 0 &&
+                  { this.state.defaultCat &&
                     <Select
                       defaultValue={{
-                        label: this.getDefaultCat(),
-                        value: this.getDefaultCat()
+                        label: this.state.defaultCat,
+                        value: this.state.defaultCat
                       }}
                       options={this.categoryOptions()}
                       value={this.state.value}
@@ -143,6 +140,7 @@ const mapStateToProps = state => {
   return {
     singleProduct: state.productReducer.singleProduct,
     allCategories: state.productReducer.allCategories,
+    allProducts: state.productReducer.allProducts,
     user: state.user
   }
 }

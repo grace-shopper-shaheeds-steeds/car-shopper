@@ -3,6 +3,44 @@ const router = express.Router()
 const Cart = require('../db/models/cart')
 const User = require('../db/models/user')
 const Product = require('../db/models/product')
+const faker = require('faker')
+
+router.get('/temp', async (req, res, next) => {
+  try {
+    const tempUser = await User.create({
+      email: faker.internet.email()
+    })
+    res.json(tempUser)
+  } catch (err){
+    next(err)
+  }
+})
+
+router.put('/cartMerge', async (req, res, next) => {
+  try {
+    console.log('entered')
+    const tempUser = await User.findById(+req.body.tempUserId)
+    const userToUpdate = await User.findById(req.body.userId)
+    const oldCart = await Cart.findById(tempUser.cartId)
+    if (!oldCart.products.length) {
+      res.end()
+    } else {
+      const newCart = await Cart.findById(userToUpdate.cartId)
+      console.log('oldcart', oldCart)
+      console.log('newcart', newCart)
+      await newCart.update({
+        products: oldCart.products
+      })
+      await oldCart.update({
+        products: [],
+      })
+      res.end()
+    }
+  } catch (err){
+    next(err)
+  }
+})
+
 
 router.get('/:userId', async (req, res, next) => {
   try {
@@ -28,17 +66,6 @@ router.get('/:userId/products', async (req, res, next) => {
     next(err)
   }
 })
-
-
-// 'ROUTE FOR CREATING NEW CART!!! WILL NEED LATER FOR USERS WHO ARE NOT SIGNED IN!!!!!!!!!!!!!'
-// router.post('/', async (req, res, next) => {
-//   try {
-//     const foundCart = await Cart.create()
-//     res.json(foundCart)
-//   } catch (err){
-//     next(err)
-//   }
-// })
 
 router.put('/:userId/add', async (req, res, next) => {
   try {
