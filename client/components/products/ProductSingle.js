@@ -3,14 +3,14 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ProductDetails from './ProductDetails'
 import { ReviewsMain } from '../reviews'
-import { getSingleProduct, updateWithAdded, getAllCategories } from '../../store'
+import { getSingleProduct, updateWithAdded, getAllCategories, getProductReviews } from '../../store'
 
 export class ProductSingle extends Component {
 
-  componentDidMount(){
+  componentDidMount = async () => {
     const id = this.props.match.params.id
-    this.props.getSingleProduct(id)
-    this.props.getCategories()
+    await this.props.getSingleProduct(id)
+    this.props.productReviews(id)
   }
 
   handleCartAdd = (event) => {
@@ -26,9 +26,9 @@ export class ProductSingle extends Component {
   }
 
   render () {
-    const { product, user, categories } = this.props
+    const { product, user, reviews } = this.props
     const quantity = product.inventoryQuantity - product.soldQuantity
-    const category = categories[product.categoryId - 1]
+
     return (
       <div className="container product-single">
           {
@@ -43,8 +43,11 @@ export class ProductSingle extends Component {
                 <h3>{product.title}</h3>
                 <p className="description">{product.description}</p>
 
-                { category &&
-                 <ProductDetails product={product} category={category} />
+                { product.categoryId > 0 &&
+                  <ProductDetails
+                    product={product}
+                    category={product.category}
+                  />
                 }
 
                 <hr />
@@ -71,7 +74,9 @@ export class ProductSingle extends Component {
             </div>
           }
 
-          <ReviewsMain productId={product.id} />
+          { product &&
+            <ReviewsMain reviews={reviews} productId={product.id} />
+          }
 
       </div>
     )
@@ -81,8 +86,8 @@ export class ProductSingle extends Component {
 const mapStateToProps = (state) => {
   return {
     product: state.productReducer.singleProduct,
-    categories: state.productReducer.allCategories,
-    user: state.user
+    user: state.user,
+    reviews: state.reviewReducer.singleProductReviews
   }
 }
 
@@ -94,8 +99,8 @@ const mapDispatchToProps = (dispatch) => {
     addToCart: (info) => {
       dispatch(updateWithAdded(info))
     },
-    getCategories: () => {
-      dispatch(getAllCategories())
+    productReviews: (id) => {
+      dispatch(getProductReviews(id))
     }
   }
 }

@@ -1,21 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import ReviewSubmit from './ReviewSubmit'
 import ReviewsList from './ReviewsList'
 import ReviewLogin from './ReviewLogin'
-
-const reviewsDemo = [
-  {id: 1, content: 'lorem ipsum dolar sit emit', rating: 3, productId: 9, userId: 3},
-  {id: 2, content: 'lorem ipsum dolar sit emit', rating: 4, productId: 9, userId: 2},
-  {id: 3, content: 'lorem ipsum dolar sit emit', rating: 5, productId: 9, userId: 1},
-]
+import { getProductReviews } from '../../store'
 
 export class ReviewsMain extends Component {
   constructor(){
     super()
     this.state = {
-      reviews: reviewsDemo,
       rating: 0,
       content: ''
     }
@@ -32,7 +25,7 @@ export class ReviewsMain extends Component {
   }
 
   render () {
-    const { user } = this.props
+    const { user, reviews } = this.props
 
     const reviewAuthStatus = (
       user.userType === 'user' || user.userType === 'administrator'
@@ -41,13 +34,13 @@ export class ReviewsMain extends Component {
     return (
       <div className="product-reviews">
 
-        <h3 className="text-center">Reviews</h3>
+        <h3 className="text-center">Product Reviews</h3>
 
         <div className="row justify-content-md-center">
           <div className="col col-lg-8">
 
             <ReviewsList
-              reviews={this.state.reviews}
+              reviews={reviews}
               productId={this.props.productId}
             />
 
