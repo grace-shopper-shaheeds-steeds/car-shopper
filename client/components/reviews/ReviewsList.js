@@ -1,13 +1,10 @@
 import React from 'react'
 
-const ReviewsList = ({reviews, productId}) => {
+const ReviewsList = ({reviews}) => {
   return (
     <div className="review-list">
       {
-        reviews.filter((review) => {
-          return review.productId === productId
-        })
-        .map((review) => {
+        reviews.map((review) => {
           return (
             <div key={review.id} className="card">
               <div className="card-header">
