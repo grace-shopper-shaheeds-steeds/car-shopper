@@ -30,6 +30,8 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     callbackURL: process.env.GOOGLE_CALLBACK
   }
 
+  console.log('googleConfig: ', googleConfig)
+
   const strategy = new GoogleStrategy(googleConfig, (token, refreshToken, profile, done) => {
     const googleId = profile.id
     const name = profile.displayName
@@ -43,6 +45,8 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       ))
       .catch(done)
   })
+
+  console.log('strategy: ', strategy)
 
   passport.use(strategy)
 
