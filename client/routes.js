@@ -10,21 +10,9 @@ import axios from 'axios'
  * COMPONENT
  */
 class Routes extends Component {
-  constructor() {
-    super();
-    this.state = {
-      tempUserId: ''
-    }
-  }
-
 
   async componentDidMount () {
-    console.log('propppps', this.props)
     this.props.loadInitialData()
-    console.log('logged in', this.props.isLoggedIn)
-    if (this.props.isLoggedIn) {
-      this.props.fetchInitialCartInfo()
-    }
     if (!(window.localStorage.getItem('tempUserId')) && !this.props.isLoggedIn) {
       const response = await axios.get('/api/cart/temp')
       const data = response.data
@@ -35,7 +23,6 @@ class Routes extends Component {
   
   render () {
     const {isLoggedIn} = this.props
-    console.log('window.localstorage', window.localStorage)
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}

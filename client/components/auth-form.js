@@ -131,19 +131,3 @@ AuthForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
 }
-
-
-// .then(res => {
-//   dispatch(getUser(res.data || defaultUser))
-//   console.log('res', res)
-//   console.log('res.data', res.data)
-//   // console.log('second test', window.localStorage.getItem('tempUserId').length > 0)
-//   if (res.data && window.localStorage.getItem('tempUserId').length > 0) {
-//     console.log('running the post')
-//     let obj = {
-//       tempUserId: window.localStorage.getItem('tempUserId'),
-//       userId: res.data.id
-//     }
-//     return axios.put('/api/cart/cartMerge', obj)
-//   }
-// })

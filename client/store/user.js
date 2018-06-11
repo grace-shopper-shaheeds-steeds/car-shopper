@@ -36,6 +36,13 @@ export const auth = (firstName, lastName, email, password, method) =>
       .then(res => {
         dispatch(getUser(res.data))
         history.push('/home')
+        if (res.data && window.localStorage.getItem('tempUserId').length > 0) {
+          let obj = {
+            tempUserId: window.localStorage.getItem('tempUserId'),
+            userId: res.data.id
+          }
+          return axios.put('/api/cart/cartMerge', obj)
+        }
       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
         dispatch(getUser({error: authError}))
       })
