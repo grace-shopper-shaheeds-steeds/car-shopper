@@ -16,7 +16,7 @@ class OrderSingle extends Component {
   render () {
       const { order, user } = this.props
 
-      if ( !order.id || order.id !== user.id ) {
+      if ( !order.id || (user.userType !== 'administrator') && (order.id !== user.id )) {
         console.log('No Order.....')
         return ( <h3>No order exists for this user</h3> )
       }

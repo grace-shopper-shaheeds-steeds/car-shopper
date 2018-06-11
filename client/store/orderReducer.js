@@ -121,8 +121,8 @@ export const orderReducer = ( state = initialState, action) => {
       case ORDER_CREATE:
         return {
           ...state,
-          orders: [...state.orders, action.payload],
-          currentOrder: action.payload
+          currentOrder: action.payload,
+          orders: [...state.orders, action.payload]
         }
 
       case ORDER_GET_ALL:

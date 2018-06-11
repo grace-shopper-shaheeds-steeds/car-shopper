@@ -1,16 +1,20 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
 function OrderCartDetail(props) {
-  let product = props.cart
+  let {product} = props
   return (
-        <li className="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 className="my-0">{product.title}</h6>
-            <small className="text-muted">{product.description}</small>
-          </div>
-          <span className="text-muted">{product.price}</span>
-        </li>
+    <div className="row" >
+        <div className="col-3">
+        <img className="card-img-top" src={product.photo} alt={product.title} />
+        </div>
+        <div className="col-6">
+          <h5> {product.title} </h5>
+          <p> {product.description} </p>
+        </div>
+        <div className="col-3">
+          {product.price}
+        </div>
+    </div>
   )
 }
 

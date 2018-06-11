@@ -21,12 +21,16 @@ class OrderBilling extends Component {
         this.setState({
             [event.target.name]: event.target.value
         })
+				const userId = this.props.userId
+        const contact = this.state
+        this.props.updateContact(contact, userId)
+
     }
     handleSubmit = async event => {
         event.preventDefault();
-				const userId = this.props.userId
-				const contact = this.state
-        this.props.updateContact(contact, userId)
+				// const userId = this.props.userId
+				// const contact = this.state
+        // this.props.updateContact(contact, userId)
     }
 
     render() {
@@ -76,11 +80,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return { updateContact: (contactData, userId ) => {
-			dispatch( addNewContact( contactData, userId ) )
-			}
-		}
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return { updateContact: (contactData, userId ) => {
+// 			dispatch( addNewContact( contactData, userId ) )
+// 			}
+// 		}
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderBilling);
+export default connect(mapStateToProps, null)(OrderBilling);
