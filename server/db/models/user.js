@@ -46,10 +46,6 @@ const User = db.define('user', {
   },
   cartId: {
     type: Sequelize.INTEGER
-  },
-  photo: {
-    type: Sequelize.STRING,
-    defaultValue: 'default_person.png'
   }
 
 })
@@ -95,15 +91,6 @@ User.isAdmin = async function (userId){
   return false
 }
 
-User.changeStatus = async function(instanceId){
-  const instance = await User.findById(instanceId)
-  instance.userType = 'administrator'
-}
-
-// User.prototype.isAdmin = function (){
-//   if (this.userType === 'administrator') return true
-//   return false
-// }
 
 /**
  * hooks

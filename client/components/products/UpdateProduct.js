@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Select from 'react-select'
-import {updateProductThunk, getSingleProduct, getAllCategories, removeProductCategory} from '../../store'
+import {updateProductThunk, getSingleProduct, getAllCategories, removeProductCategory, getAllProducts} from '../../store'
 
 export class UpdateProduct extends Component { // eslint-disable-line react/no-deprecated
   constructor(){
@@ -16,15 +16,19 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
 
   componentDidMount = async () => {
     const id = this.props.match.params.productId;
+    console.log('id: ', id)
 
     await this.props.displaySingleProduct(id)
     await this.props.displayCategories()
+    await this.props.displayAllProducts()
+
+    console.log('componentDidMount thisprops.singleProducts: ', this.props.singleProduct)
 
     this.setState({
       title: this.props.singleProduct.title,
       description: this.props.singleProduct.description,
       price: this.props.singleProduct.price,
-      inventoryQuantity: this.props.singleProduct.inventoryQuantity
+      inventoryQuantity: this.props.singleProduct.inventoryQuantity,
     })
   }
 
@@ -57,8 +61,18 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
   }
 
   getDefaultCat = () => {
-    const { allCategories, singleProduct } = this.props
-    return allCategories[singleProduct.categoryId - 1].name
+    //await this.displaySingleProduct(this.props.match.params.productId)
+    const { allCategories, singleProduct, allProducts} = this.props
+    console.log('outside if block allProducts: ', allProducts)
+    console.log('outside if block singleProduct: ', singleProduct)
+    console.log('productId: ', this.props.match.params.productId)
+    if(singleProduct.id === +this.props.match.params.productId){
+      console.log('inside if block allCategories: ', allCategories)
+      console.log('inside if block singleProduct: ', singleProduct)
+      let index = allCategories.findIndex(category => category.id === singleProduct.categoryId)
+      console.log('index: ', index)
+      return allCategories[index].name
+    }
   }
 
   render() {
@@ -143,6 +157,7 @@ const mapStateToProps = state => {
   return {
     singleProduct: state.productReducer.singleProduct,
     allCategories: state.productReducer.allCategories,
+    allProducts: state.productReducer.allProducts,
     user: state.user
   }
 }
@@ -152,7 +167,9 @@ const mapDispatchToProps = dispatch => {
     updateProduct: (updatedProduct, productId) => dispatch(updateProductThunk(updatedProduct, productId)),
     displaySingleProduct: (singleProductId) => dispatch(getSingleProduct(singleProductId)),
     displayCategories: () => dispatch(getAllCategories()),
-    removeACategory: (productId, updatedProduct) => dispatch(removeProductCategory(productId, updatedProduct))
+    removeACategory: (productId, updatedProduct) => dispatch(removeProductCategory(productId, updatedProduct)),
+    displayAllProducts: () => dispatch(getAllProducts())
+    // getDefaultCat: (categoryList, singleCategory) => dispatch()
   }
 }
 

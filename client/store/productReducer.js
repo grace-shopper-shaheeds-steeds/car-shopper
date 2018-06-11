@@ -116,6 +116,12 @@ export const removeProductCategory = (productId, updatedProduct) =>{
   }
 }
 
+// export const defaultCatDropDown = (categoryList, singleCategory) =>{
+//   return dispatch =>{
+
+//   }
+// }
+
 const initialState = {
   allProducts: [],
   allCategories: [],
