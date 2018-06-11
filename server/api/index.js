@@ -22,6 +22,7 @@ router.use('/addresses', require('./address'))
 router.use('/categories', require('./category'))
 
 router.use('/cart', require('./cart'))
+router.use('/review', require('./review'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
