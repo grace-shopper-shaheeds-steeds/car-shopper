@@ -10,3 +10,4 @@ export { ProductsList, AddProduct, AddCategory, UpdateProduct, ProductSingle, Pr
 export {default as Cart} from './Cart'
 export {default as LandingHome } from './landing-home'
 export {default as UserList} from './UserList'
+export { OrderCreate, OrderBilling, OrderCart, OrderPayment, OrderItem, OrdersList, OrderSingle } from './orders'

@@ -47,7 +47,7 @@ const User = db.define('user', {
   cartId: {
     type: Sequelize.INTEGER
   }
-
+  
 })
 
 module.exports = User

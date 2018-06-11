@@ -74,9 +74,11 @@ router.post('/', async (req, res, next ) => {
         userId: userId
       }
       let newOrder = await Order.create(order)
-      const itemsArray = products.filter(product => {return {productId: product, orderId: newOrder.id} })
+
+      const itemsArray = products.map(product => {return {productId: product, orderId: newOrder.dataValues.id} })
       await OrderItem.bulkCreate(itemsArray)
-      newOrder = await Order.findById(newOrder.id)
+      
+      newOrder = await Order.findById(newOrder.dataValues.id)
       res.send(newOrder);
   } catch (err){
       next(err)
