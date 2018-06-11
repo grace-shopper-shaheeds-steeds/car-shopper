@@ -3,7 +3,7 @@ const User = require('../db/models/user')
 module.exports = router
 
 async function adminGateway(req, res, next){
-  if (req.user && await User.isAdmin(req.user.id)){
+  if(req.user && await User.isAdmin(req.user.id)){
     next()
   } else {
     res.status(403).send('Unauthorized')

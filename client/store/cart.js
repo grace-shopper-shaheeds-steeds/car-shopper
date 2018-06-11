@@ -31,9 +31,7 @@ export const fetchCartInfo = (info) => {
 }
 
 export const fetchCartProductInfo = (info) => {
-  console.log('fetchproduct thunk')
   console.log('localstorage object', window.localStorage)
-  window.localStorage.setItem('tester', 'dayy')
   return async (dispatch) => {
     const response = await axios.get(`/api/cart/${info.userId}/products`)
     const data = response.data
