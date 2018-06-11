@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-// const GOT_ALL_REVIEWS = 'GOT_ALL_REVIEWS'
+const GOT_ALL_REVIEWS = 'GOT_ALL_REVIEWS'
 const GET_SINGLE_PRODUCT_REVIEWS = 'GET_SINGLE_PRODUCT_REVIEWS'
 const ADD_PRODUCT_REVIEW = 'ADD_PRODUCT_REVIEW'
 
-// const gotAllReviews = (reviews) => {
-//   return {
-//     type: GOT_ALL_REVIEWS,
-//     reviews
-//   }
-// }
+const gotAllReviews = (reviews) => {
+  return {
+    type: GOT_ALL_REVIEWS,
+    reviews
+  }
+}
 
 const gotSingleProductReviews = (reviews) => {
   return {
@@ -25,12 +25,12 @@ const addedProductReview = (review) => {
   }
 }
 
-// export const getAllReviews = () => {
-//   return async (dispatch) => {
-//     const { data } = await axios.get('/api/reviews')
-//     dispatch(gotAllReviews(data))
-//   }
-// }
+export const getAllReviews = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get('/api/reviews')
+    dispatch(gotAllReviews(data))
+  }
+}
 
 export const getProductReviews = (productId) => {
   return async (dispatch) => {
@@ -52,19 +52,18 @@ export const addProductReview = (review) => {
 }
 
 const initialState = {
-  latestReview: {},
+  allReviews: [],
   singleProductReviews: []
 }
 
 export const reviewReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case GOT_ALL_REVIEWS:
-    //   return {...state, allReviews: action.reviews }
-    case GET_SINGLE_PRODUCT_REVIEWS: {
+    case GOT_ALL_REVIEWS:
+      return {...state, allReviews: action.reviews }
+    case GET_SINGLE_PRODUCT_REVIEWS:
       return {...state, singleProductReviews: action.reviews}
-    }
     case ADD_PRODUCT_REVIEW:
-      return {...state, latestReview: action.product}
+      return {...state, allReviews: [...state.allReviews, action.review]}
     default:
       return state
   }

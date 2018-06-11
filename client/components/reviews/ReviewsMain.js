@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import ReviewSubmit from './ReviewSubmit'
 import ReviewsList from './ReviewsList'
 import ReviewLogin from './ReviewLogin'
-import {addProductReview} from '../../store'
+import {addProductReview, getProductReviews} from '../../store'
 
 export class ReviewsMain extends Component {
   constructor(){
@@ -14,6 +14,10 @@ export class ReviewsMain extends Component {
     }
   }
 
+  componentDidMount (){
+    this.props.productReviews(this.props.productId)
+  }
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -21,8 +25,27 @@ export class ReviewsMain extends Component {
   }
 
   handleSubmit = (event) => {
-    event.preventDefault()
-    this.props.addReview(this.state)
+    event.preventDefault();
+
+    const review = {
+      content: this.state.content,
+      rating: Number(this.state.rating),
+      productId: this.props.productId,
+      userId: this.props.user.id
+    }
+
+    this.props.addReview(review)
+
+    this.setState({
+      rating: 0,
+      content: ''
+    })
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.allReviews !== this.props.allReviews){
+      this.props.productReviews(this.props.productId)
+    }
   }
 
   onStarClick(nextValue) {
@@ -75,7 +98,9 @@ export class ReviewsMain extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    reviews: state.reviewReducer.singleProductReviews,
+    allReviews: state.reviewReducer.allReviews
   }
 }
 
@@ -83,6 +108,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addReview: (review) => {
       dispatch(addProductReview(review))
+    },
+    productReviews: (id) => {
+      dispatch(getProductReviews(id))
     }
   }
 }
