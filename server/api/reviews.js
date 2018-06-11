@@ -22,15 +22,6 @@ router.get('/:id', async (req, res, next) => {
   } catch (err) { next(err) }
 })
 
-// POST /api/review
-// router.post('/', async (req, res, next) => {
-//   try {
-//     const createdReview = await Review.create({
-//       content: req.body.content,
-//       rating: req.body.rating
-//     })
-//     res.json(createdReview)
-//   } catch (err) { next(err) }
-// })
+// POST /api/review - TODO
 
 module.exports = router

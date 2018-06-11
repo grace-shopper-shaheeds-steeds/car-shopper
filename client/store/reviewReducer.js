@@ -12,9 +12,11 @@ const gotSingleProductReviews = (reviews) => {
 export const getProductReviews = (productId) => {
   return async (dispatch) => {
     const { data } = await axios.get('/api/reviews')
+
     const productReviews = data.filter((review) => {
       return review.productId === Number(productId)
     })
+
     dispatch(gotSingleProductReviews(productReviews))
   }
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ProductDetails from './ProductDetails'
 import { ReviewsMain } from '../reviews'
-import { getSingleProduct, updateWithAdded, getAllCategories, getProductReviews } from '../../store'
+import { getSingleProduct, updateWithAdded, getProductReviews } from '../../store'
 
 export class ProductSingle extends Component {
 
