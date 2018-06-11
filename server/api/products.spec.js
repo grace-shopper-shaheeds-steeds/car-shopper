@@ -4,7 +4,6 @@ const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
 const Product = db.model('product')
-const User = db.model('user')
 
 describe('Product routes', () => {
   beforeEach(() => {
@@ -44,34 +43,6 @@ describe('Product routes', () => {
           expect(res.body.title).to.be.equal('Prius')
         })
     })
-    
+
   })
-
-
-
-  // describe('DELETE ROUTES', () => {
-  //   const sampleProduct = {
-  //     title: 'Prius',
-  //     description: 'fastest car alive',
-  //     price: 10.5,
-  //     inventoryQuantity: 1,
-  //     photo: 'photoTest',
-  //     averageRating: 3.5
-  //   }
-
-  //   beforeEach(() => {
-  //     return Product.create(sampleProduct)
-  //   })
-
-  //   it('DELETE /api/admin/products/:id', async () => {
-  //     await request(app)
-  //       .delete('/api/products/1')
-  //       .expect(200)
-  //       const res = await Product.findAll()
-  //       expect(res).to.be.an('array')
-  //       expect(res.length).to.be.equal(0)
-
-  //   })
-  // })
-
 })
