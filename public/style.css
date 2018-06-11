@@ -13,7 +13,49 @@ a {
 }
 
 /*
-* === Home ===
+* === Product: Single ===
+*/
+.product-single {
+  margin-top: 2em;
+}
+
+.product-single img {
+  width: 100%
+}
+
+.product-single .description {
+  margin: 1em 0 2em 0;
+}
+
+.product-single .details {
+  margin-bottom: 2em;
+}
+
+/*
+* === Product: Reviews ===
+*/
+.product-reviews {
+  margin-top: 4em;
+}
+
+.product-reviews h3 {
+  margin-bottom: 1em
+}
+
+.review-list .card {
+  margin-bottom: 2em;
+}
+
+.product-reviews i {
+  font-size: 20px;
+}
+
+.submit-review h5 {
+  margin-bottom: 1em;
+}
+
+/*
+* === Home Landing Page ===
 */
 
 #home-landing {
@@ -66,8 +108,6 @@ nav a {
   color: white;
 }
 
-
-
 /*
 * === Forms ===
 */
@@ -79,4 +119,12 @@ img.google-signin {
 img.google-signin:active {
   position: relative;
   top: 1px;
+}
+
+/*
+* === Product Reviews ===
+*/
+
+#review-login {
+  margin: 2em 0;
 }

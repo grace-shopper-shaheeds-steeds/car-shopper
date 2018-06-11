@@ -5,18 +5,26 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, AddProduct, AddCategory, ProductsList, UpdateProduct, ProductSingle, Cart, ProductSearchResults, UserList, LandingHome} from './components'
 import {me} from './store'
 import { OrderCreate, OrderBilling, OrderCart, OrderPayment, OrderItem, OrdersList, OrderSingle } from './components/orders'
+import { fetchCartInfo } from './store/cart'
+import axios from 'axios'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount () {
+
+  async componentDidMount () {
     this.props.loadInitialData()
+    if (!(window.localStorage.getItem('tempUserId')) && !this.props.isLoggedIn) {
+      const response = await axios.get('/api/cart/temp')
+      const data = response.data
+      window.localStorage.setItem('tempUserId', data.id)
+    }
   }
 
+  
   render () {
     const {isLoggedIn} = this.props
-
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -24,6 +32,10 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {/* <Route exact path="/products" component={ProductsList} /> */}
+
+
+        <Route path="/cart/:userId" component={Cart} />
+
 
         <Route exact path="/products/search/:value" component={ProductSearchResults} />
         <Route exact path="/products" component={ProductsList} />
@@ -34,7 +46,6 @@ class Routes extends Component {
             <Switch>
               {/* Routes placed here are only available after logging in */}
               <Route path="/home" component={UserHome} />
-              <Route path="/cart/:userId" component={Cart} />
               <Route path="/addProduct" component={AddProduct} />
               <Route path="/updateProduct/:productId" component={UpdateProduct} />
               <Route path="/addCategory" component={AddCategory} />
@@ -56,25 +67,20 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
-  }
-}
+
 
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
-    }
+    },
+    fetchInitialCartInfo: (info) => dispatch(fetchCartInfo(info)),
   }
 }
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes))
+export default withRouter(connect(null, mapDispatch)(Routes))
 
 /**
  * PROP TYPES

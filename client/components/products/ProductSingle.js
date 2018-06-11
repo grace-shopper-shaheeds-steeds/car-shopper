@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getSingleProduct, updateWithAdded } from '../../store'
+import { Link } from 'react-router-dom'
+import ProductDetails from './ProductDetails'
+import { ReviewsMain } from '../reviews'
+import { getSingleProduct, updateWithAdded, getProductReviews } from '../../store'
 
 export class ProductSingle extends Component {
 
-  componentDidMount(){
+  componentDidMount = async () => {
     const id = this.props.match.params.id
-    this.props.getSingleProduct(id)
+    await this.props.getSingleProduct(id)
+    this.props.productReviews(id)
   }
 
   handleCartAdd = (event) => {
@@ -22,20 +26,36 @@ export class ProductSingle extends Component {
   }
 
   render () {
-    const { product } = this.props
+    const { product, user, reviews } = this.props
     const quantity = product.inventoryQuantity - product.soldQuantity
+
     return (
-      <div className="container">
+      <div className="container product-single">
           {
             product &&
-            <div className="row">
-              <div className="col-8">
+            <div className="row justify-content-md-center">
+
+              <div className="col col-lg-4">
                 <img src={`/${product.photo}`} />
               </div>
-              <div className="col-4">
-                <h5>ID: {product.id} - {product.title}</h5>
-                <h5>Price: ${product.price}</h5>
-                <p>Description: {product.description}</p>
+
+              <div className="col col-lg-4">
+                <h3>{product.title}</h3>
+                <p className="description">{product.description}</p>
+
+                { product.categoryId > 0 &&
+                  <ProductDetails
+                    product={product}
+                    category={product.category}
+                  />
+                }
+
+                <hr />
+
+                { user.userType === 'administrator' &&
+                  <Link to={`/updateProduct/${product.id}`} className="float-left">edit</Link>
+                }
+
                 {
                   quantity ? (
                     <button
@@ -53,6 +73,11 @@ export class ProductSingle extends Component {
               </div>
             </div>
           }
+
+          { product &&
+            <ReviewsMain reviews={reviews} productId={product.id} />
+          }
+
       </div>
     )
   }
@@ -61,7 +86,8 @@ export class ProductSingle extends Component {
 const mapStateToProps = (state) => {
   return {
     product: state.productReducer.singleProduct,
-    user: state.user
+    user: state.user,
+    reviews: state.reviewReducer.singleProductReviews
   }
 }
 
@@ -72,6 +98,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     addToCart: (info) => {
       dispatch(updateWithAdded(info))
+    },
+    productReviews: (id) => {
+      dispatch(getProductReviews(id))
     }
   }
 }
