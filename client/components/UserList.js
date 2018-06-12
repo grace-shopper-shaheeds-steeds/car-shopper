@@ -30,17 +30,14 @@ export class UserList extends Component {
                                 )
                             })
                         }
+                        </div>
                     </div>
+                </div>: null
+            )
+        }
+    }
 
-                </div>
-              )
-            })
-          }
-        </div>
-      </div>
-    )
-  }
-}
+        
 
 
 const mapStateToProps = state =>{
