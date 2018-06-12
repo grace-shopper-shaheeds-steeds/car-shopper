@@ -61,6 +61,12 @@ ul.product-edit-admin li span a {
   color: white
 }
 
+.product-card img {
+  max-width: 100%;
+  max-height: 100%;
+  height: inherit !important;
+}
+
 /*
 * === Product: Reviews ===
 */
