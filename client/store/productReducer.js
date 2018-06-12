@@ -8,6 +8,7 @@ const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 const UPDATED_PRODUCT = 'UPDATED_PRODUCT'
 const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS'
+const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 
 const addProduct = newProduct => {
   return {
@@ -48,6 +49,13 @@ const addCategory = category =>{
   return {
     type: ADD_CATEGORY,
     category
+  }
+}
+
+const removeProduct = productId =>{
+  return {
+    type: REMOVE_PRODUCT,
+    productId
   }
 }
 
@@ -118,6 +126,13 @@ export const removeProductCategory = (productId, updatedProduct) =>{
   }
 }
 
+export const removeAProduct = productId =>{
+  return async dispatch =>{
+    await axios.delete(`/api/admin/products/${productId}`)
+    dispatch(removeProduct(productId))
+  }
+}
+
 const initialState = {
   allProducts: [],
   allCategories: [],
@@ -148,6 +163,9 @@ export const productReducer = ( state = initialState, action) => {
       })
       return {...state, searchResult: {value: action.value, matches }}
     }
+    case REMOVE_PRODUCT:
+      let newArr = state.allProducts.filter(product => product.id !== action.productId)
+      return {...state, allProducts: newArr}
     default:
       return state
   }
