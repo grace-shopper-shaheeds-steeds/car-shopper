@@ -53,12 +53,10 @@ const User = db.define('user', {
   userName: {
     type: Sequelize.VIRTUAL,
     get(){
-      return this.getDataValue('firstName').slice(0, 2) + this.getDataValue('id')
+      if(!!this.getDataValue('firstName')){
+        return this.getDataValue('firstName').slice(0,2) + this.getDataValue('id')
+      }
     }
-  }, 
-  changePassword: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
   }
   
 })

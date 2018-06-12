@@ -9,6 +9,8 @@ export class UserList extends Component {
     componentDidMount(){
         this.props.displayUsers()
     }
+
+
     render() {
         return (
             this.props.userList.length ?
