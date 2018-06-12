@@ -69,7 +69,6 @@ export class ProductsList extends Component {
               }
             })
             .map((item) => {
-              console.log('here')
               return (
                 <div key={item.id} className="col-md-auto">
                   <ProductCard product={item} />
