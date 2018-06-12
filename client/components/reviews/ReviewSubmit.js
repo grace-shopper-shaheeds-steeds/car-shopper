@@ -2,10 +2,11 @@ import React from 'react'
 import StarRating from 'react-star-rating-component'
 
 const ReviewSubmit = ({user, onStarClick, onContentChange, onReviewSubmit, review}) => {
+  const greeting = ( user.fullName ? user.fullName : user.email )
   return (
     <div className="submit-review">
 
-      <h5>Hello, {user.fullName}! Would you like to leave a review?</h5>
+      <h5>Hello, {greeting}! Would you like to leave a review?</h5>
 
       <form
         onChange={(event) => onContentChange(event)}
@@ -16,7 +17,7 @@ const ReviewSubmit = ({user, onStarClick, onContentChange, onReviewSubmit, revie
             renderStarIcon={() => <i className="fa fa-star" aria-hidden="true" />}
             name="rating"
             value={Number(review.rating)}
-            onStarClick={() => onStarClick()}
+            onStarClick={(event) => onStarClick(event)}
           />
         </div>
 
