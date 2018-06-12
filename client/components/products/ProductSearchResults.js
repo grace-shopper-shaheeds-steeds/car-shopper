@@ -37,7 +37,7 @@ export class ProductSearchResults extends Component {
     const products = this.props.searchResult
     return (
       <div className="container">
-        <h2 className="text-center">Search Results for "{this.state.query}"</h2>
+        <h2 className="text-center page-header">Search Results for "{this.state.query}"</h2>
         <div className="row">
           {
             products.map((product) => {

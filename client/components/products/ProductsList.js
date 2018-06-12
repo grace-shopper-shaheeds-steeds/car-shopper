@@ -31,7 +31,7 @@ export class ProductsList extends Component {
     return (
       <div className="container">
 
-        <h2 className="text-center">Cars Catalog</h2>
+        <h2 className="text-center page-header">Cars Catalog</h2>
 
         { products[0] ? (
         <div>

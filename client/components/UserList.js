@@ -15,7 +15,7 @@ export class UserList extends Component {
         return (
             this.props.userList.length ?
             <div className="container">
-                <h2 className="text-center">User List</h2>
+                <h2 className="text-center page-header">User List</h2>
                 <div>
                     <div className="row">
                         {

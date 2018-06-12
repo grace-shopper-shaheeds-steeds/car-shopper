@@ -55,23 +55,21 @@ export class ProductCard extends Component {
 
           <div className="row">
 
-
-          <div className="col-sm">
-          { user.userType === 'administrator' &&
-            <ul className="product-edit-admin">
-              <li>
-                <Link to={`/updateProduct/${product.id}`} style={style.link}>edit</Link>
-              </li>
-              <li>
-                <a
-                  onClick={this.deleteProduct}
-                  href="#">
-                  delete
-                </a>
-              </li>
-            </ul>
-          }
-          </div>
+            <div className="col-sm">
+            { user.userType === 'administrator' &&
+              <ul className="product-edit-admin">
+                <li>
+                  <Link
+                    to={`/updateProduct/${product.id}`}
+                    style={style.link}>edit
+                  </Link>
+                </li>
+                <li>
+                  <a onClick={this.deleteProduct} href="#"> delete </a>
+                </li>
+              </ul>
+            }
+            </div>
 
           <div className="col-sm">
           <button
@@ -83,13 +81,6 @@ export class ProductCard extends Component {
           </div>
 
           </div>
-
-          {/* <button
-            onClick={this.deleteProduct}
-            type="button"
-            className="btn btn-danger float-right">
-            Delete Product
-          </button> */}
 
         </div>
       </div>
