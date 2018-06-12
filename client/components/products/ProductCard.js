@@ -34,6 +34,10 @@ export class ProductCard extends Component {
     }
   }
 
+  summary = (str) => {
+    return str.slice(0, 40)
+  }
+
   productAvailability = () => {
       let availability = !this.props.product.available
       let message = {
@@ -63,7 +67,7 @@ export class ProductCard extends Component {
           }
 
           <p className="card-text">ID: {product.id}</p>
-          <p className="card-text">{product.description}</p>
+          <p className="card-text">{this.summary(product.description)}</p>
 
           <div className="row">
 

@@ -193,3 +193,11 @@ img.google-signin:active {
 #order-create .order-product {
   margin-bottom: 1em;
 }
+
+#order-single .order-item {
+  margin-bottom: 1em;
+}
+
+.order-user-details {
+  margin-top: 1em;
+}
