@@ -16,7 +16,9 @@ const style = {
 export class UserCard extends Component{
 
     deleteUser = () =>{
-        this.props.deleteAUser(this.props.user.id)
+        if(window.confirm(`Are you sure you want to delete ${this.props.user.fullName}?`)){
+          this.props.deleteAUser(this.props.user.id)
+        }
     }
 
     adminStatus = () =>{

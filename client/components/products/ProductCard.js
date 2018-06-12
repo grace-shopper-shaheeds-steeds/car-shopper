@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateWithAdded } from '../../store/cart'
+import {removeAProduct } from '../../store'
 
 const style = {
   component: {
@@ -27,6 +28,12 @@ export class ProductCard extends Component {
     if (!this.props.user.id) info.userId = window.localStorage.getItem('tempUserId')
 
     this.props.addToCart(info)
+  }
+
+  deleteProduct = () => {
+    if(window.confirm(`Are you sure you want to delete ${this.props.product.title}?`)){
+      this.props.removeProduct(this.props.product.id)
+    }
   }
 
   render(){
@@ -58,6 +65,12 @@ export class ProductCard extends Component {
             className="btn btn-primary float-right">
             Add to cart
           </button>
+          <button
+            onClick={this.deleteProduct}
+            type="button"
+            className="btn btn-danger float-right">
+            Delete Product
+          </button>
 
         </div>
       </div>
@@ -75,7 +88,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (info) => {
       dispatch(updateWithAdded(info))
-    }
+    },
+    removeProduct: (productId) => dispatch(removeAProduct(productId))
   }
 }
 
