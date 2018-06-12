@@ -61,42 +61,43 @@ class Cart extends React.Component {
     console.log('uniqueProducts: ', uniqueProducts)
 
     return (
-    <div>
+    <div className='cartMainWrap'>
       {
         (!cart) ? <div>Rendering...</div> : ''
       }
-      <h3>Cart for User {currentUser.email}</h3>
+      <h3 className='titleForCart' >Cart for User {currentUser.email}</h3>
       {
         uniqueProducts.map(product => {
           const subTotal = product.price * cart.quantity[product.id]
 
           if (!subTotal) return ''
           return (
-            <div key={product.id} className='container'>
-              <img src={product.photo} />
-              <div>
+            <div key={product.id} className='eachProductInCart'>
+              <img className='cartImage' src={product.photo} />
+              <div className='halfCartItem'>
                 <div>
-                  <div>Title: {product.title}</div>
-                  <button onClick={() => this.handleDelete(product.id)}>Remove</button>
+                  <h3 classname='cartTitle'>Title: {product.title}</h3>
+                  <button className='btn btn-danger' onClick={() => this.handleDelete(product.id)}>Remove</button>
                 </div>
-                <div>Description: {product.description}</div>
+                <div className='cartdescrip'>Description: {product.description}</div>
                 <div>Unit Price: {product.price}</div>
                 <div>
-                  <div>quantity {cart.quantity[product.id]}</div>
-                  <div>
-                    <button onClick={() => this.handleDecrement(product.id)}>- 1</button>
-                    <button onClick={() => this.handleIncrement(product.id)}>+ 1</button>
+                  <div className='cartQuant'>quantity {cart.quantity[product.id]}</div>
+                  <div className='incDecParent'>
+                    <button id='dec' className='btn btn-warning' onClick={() => this.handleDecrement(product.id)}>- 1</button>
+                    <button id='inc' className='btn btn-primary' onClick={() => this.handleIncrement(product.id)}>+ 1</button>
                   </div>
+                  <h4 className='cartSubtotal'>Subtotal: {subTotal}</h4>
                 </div>
               </div>
-              <div>Subtotal: {subTotal}</div>
+              
             </div>
           )
         })
       }
-      <div>Total: {cart.total}</div>
+      <h2>Total: {cart.total}</h2>
       <Link to='/orders/create/'>
-      <button>Proceed to Checkout</button>
+      <button id='checkoutbutton' className='btn btn-success'>Proceed to Checkout</button>
       </Link>
     </div>
     )
