@@ -32,6 +32,13 @@ const Product = db.define('product', {
   available: {
     type: Sequelize.BOOLEAN,
     defaultValue: true
+  },
+  createDate: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW,
+    get(){
+      return this.getDataValue('createDate').toString().slice(0, 15)
+    }
   }
 })
 

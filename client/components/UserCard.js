@@ -29,6 +29,10 @@ export class UserCard extends Component{
     render(){
         let title = this.props.user.firstName ? this.props.user.fullName : this.props.user.email
         let email = title !== this.props.user.email ?  this.props.user.email : null
+        //User name logic for Oauth Login
+        // let userName = this.props.user.userName ? this.props.user.userName : this.props.user.email.slice(0, 2) + this.props.user.id
+        console.log('email: ', this.props.user.email)
+        console.log('userName: ', this.props.user.userName)
         return (
 
         <div className="card user-card" style={style.component}>
