@@ -3,7 +3,7 @@ import React from 'react';
 const OrderItem = (props) => {
   const item = props.item
   return (
-    <div className="row" >
+    <div className="row order-item" >
         <div className="col-3">
         <img className="card-img-top" src={item.product.photo} alt={item.product.title} />
         </div>

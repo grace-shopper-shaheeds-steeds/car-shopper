@@ -53,7 +53,7 @@ class AddProduct extends Component {
     return ( this.props.user.userType === 'administrator' ?
       <div className="container">
 
-        <h2 className="text-center">Add New Product</h2>
+        <h2 className="text-center page-header">Add New Product</h2>
 
         <div className="row justify-content-md-center">
 

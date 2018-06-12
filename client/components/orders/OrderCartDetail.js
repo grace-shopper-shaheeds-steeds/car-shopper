@@ -1,18 +1,29 @@
-import React from 'react';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 function OrderCartDetail(props) {
   let {product} = props
+
+  function insertDecimal(num) {
+    return (num / 100).toFixed(2);
+  }
+
+  function summary (str) {
+    return str.slice(0, 40) + '...'
+  }
+
   return (
-    <div className="row" >
+    <div className="row order-product">
         <div className="col-3">
         <img className="card-img-top" src={product.photo} alt={product.title} />
         </div>
         <div className="col-6">
-          <h5> {product.title} </h5>
-          <p> {product.description} </p>
+          <h5> <Link to={`/products/${product.id}`}>{product.title}</Link> </h5>
+          <p>{summary(product.description)}</p>
+          <p>Qty: {props.qty}</p>
         </div>
         <div className="col-3">
-          ${product.price * 100.00}
+          ${insertDecimal(product.price)}
         </div>
     </div>
   )

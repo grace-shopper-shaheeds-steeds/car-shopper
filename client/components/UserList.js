@@ -5,7 +5,6 @@ import UserCard from './UserCard'
 
 export class UserList extends Component {
 
-
     componentDidMount(){
         this.props.displayUsers()
     }
@@ -32,10 +31,15 @@ export class UserList extends Component {
                             })
                         }
                     </div>
+
                 </div>
-            </div>: null
-        )
-    }
+              )
+            })
+          }
+        </div>
+      </div>
+    )
+  }
 }
 
 

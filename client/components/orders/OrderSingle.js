@@ -19,46 +19,64 @@ class OrderSingle extends Component {
         console.log('No Order.....')
         return ( <h3>No order exists for this user</h3> )
       }
-        
+
       const fullName = order.user.firstName + ' ' + order.user.lastName
 
       return (
-      <div>
-        <div className="container"> 
-          <div className="row">
-            {
-            <div className="col-3"> 
-              <h4> {fullName} </h4>
-              <p> </p>
-              <p> {order.address.street} </p> 
-              <p> {order.address.city}, {order.address.state}  {order.address.zipCode} </p>
-            </div>
-            }
-            
-            <div className="col-6"> </div>
+        <div className="container" id="order-single">
 
-            {
-            <div className="col-3"> 
-              <h5> Order Number: {order.id} </h5>
-              <p> </p>
-              <p>  Status: {order.status} </p> 
-              <p>  Total: ${order.totalAmt / 100.00} </p>
+        <h2 className="text-center page-header">Details for Order #{order.id}</h2>
+
+        <div className="row justify-content-md-center">
+
+          <div className="col col-md-6">
+
+            <div className="card order-user-details">
+              <h5 className="card-header">User Details</h5>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">{fullName}</li>
+                <li className="list-group-item">{order.address.street}, {order.address.state}  {order.address.zipCode}</li>
+              </ul>
             </div>
-            }
+
+          </div>
+
+          <div className="col col-md-6">
+
+            <div className="card order-user-details">
+              <h5 className="card-header">Order Number: {order.id}</h5>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">Status: {order.status} </li>
+                <li className="list-group-item">Total: ${order.totalAmt / 100.00}</li>
+              </ul>
+            </div>
+
           </div>
         </div>
 
-        <p> </p>
-        <section> 
-        <div className="container"> 
-        {  
-          order.orderItems.map(item => {
-            return ( <OrderItem item={item} key={item.id} /> )
-          })
-        }
+        <p />
+        <section>
+        <div className="container">
+
+        <h4 className="text-center page-header">Items Ordered</h4>
+
+          <div className="row justify-content-md-center">
+            <div className="col col-md-10">
+            {
+              order.orderItems.map(item => {
+                return (
+                  <div key={item.id}>
+                    <OrderItem item={item} key={item.id} />
+                    <hr />
+                  </div> )
+              })
+            }
+            </div>
+          </div>
+
         </div>
         </section>
-      </div>        
+        </div>
       )
     }
 }

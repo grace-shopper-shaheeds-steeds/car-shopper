@@ -58,7 +58,7 @@ class OrderCreate extends Component {
     let products = this.convertToUnique(cartProducts)
 
     event.preventDefault()
-     
+
     let newOrder = {
       address: {
         firstName: this.state.firstName,
@@ -99,94 +99,121 @@ class OrderCreate extends Component {
   render(){
     const {cartProducts, cart, user} = this.props
     let products = this.convertToUnique(cartProducts)
-
     return (
-
-
       <div>
-        <div className="container"> 
+        <div className="container" id="order-create">
+
+          <h2 className="text-center page-header">Order Checkout</h2>
+
           <div className="row">
-            <div className="col-6"> 
-              <h5>Billing Information</h5>
+            <div className="col-6">
+              <h5 className="page-header">1. Billing Information</h5>
 
-              <div className="row">
-                <div className="col-12">
-                  <form onChange={this.handleChange}>
-                    <label htmlFor="firstName">First Name:</label>
-                    <input name="firstName" type="text" value={this.state.firstName}/>
+              <form onChange={this.handleChange}>
 
-                    <label htmlFor="lastName">Last Name:</label>
-                    <input name="lastName" type="text" value={this.state.lastName} />
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="firstName">First Name</label>
+                  <input className="form-control" name="firstName" type="text" value={this.state.firstName} />
+                </div>
 
-                    <label htmlFor="email">Email:</label>
-                    <input name="email" type="email" value={this.state.email}/>
-
-                    <label htmlFor="street">Address:</label>
-                    <input name="street" type="text" value={this.state.street}/>
-
-                    <label htmlFor="city">City:</label>
-                    <input name="city" type="text" value={this.state.city}/>
-
-                    <label htmlFor="state">State:</label>
-                    <input name="state" type="text" value={this.state.state}/>
-
-                    <label htmlFor="zipCode">Zipcode:</label>
-                    <input name="zipCode" type="text" value={this.state.zipCode}/>
-
-                    <label htmlFor="country">Country</label>
-                    <Select
-                      options={this.countryOptions()}
-                      value={this.state.country}
-                      onChange={value => this.setState({ country: value.label } )}
-                    />
-                  </form>
+                <div className="form-group col-md-6">
+                  <label htmlFor="lastName">Last Name</label>
+                  <input className="form-control" name="lastName" type="text" value={this.state.lastName} />
                 </div>
               </div>
 
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input className="form-control" name="email" type="email" value={this.state.email}/>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="street">Address</label>
+                  <input className="form-control" name="street" type="text" value={this.state.street}/>
+                </div>
+
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="city">City</label>
+                  <input className="form-control" name="city" type="text" value={this.state.city}/>
+                </div>
+
+                <div className="form-group col-md-6">
+                  <label htmlFor="state">State</label>
+                  <input className="form-control" name="state" type="text" value={this.state.state}/>
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="zipCode">Zipcode</label>
+                  <input className="form-control" name="zipCode" type="text" value={this.state.zipCode}/>
+                </div>
+
+                <div className="form-group col-md-6">
+                  <label htmlFor="country">Country</label>
+                  <Select
+                    options={this.countryOptions()}
+                    value={this.state.country}
+                    onChange={value => this.setState({ country: value.label } )}
+                  />
+                </div>
+              </div>
+
+              </form>
+
+              <hr />
+
+              <div className="payment">
+                <h5 className="page-header">2. Credit Card Payment</h5>
+
+                <form onChange={this.handleChange}>
+
+                  <div className="form-group">
+                    <label htmlFor="ccname">Name on card</label>
+                    <input className="form-control" name="ccname" type="text" value={this.state.ccname} />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="ccnumber">Credit card number</label>
+                    <input className="form-control" name="ccnumber" type="text" value={this.state.ccnumber} />
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-group col-md-6">
+                      <label htmlFor="ccexpiration">Expiration</label>
+                      <input className="form-control" name="ccexpiration" type="text" value={this.state.ccexpiration}/>
+                    </div>
+                    <div className="form-group col-md-6">
+                      <label htmlFor="cvv">CVV</label>
+                      <input className="form-control" name="cvv" type="text" value={this.state.cvv} />
+                    </div>
+                  </div>
+                </form>
+
+              </div>
 
             </div>
-            
-            <div className="col-6"> 
+
+            <div className="col-6">
               <div className="cartDetail">
-                <h5>Order Items</h5> {
+                <h5 className="page-header">3. Order Summary</h5> {
                   products.map(product => {
-                    return ( <OrderCartDetail product={product} key={product.id} /> )
+                    return (
+                    <div key={product.id}>
+                      <OrderCartDetail
+                        qty={cart.quantity[product.id]}
+                        product={product}
+                        key={product.id} />
+                      <hr />
+                    </div> )
                   })
                 }
               </div>
 
-              <br/> <br/>
+              <button type="button" className="btn btn-primary btn-block" onClick={this.handleSubmit}>Submit Order</button>
 
-              <div className="payment">
-                <h5>Credit Card Payment</h5> 
-                <form onChange={this.handleChange}>
-                  <div className="row">
-                    <div className="col-6">
-                      <label htmlFor="ccname">Name on card</label>
-                    <input name="ccname" type="text" value={this.state.ccname}/>
-                    </div>
-
-                    <div className="col-6">
-                      <label htmlFor="ccnumber">Credit card number</label>
-                      <input name="ccnumber" type="text" value={this.state.ccnumber}/>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-6">
-                    <br/>
-                      <label htmlFor="ccexpiration">Expiration</label>
-                      <input name="ccexpiration" type="text" value={this.state.ccexpiration}/>
-                    </div>
-                    <div className="col-6">
-                    <br/>
-                      <label htmlFor="cvv">CVV</label>
-                      <input name="cvv" type="text" value={this.state.cvv}/>
-                    </div>
-                  </div> 
-                </form>
-                <br/> <br/>
-                <button type="button" className="btn btn-primary" onClick={this.handleSubmit}>Submit Order</button>
-              </div>
             </div>
 
           </div>

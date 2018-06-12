@@ -31,11 +31,11 @@ export class ProductsList extends Component {
   }
 
   render(){
-    const { products, categories } = this.props
+    const { products, categories, user } = this.props
     return (
       <div className="container">
 
-        <h2 className="text-center">Cars Catalog</h2>
+        <h2 className="text-center page-header">Cars Catalog</h2>
 
         { products[0] ? (
         <div>
@@ -66,11 +66,10 @@ export class ProductsList extends Component {
                   return product
                 }
 
-
               }
             })
             .filter((product) =>{
-              if(((this.props.user.userType === undefined || this.props.user.userType === 'user') && product.available === true) || this.props.user.userType === 'administrator'){
+              if (((this.props.user.userType === undefined || this.props.user.userType === 'user') && product.available === true) || this.props.user.userType === 'administrator'){
                 return product
               }
             })

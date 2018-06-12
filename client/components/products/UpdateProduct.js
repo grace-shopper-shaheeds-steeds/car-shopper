@@ -62,7 +62,7 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
 
   productAvailability = async  () => {
     await this.props.displaySingleProduct(this.props.match.params.productId)
-    let availability = this.props.singleProduct.available ? false : true
+    let availability = !this.props.singleProduct.available
     let message = {
       title: this.props.singleProduct.title,
       description: this.props.singleProduct.description,
@@ -74,13 +74,16 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
 }
 
   render() {
+    const availability = this.props.singleProduct.available ? 'btn-success' : 'btn-secondary'
+    const availableText = this.props.singleProduct.available ? 'True' : 'False'
+
     return (
       <div className="container">
       {
         this.props.user.userType === 'administrator' ? (
 
         <div>
-          <h2 className="text-center">Update Product</h2>
+          <h2 className="text-center page-header">Update Product</h2>
 
           <div className="row justify-content-md-center">
           <div className="col col-md-6">
@@ -137,12 +140,11 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
               <button className="btn btn-primary" type="submit">Submit</button>
             </form>
             <button
-            onClick={this.productAvailability}
-            type="button"
-            className="btn btn-success float-right">
-            Product Availability
-          </button>
-          <div>{`Is product Available: ${this.props.singleProduct.available}`}</div>
+              onClick={this.productAvailability}
+              type="button"
+              className={`btn ${availability} float-right`}>
+              Product Availability: {availableText}
+            </button>
 
           </div>
           </div>
@@ -158,7 +160,7 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
   }
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
   return {
     singleProduct: state.productReducer.singleProduct,
     allCategories: state.productReducer.allCategories,
