@@ -176,3 +176,20 @@ img.google-signin:active {
 .user-card button {
   margin: 0.5em 0 1em 0;
 }
+
+/*
+* === Order Checkout ===
+*/
+#order-create {
+  margin-bottom: 2em;
+}
+
+#order-create .payment {
+  background-color: #efefef;
+  padding: 1em;
+  border-radius: 5px;
+}
+
+#order-create .order-product {
+  margin-bottom: 1em;
+}
