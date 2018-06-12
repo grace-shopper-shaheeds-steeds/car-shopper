@@ -39,7 +39,7 @@ export class ProductSearchResults extends Component {
       <div className="container">
         <h2 className="text-center">Search Results for "{this.state.query}"</h2>
         <div className="row">
-          {
+          { products.length > 0 ? (
             products.map((product) => {
               return (
                 <div key={product.id} className="col-md-auto">
@@ -47,6 +47,11 @@ export class ProductSearchResults extends Component {
                 </div>
               )
             })
+            ) : (
+              <div id="search-no-results">
+                <h4 className="text-center">Sorry, no results</h4>
+              </div>
+            )
           }
         </div>
       </div>
