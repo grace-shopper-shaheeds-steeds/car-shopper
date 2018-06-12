@@ -85,11 +85,12 @@ export const getAllCategories = () => {
 
 export const updateProductThunk = (updatedProduct, productId) => {
   return async (dispatch) => {
+    console.log('updateProduct: ', updatedProduct)
     await axios.put(`/api/admin/products/${productId}`, updatedProduct)
     const res = await axios.get(`/api/products`)
     const updatedProductList = res.data;
     dispatch(gotAllProducts(updatedProductList))
-    history.push('/productList')
+    history.push('/products')
   }
 }
 

@@ -40,7 +40,7 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) =>{
     try{
-        // console.log('req.body in admin put route: ', req.body)
+        console.log('req.body in admin put route: ', req.body)
         if(!!req.body.category){
             const category = await Category.findOne({
                 where: {
@@ -53,10 +53,12 @@ router.put('/:id', async (req, res, next) =>{
                 price: req.body.price,
                 photo: req.body.photo,
                 inventoryQuantity: req.body.inventoryQuantity,
+                // available: req.body.available,
                 categoryId: category.id
             }, {where: {
                      id: req.params.id
-                 }
+                 }, 
+                 returning: true
              })
         } if(req.body.categoryId === null){
            const instance =  await Product.update({
@@ -65,10 +67,12 @@ router.put('/:id', async (req, res, next) =>{
                 price: req.body.price,
                 photo: req.body.photo,
                 inventoryQuantity: req.body.inventoryQuantity,
+                // available: req.body.available,
                 categoryId: null
             }, {where: {
                      id: req.params.id
-                 }
+                 },
+                 returning: true
              })
         }
            const instance = await Product.update({
@@ -77,7 +81,8 @@ router.put('/:id', async (req, res, next) =>{
                 price: req.body.price,
                 photo: req.body.photo,
                 inventoryQuantity: req.body.inventoryQuantity,
-            }, {where: {
+               available: req.body.available
+           }, {where: {
                      id: req.params.id
                  },
                  returning: true
