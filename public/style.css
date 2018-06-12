@@ -17,6 +17,13 @@ a {
 }
 
 /*
+* === Navigation ===
+*/
+.navbar-dark .navbar-nav .dropdown-menu a.nav-link{
+  color: black
+}
+
+/*
 * === Product: Single ===
 */
 .product-single {
