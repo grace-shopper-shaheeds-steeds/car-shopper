@@ -23,30 +23,26 @@ const Navbar = ({ handleClick, isLoggedIn, userId, cart, user }) => {
             <li className="nav-item">
               <Link className="nav-link" to="/orders">Orders</Link>
             </li>
-            <li className="nav-item">
-            {
-              user.userType === 'administrator' ?
-              <Link className="nav-link" to="/addProduct">Add Product</Link>:null
-            }
-            </li>
-            <li className="nav-item">
-            {
-              user.userType === 'administrator' ?
-              <Link className="nav-link" to="/addCategory">Add Category</Link>: null
-            }
-            </li>
-            <li className="nav-item">
-            {
-              user.userType === 'administrator' ?
-              <Link className="nav-link" to="/userList">User Management</Link>: null
-            }
-            </li>
+
             <li className="nav-item">
               <Link className="nav-link" to={`/cart/${userId}`}>Cart{cart.totalQuant}</Link>
             </li>
+
             <li className="nav-item">
               <a className="nav-link" href="#" onClick={handleClick}>Logout</a>
             </li>
+
+            { user.userType === 'administrator' &&
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+                <div className="dropdown-menu">
+                  <Link className="nav-link" to="/addProduct">Add Product</Link>
+                  <Link className="nav-link" to="/addCategory">Add Category</Link>
+                  <Link className="nav-link" to="/userList">User Management</Link>
+                </div>
+              </li>
+            }
+
         </ul>
         ) : (
           <ul className="navbar-nav ml-auto">
