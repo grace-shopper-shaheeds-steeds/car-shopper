@@ -91,6 +91,13 @@ describe('Admin Product Routes', () =>{
                 inventoryQuantity: 1,
                 categoryId: null
             }
+            const changeAvailability = {
+                title: 'Ferrari',
+                description: 'fastest car alive',
+                price: 11,
+                inventoryQuantity: 1,
+                available: false
+            }
             it('Updating a current product title', ()=>{
                 return adminUser
                     .put(`/api/admin/products/${product.id}`)
@@ -117,6 +124,16 @@ describe('Admin Product Routes', () =>{
                     .then((res) =>{
                         expect(res.body.product.categoryId).to.equal(null)
                     })
+            })
+            it('Changes just availability', () =>{
+                return adminUser
+                .put(`/api/admin/products/${product.id}`)
+                .send(changeAvailability)
+                .expect(200)
+                .then((res) =>{
+                    console.log('res.body in available update test')
+                    expect(res.body.product.available).to.equal(false)
+                })
             })
         })
     })

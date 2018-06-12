@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateWithAdded } from '../../store/cart'
-import {removeAProduct } from '../../store'
+import {removeAProduct,  updateProductThunk} from '../../store'
 
 const style = {
   component: {
@@ -31,14 +31,28 @@ export class ProductCard extends Component {
   }
 
   deleteProduct = () => {
+    console.log('this.props.product: ', this.props.product)
     if(window.confirm(`Are you sure you want to delete ${this.props.product.title}?`)){
       this.props.removeProduct(this.props.product.id)
     }
   }
 
+  productAvailability = () => {
+      let availability = this.props.product.available ? false : true
+      let message = {
+        title: this.props.product.title,
+        description: this.props.product.description,
+        price: this.props.product.price,
+        inventoryQuantity: +this.props.product.inventoryQuantity,
+        available: availability
+      }
+      console.log('message: ', message)
+      this.props.toggleAvailability(message, this.props.product.id)
+  }
+
   render(){
     const { product, user } = this.props
-
+    console.log('product: ', product)
     return (
       <div className="card" style={style.component}>
         <img className="card-img-top" src={product.photo} alt={product.title} />
@@ -54,7 +68,6 @@ export class ProductCard extends Component {
 
           <p className="card-text">ID: {product.id}</p>
           <p className="card-text">{product.description}</p>
-
           { user.userType === 'administrator' &&
             <Link to={`/updateProduct/${product.id}`} className="float-left" style={style.link}>edit</Link>
           }
@@ -71,7 +84,12 @@ export class ProductCard extends Component {
             className="btn btn-danger float-right">
             Delete Product
           </button>
-
+          <button
+            onClick={this.productAvailability}
+            type="button"
+            className="btn btn-success float-right">
+            Product Availability
+          </button>
         </div>
       </div>
     )
@@ -89,7 +107,8 @@ const mapDispatchToProps = (dispatch) => {
     addToCart: (info) => {
       dispatch(updateWithAdded(info))
     },
-    removeProduct: (productId) => dispatch(removeAProduct(productId))
+    removeProduct: (productId) => dispatch(removeAProduct(productId)),
+    toggleAvailability: (message, productId) => dispatch(updateProductThunk(message, productId))
   }
 }
 
