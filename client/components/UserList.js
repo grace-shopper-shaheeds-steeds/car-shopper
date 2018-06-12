@@ -12,17 +12,17 @@ export class UserList extends Component {
 
     render() {
         return (
-            this.props.userList.length ?
+            this.props.userList.length &&
             <div className="container">
                 <h2 className="text-center">User List</h2>
                 <div>
                     <div className="row">
                         {
                             this.props.userList
-                            .sort((a,b) =>{
+                            .sort((a, b) => {
                                 return ( (a.id < b.id) ? 1 : ((b.id < a.id) ? -1 : 0) );
                             })
-                            .map(element =>{
+                            .map(element => {
                                 return (
                                     <div key={element.id} className="col-md-auto">
                                         <UserCard user={element} />
@@ -36,18 +36,17 @@ export class UserList extends Component {
               )
             })
           }
-        </div>
-      </div>
+            </div>
     )
   }
 }
 
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
     return {userList: state.userManagementReducer.allUsers}
 }
 
-const mapDispatchToProps = dispatch =>{
+const mapDispatchToProps = dispatch => {
     return {displayUsers: () => dispatch(getAllUsersThunk())}
 }
 
