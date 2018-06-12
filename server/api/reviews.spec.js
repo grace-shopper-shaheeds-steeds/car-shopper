@@ -6,11 +6,13 @@ const app = require('../index')
 const Review = db.model('review')
 
 describe('Reviews Routes', () => {
+
   beforeEach(() => {
     return db.sync({force: true})
   })
 
   describe('GET ROUTES', () => {
+
     const sampleReview = {
       content: 'Lorem ipsum dolar sit emit',
       rating: 3

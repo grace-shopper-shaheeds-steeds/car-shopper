@@ -3,14 +3,13 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ProductDetails from './ProductDetails'
 import { ReviewsMain } from '../reviews'
-import { getSingleProduct, updateWithAdded, getProductReviews } from '../../store'
+import { getSingleProduct, updateWithAdded } from '../../store'
 
 export class ProductSingle extends Component {
 
   componentDidMount = async () => {
     const id = this.props.match.params.id
     await this.props.getSingleProduct(id)
-    this.props.productReviews(id)
   }
 
   handleCartAdd = (event) => {
@@ -26,7 +25,7 @@ export class ProductSingle extends Component {
   }
 
   render () {
-    const { product, user, reviews } = this.props
+    const { product, user } = this.props
     const quantity = product.inventoryQuantity - product.soldQuantity
 
     return (
@@ -74,8 +73,8 @@ export class ProductSingle extends Component {
             </div>
           }
 
-          { product &&
-            <ReviewsMain reviews={reviews} productId={product.id} />
+          { product.id &&
+            <ReviewsMain productId={product.id} />
           }
 
       </div>
@@ -86,8 +85,7 @@ export class ProductSingle extends Component {
 const mapStateToProps = (state) => {
   return {
     product: state.productReducer.singleProduct,
-    user: state.user,
-    reviews: state.reviewReducer.singleProductReviews
+    user: state.user
   }
 }
 
@@ -98,9 +96,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     addToCart: (info) => {
       dispatch(updateWithAdded(info))
-    },
-    productReviews: (id) => {
-      dispatch(getProductReviews(id))
     }
   }
 }

@@ -12,7 +12,6 @@ router.get('/', async (req, res, next) =>{
     } catch(err){
         console.error(err)
     }
-
 })
 
 router.put('/:id', async (req, res, next) =>{

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import ReviewSubmit from './ReviewSubmit'
 import ReviewsList from './ReviewsList'
 import ReviewLogin from './ReviewLogin'
+import {addProductReview, getProductReviews} from '../../store'
 
 export class ReviewsMain extends Component {
   constructor(){
@@ -13,14 +14,44 @@ export class ReviewsMain extends Component {
     }
   }
 
+  componentDidMount (){
+    this.props.productReviews(this.props.productId)
+  }
+
   handleChange = (event) => {
     this.setState({
-      content: event.target.value
+      [event.target.name]: event.target.value
     })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const review = {
+      content: this.state.content,
+      rating: Number(this.state.rating),
+      productId: this.props.productId,
+      userId: this.props.user.id
+    }
+
+    this.props.addReview(review)
+
+    this.setState({
+      rating: 0,
+      content: ''
+    })
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.allReviews !== this.props.allReviews){
+      this.props.productReviews(this.props.productId)
+    }
+  }
+
   onStarClick(nextValue) {
-    this.setState({rating: nextValue});
+    this.setState({
+      rating: Number(nextValue)
+    })
   }
 
   render () {
@@ -38,10 +69,12 @@ export class ReviewsMain extends Component {
         <div className="row justify-content-md-center">
           <div className="col col-lg-8">
 
-            <ReviewsList
-              reviews={reviews}
-              productId={this.props.productId}
-            />
+            { reviews &&
+              <ReviewsList
+                reviews={reviews}
+                productId={this.props.productId}
+              />
+            }
 
             { reviewAuthStatus ? (
               <ReviewSubmit
@@ -49,6 +82,8 @@ export class ReviewsMain extends Component {
                 onStarClick={this.onStarClick.bind(this)}
                 rating={this.state.rating}
                 onContentChange={this.handleChange}
+                onReviewSubmit={this.handleSubmit}
+                review={this.state}
               />
               ) : (
                 <ReviewLogin />
@@ -65,8 +100,21 @@ export class ReviewsMain extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    reviews: state.reviewReducer.singleProductReviews,
+    allReviews: state.reviewReducer.allReviews
   }
 }
 
-export default connect(mapStateToProps)(ReviewsMain)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addReview: (review) => {
+      dispatch(addProductReview(review))
+    },
+    productReviews: (id) => {
+      dispatch(getProductReviews(id))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewsMain)
