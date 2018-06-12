@@ -47,6 +47,20 @@ a {
   margin-top: -10px;
 }
 
+ul.product-edit-admin {
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+ul.product-edit-admin li a {
+  color: black
+}
+
+ul.product-edit-admin li span a {
+  color: white
+}
+
 /*
 * === Product: Reviews ===
 */

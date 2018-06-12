@@ -81,7 +81,9 @@ export class ProductCard extends Component {
                   </Link>
                 </li>
                 <li>
-                  <a onClick={this.deleteProduct} href="#"> delete </a>
+                  <span className="badge badge-danger">
+                    <a onClick={this.deleteProduct} href="#"> delete </a>
+                  </span>
                 </li>
               </ul>
             }
@@ -94,13 +96,6 @@ export class ProductCard extends Component {
                 type="button"
                 className="btn btn-primary">
                 Add to cart
-              </button>
-
-              <button
-                onClick={this.deleteProduct}
-                type="button"
-                className="btn btn-danger float-right">
-                Delete Product
               </button>
 
             </div>
