@@ -12,6 +12,7 @@ export class UserList extends Component {
 
     render() {
         return (
+          <div>
             this.props.userList.length &&
             <div className="container">
                 <h2 className="text-center">User List</h2>
@@ -31,15 +32,12 @@ export class UserList extends Component {
                             })
                         }
                     </div>
-
                 </div>
-              )
-            })
-          }
             </div>
-    )
-  }
-}
+          </div>
+            )
+        }
+    }
 
 
 const mapStateToProps = state => {
