@@ -132,3 +132,80 @@ img.google-signin:active {
 #error{
   color: red
 }
+
+.cartMainWrap {
+  display: flex;
+  flex-direction: column;
+  /* align-content: center; */
+  text-align: center;
+  /* justify-content: center; */
+  text-align: center;
+  
+}
+
+.eachProductInCart {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  /* padding-bottom: 20px; */
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 25px;
+  /* padding-top: 20px; */
+  /* align-content: center; */
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.titleForCart {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+
+
+.halfCartItem {
+  padding-left: 30px;
+  text-align: center;
+}
+
+.cartImage {
+  border-radius: 24px;
+  /* padding-left: 20px; */
+  max-width: 350px;
+  box-sizing: border-box;
+  max-height: 350px;
+}
+
+.incDecParent > btn.btn-warning {
+  padding: 10px;
+}
+
+#dec {
+  margin-right: 5px;
+}
+
+#inc {
+  margin-left: 5px;
+}
+
+.cartdescrip {
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.cartSubtotal {
+  padding-top: 15px;
+}
+
+.cartQuant {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#checkoutbutton {
+  margin-top: 20px;
+  margin-bottom: 70px;
+}
