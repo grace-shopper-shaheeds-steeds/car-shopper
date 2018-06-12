@@ -12,7 +12,7 @@ function OrderCartDetail(props) {
           <p> {product.description} </p>
         </div>
         <div className="col-3">
-          {product.price}
+          ${product.price * 100.00}
         </div>
     </div>
   )

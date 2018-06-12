@@ -15,8 +15,7 @@ class OrderSingle extends Component {
 
   render () {
       const { order, user } = this.props
-
-      if ( !order.id || (user.userType !== 'administrator') && (order.id !== user.id )) {
+      if ( !order.id || (user.userType !== 'administrator') && (order.userId !== user.id )) {
         console.log('No Order.....')
         return ( <h3>No order exists for this user</h3> )
       }
@@ -72,11 +71,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  console.log('Entered Dispatch to Props....')
   return {
     fetchOrder: (orderId) => {
-      console.log('Logging:  About to dispatch fetchOneOrder with orderId = ', orderId)
-
       dispatch(fetchOneOrder( orderId ))
     }
   }
