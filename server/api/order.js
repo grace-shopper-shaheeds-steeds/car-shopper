@@ -5,6 +5,7 @@ const Product = require('../db/models/product')
 const User = require('../db/models/user')
 const Address = require('../db/models/address')
 const OrderItem = require('../db/models/orderItem')
+const Cart = require('../db/models/cart')
 
 
 module.exports = router
@@ -57,7 +58,7 @@ router.get('/:id', (req, res, next) => {
 // post a new order to product
 router.post('/', async (req, res, next ) => {
   console.log(req.body)
-  let {address, addressId, cart, userId, saveAddress} = req.body
+  let {address, addressId, cart, userId, saveAddress, quantities, cartProducts} = req.body
   let products = req.body.cart.products
 
   try {
@@ -69,7 +70,7 @@ router.post('/', async (req, res, next ) => {
       // if the user wants to save this address, then we'll update the user record with this new address
 
       const order = {
-        totalAmt: cart.total,
+        totalAmt: cart.total * 100,
         addressId: addressId,
         userId: userId
       }
@@ -78,7 +79,24 @@ router.post('/', async (req, res, next ) => {
       const itemsArray = products.map(product => {return {productId: product, orderId: newOrder.dataValues.id} })
       await OrderItem.bulkCreate(itemsArray)
       
-      newOrder = await Order.findById(newOrder.dataValues.id)
+      // update product quantities
+      cartProducts.forEach(async (product) => {
+        const currentProduct = await Product.findById(product.id)
+        await currentProduct.update({soldQuantity: currentProduct.soldQuantity + quantities[product.id]})
+      })
+
+      // clear out the cart
+      const cartRecord = await Cart.findById(cart.id)
+      await cartRecord.update({products: null})
+
+      newOrder = await Order.findOne({ 
+        where: { id: newOrder.dataValues.id },
+        include: [
+          {model: User, attributes: ["id", "firstName", "lastName", "email" ]},
+          {model: Address},
+          {model: OrderItem, include: [{model: Product}]},
+        ]
+      })
       res.send(newOrder);
   } catch (err){
       next(err)

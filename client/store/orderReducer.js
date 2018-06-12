@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../history'
 
 const CONTACT_CREATE = 'CONTACT_CREATE'
 
@@ -56,8 +57,6 @@ export const addNewContact = (newContact, userId) => {
         address: newContact,
         userId: userId
       }
-      // const res = await axios.post(`/api/addresses`, payload)
-      // const createdContact = res.data
       dispatch(addContact(newContact))
   }
 }
@@ -71,9 +70,6 @@ export const fetchAllOrders = () => {
 }
 
 export const fetchOneOrder = (orderId) => {
-
-  console.log('Logging:  Arrive at the REDUCER fetchOneOrder where orderId = ', orderId)
-
   return async(dispatch) => {
       const res = await axios.get(`/api/orders/${orderId}`)
       const order = res.data
@@ -95,6 +91,7 @@ export const createOrder = (newOrder) => {
     const res = await axios.post(`/api/orders`, newOrder)
     const order = res.data
     dispatch(orderCreated(order))
+    history.push(`/orders/${order.id}`)
   }
 }
 

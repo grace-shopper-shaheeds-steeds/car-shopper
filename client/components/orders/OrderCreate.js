@@ -13,21 +13,38 @@ class OrderCreate extends Component {
     // We will eventually package all this into one object
     // {address, addressId, cart, userId, saveAddress}
     this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      address: '',
-      city: '',
-      state: '',
-      zipcode: '',
-      country: '',
-    }
-    // this.countryOptions = this.countryOptions.bind(this)
+        firstName: '',
+        lastName: '',
+        email: '',
+        street: '',
+        city: '',
+        state: '',
+        zipCode: '',
+        country: '',
+        ccname: '',
+        ccnumber: '',
+        ccexpiration: '',
+        cvv: ''
+      }
+    this.countryOptions = this.countryOptions.bind(this)
+    this.convertToUnique = this.convertToUnique.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchCartMethod({ userId: this.props.match.params.userId})
     this.props.fetchCartProductInfoMethod({ userId: this.props.match.params.userId})
+  }
+
+  convertToUnique(prods) {
+    let notUnique = []
+    const uniqueProducts = prods.filter(product => {
+      if (notUnique.indexOf(product.id) === -1) {
+        notUnique.push(product.id)
+        return true
+      }
+      return false
+    })
+    return uniqueProducts
   }
 
   handleChange = event => {
@@ -37,11 +54,32 @@ class OrderCreate extends Component {
   }
 
   handleSubmit = event => {
+    const {cartProducts, user} = this.props
+    let products = this.convertToUnique(cartProducts)
+
     event.preventDefault()
+     
     let newOrder = {
-      address: this.state.address,
-      cart: this.state.cart,
-      userId: this.state.userId
+      address: {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        street: this.state.street,
+        city: this.state.city,
+        state: this.state.state,
+        zipCode: this.state.zipCode,
+        country: this.state.country,
+      },
+      creditCard: {
+        ccname: this.state.ccname,
+        ccnumber: this.state.ccnumber,
+        ccexpiration: this.state.ccexpiration,
+        cvv: this.state.cvv,
+      },
+      cart: this.props.cart,
+      userId: user.id,
+      quantities: this.props.quantities,
+      cartProducts: products
     }
 
     this.props.submitOrder(newOrder)
@@ -59,27 +97,20 @@ class OrderCreate extends Component {
   }
 
   render(){
-    const {cartProducts, cart} = this.props
-    console.log('LOGGING Cart:', cart)
-    let notUnique = []
+    const {cartProducts, cart, user} = this.props
+    let products = this.convertToUnique(cartProducts)
 
-    const uniqueProducts = cartProducts.filter(product => {
-      if (notUnique.indexOf(product.id) === -1) {
-        notUnique.push(product.id)
-        return true
-      }
-      return false
-    })
-    
     return (
+
+
       <div>
         <div className="container"> 
           <div className="row">
             <div className="col-6"> 
-              <h3>Billing Information</h3>
+              <h5>Billing Information</h5>
 
-              <div className="row justify-content-md-center">
-                <div className="col-8">
+              <div className="row">
+                <div className="col-12">
                   <form onChange={this.handleChange}>
                     <label htmlFor="firstName">First Name:</label>
                     <input name="firstName" type="text" value={this.state.firstName}/>
@@ -90,8 +121,8 @@ class OrderCreate extends Component {
                     <label htmlFor="email">Email:</label>
                     <input name="email" type="email" value={this.state.email}/>
 
-                    <label htmlFor="address">Address:</label>
-                    <input name="address" type="text" value={this.state.address}/>
+                    <label htmlFor="street">Address:</label>
+                    <input name="street" type="text" value={this.state.street}/>
 
                     <label htmlFor="city">City:</label>
                     <input name="city" type="text" value={this.state.city}/>
@@ -99,20 +130,15 @@ class OrderCreate extends Component {
                     <label htmlFor="state">State:</label>
                     <input name="state" type="text" value={this.state.state}/>
 
-                    <label htmlFor="zipcode">Zipcode:</label>
-                    <input name="zipcode" type="text" value={this.state.zipcode}/>
+                    <label htmlFor="zipCode">Zipcode:</label>
+                    <input name="zipCode" type="text" value={this.state.zipCode}/>
 
-                    <label htmlFor="country">Country:</label>
-                    <input name="country" type="text" value={this.state.country}/>
-
-                    <div className="form-group col-md-6">
                     <label htmlFor="country">Country</label>
                     <Select
                       options={this.countryOptions()}
                       value={this.state.country}
-                      onChange={value => this.setState({ country: value.label })}
+                      onChange={value => this.setState({ country: value.label } )}
                     />
-                    </div>
                   </form>
                 </div>
               </div>
@@ -122,23 +148,49 @@ class OrderCreate extends Component {
             
             <div className="col-6"> 
               <div className="cartDetail">
-                <h3>Order Items</h3> {
-                  uniqueProducts.map(product => {
+                <h5>Order Items</h5> {
+                  products.map(product => {
                     return ( <OrderCartDetail product={product} key={product.id} /> )
                   })
                 }
               </div>
 
+              <br/> <br/>
+
               <div className="payment">
-              <br/>
-                <h3>Credit Card Payment</h3> 
-                {/* <OrderPayment total={cart.total}/> */}
+                <h5>Credit Card Payment</h5> 
+                <form onChange={this.handleChange}>
+                  <div className="row">
+                    <div className="col-6">
+                      <label htmlFor="ccname">Name on card</label>
+                    <input name="ccname" type="text" value={this.state.ccname}/>
+                    </div>
+
+                    <div className="col-6">
+                      <label htmlFor="ccnumber">Credit card number</label>
+                      <input name="ccnumber" type="text" value={this.state.ccnumber}/>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-6">
+                    <br/>
+                      <label htmlFor="ccexpiration">Expiration</label>
+                      <input name="ccexpiration" type="text" value={this.state.ccexpiration}/>
+                    </div>
+                    <div className="col-6">
+                    <br/>
+                      <label htmlFor="cvv">CVV</label>
+                      <input name="cvv" type="text" value={this.state.cvv}/>
+                    </div>
+                  </div> 
+                </form>
+                <br/> <br/>
+                <button type="button" className="btn btn-primary" onClick={this.handleSubmit}>Submit Order</button>
               </div>
             </div>
 
           </div>
         </div>
-        <button className="btn btn-primary" onClick={this.handleSubmit}>Submit Order</button>
       </div>
     )
   }
@@ -149,21 +201,10 @@ const mapStateToProps = (state) => {
     contact: state.orderReducer.contact,
     cart: state.cart.cart,
     cartProducts: state.cart.cartProducts,
-    user: state.user
+    user: state.user,
+    quantities: state.cart.cart.quantity
   }
 }
-
-// const mapState = state => {
-//   return {
-//     currentUser: state.user,
-//     isLoggedIn: !!state.user.id,
-//     firstName: state.user.firstName,
-//     cart: state.cart.cart,
-//     cartProducts: state.cart.cartProducts
-//   }
-// }
-
-
 
 const mapDispatchToProps = (dispatch) => {
   return {
