@@ -168,3 +168,11 @@ img.google-signin:active {
 #error{
   color: red
 }
+
+/*
+* === User Management ===
+*/
+
+.user-card button {
+  margin: 0.5em 0 1em 0;
+}

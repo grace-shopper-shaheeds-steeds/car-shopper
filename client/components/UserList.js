@@ -5,33 +5,29 @@ import UserCard from './UserCard'
 
 export class UserList extends Component {
 
+  componentDidMount(){
+    this.props.displayUsers()
+  }
 
-    componentDidMount(){
-        this.props.displayUsers()
-    }
-
-
-    render() {
-        return (
-            this.props.userList.length ?
-            <div className="container">
-                <h2 className="text-center page-header">User List</h2>
-                <div>
-                    <div className="row">
-                        {
-                            this.props.userList.map(element =>{
-                                return (
-                                    <div key={element.id} className="col-md-auto">
-                                        <UserCard user={element} />
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+  render() {
+    return (
+      this.props.userList.length &&
+      <div className="container">
+        <h2 className="text-center page-header">User List</h2>
+        <div className="row">
+          {
+            this.props.userList.map(element =>{
+              return (
+                <div key={element.id} className="col-md-auto">
+                  <UserCard user={element} />
                 </div>
-            </div>: null
-        )
-    }
+              )
+            })
+          }
+        </div>
+      </div>
+    )
+  }
 }
 
 
