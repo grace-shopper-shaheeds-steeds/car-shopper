@@ -31,6 +31,17 @@ a {
   margin-bottom: 2em;
 }
 
+.product-card ul.product-edit-admin {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.product-card ul.product-edit-admin li {
+  display: inline-block;
+}
+
+
 /*
 * === Product: Reviews ===
 */

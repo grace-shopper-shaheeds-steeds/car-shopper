@@ -18,20 +18,18 @@ export class ProductCard extends Component {
 
   handleCartAdd= (event) => {
     event.preventDefault()
-
     const userId = this.props.user.id
+    const carId = this.props.product.id
+    const info = { userId, carId }
 
-    const info = {
-      userId,
-      carId: this.props.product.id
-    }
     if (!this.props.user.id) info.userId = window.localStorage.getItem('tempUserId')
 
     this.props.addToCart(info)
   }
 
-  deleteProduct = () => {
-    if(window.confirm(`Are you sure you want to delete ${this.props.product.title}?`)){
+  deleteProduct = (event) => {
+    event.preventDefault()
+    if (window.confirm(`Are you sure you want to delete ${this.props.product.title}?`)){
       this.props.removeProduct(this.props.product.id)
     }
   }
@@ -40,7 +38,7 @@ export class ProductCard extends Component {
     const { product, user } = this.props
 
     return (
-      <div className="card" style={style.component}>
+      <div className="card product-card" style={style.component}>
         <img className="card-img-top" src={product.photo} alt={product.title} />
         <div className="card-body">
 
@@ -55,22 +53,43 @@ export class ProductCard extends Component {
           <p className="card-text">ID: {product.id}</p>
           <p className="card-text">{product.description}</p>
 
-          { user.userType === 'administrator' &&
-            <Link to={`/updateProduct/${product.id}`} className="float-left" style={style.link}>edit</Link>
-          }
+          <div className="row">
 
+
+          <div className="col-sm">
+          { user.userType === 'administrator' &&
+            <ul className="product-edit-admin">
+              <li>
+                <Link to={`/updateProduct/${product.id}`} style={style.link}>edit</Link>
+              </li>
+              <li>
+                <a
+                  onClick={this.deleteProduct}
+                  href="#">
+                  delete
+                </a>
+              </li>
+            </ul>
+          }
+          </div>
+
+          <div className="col-sm">
           <button
             onClick={this.handleCartAdd}
             type="button"
-            className="btn btn-primary float-right">
+            className="btn btn-primary">
             Add to cart
           </button>
-          <button
+          </div>
+
+          </div>
+
+          {/* <button
             onClick={this.deleteProduct}
             type="button"
             className="btn btn-danger float-right">
             Delete Product
-          </button>
+          </button> */}
 
         </div>
       </div>
