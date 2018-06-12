@@ -35,7 +35,7 @@ export class ProductCard extends Component {
   }
 
   productAvailability = () => {
-      let availability = this.props.product.available ? false : true
+      let availability = !this.props.product.available
       let message = {
         title: this.props.product.title,
         description: this.props.product.description,

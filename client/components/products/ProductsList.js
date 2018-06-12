@@ -27,7 +27,7 @@ export class ProductsList extends Component {
   }
 
   render(){
-    const { products, categories } = this.props
+    const { products, categories, user } = this.props
     return (
       <div className="container">
 
@@ -62,11 +62,10 @@ export class ProductsList extends Component {
                   return product
                 }
 
-
               }
             })
-            .filter((product) =>{
-              if((this.props.user.userType === 'user' && product.available === true) || this.props.user.userType === 'administrator'){
+            .filter((product) => {
+              if ( (this.props.user.userType === 'user' && product.available === true) || this.props.user.userType === 'administrator' ){
                 return product
               }
             })
