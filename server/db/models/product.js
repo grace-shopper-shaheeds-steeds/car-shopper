@@ -28,6 +28,10 @@ const Product = db.define('product', {
   },
   averageRating: {
     type: Sequelize.FLOAT
+  },
+  available: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
   }
 })
 

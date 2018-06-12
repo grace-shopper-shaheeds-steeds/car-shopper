@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateWithAdded } from '../../store/cart'
-import {removeAProduct } from '../../store'
+import {removeAProduct,  updateProductThunk} from '../../store'
 
 const style = {
   component: {
@@ -34,9 +34,21 @@ export class ProductCard extends Component {
     }
   }
 
+  productAvailability = () => {
+      let availability = this.props.product.available ? false : true
+      let message = {
+        title: this.props.product.title,
+        description: this.props.product.description,
+        price: this.props.product.price,
+        inventoryQuantity: +this.props.product.inventoryQuantity,
+        available: availability
+      }
+      console.log('message: ', message)
+      this.props.toggleAvailability(message, this.props.product.id)
+  }
+
   render(){
     const { product, user } = this.props
-
     return (
       <div className="card product-card" style={style.component}>
         <img className="card-img-top" src={product.photo} alt={product.title} />
@@ -72,12 +84,14 @@ export class ProductCard extends Component {
             </div>
 
           <div className="col-sm">
+
           <button
             onClick={this.handleCartAdd}
             type="button"
             className="btn btn-primary">
             Add to cart
           </button>
+
           </div>
 
           </div>
@@ -99,7 +113,8 @@ const mapDispatchToProps = (dispatch) => {
     addToCart: (info) => {
       dispatch(updateWithAdded(info))
     },
-    removeProduct: (productId) => dispatch(removeAProduct(productId))
+    removeProduct: (productId) => dispatch(removeAProduct(productId)),
+    toggleAvailability: (message, productId) => dispatch(updateProductThunk(message, productId))
   }
 }
 

@@ -62,6 +62,12 @@ export class ProductsList extends Component {
                   return product
                 }
 
+
+              }
+            })
+            .filter((product) =>{
+              if((this.props.user.userType === 'user' && product.available === true) || this.props.user.userType === 'administrator'){
+                return product
               }
             })
             .map((item) => {
@@ -87,7 +93,8 @@ export class ProductsList extends Component {
 const mapStateToProps = (state) => {
   return {
     products: state.productReducer.allProducts,
-    categories: state.productReducer.allCategories
+    categories: state.productReducer.allCategories,
+    user: state.user
   }
 }
 

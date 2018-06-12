@@ -35,7 +35,7 @@ export class ProductSingle extends Component {
             <div className="row justify-content-md-center">
 
               <div className="col col-lg-4">
-                <img src={`/${product.photo}`} />
+                <img src={`${product.photo}`} />
               </div>
 
               <div className="col col-lg-4">
