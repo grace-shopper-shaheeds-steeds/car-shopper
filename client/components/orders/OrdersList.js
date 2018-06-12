@@ -27,10 +27,12 @@ export class OrdersList extends Component {
     return (
       <div className="container">
 
-        <div className="row">
-          <h2 className="text-center">Orders List</h2>
-        </div>
-        <table className="table table-sm">
+        <h3 className="text-center page-header">Your Orders</h3>
+
+        <div className="row justify-content-md-center">
+        <div className="col col-md-8">
+
+        <table className="table table-striped">
           <thead>
             <tr>
               <th scope="col">Order #</th>
@@ -54,7 +56,7 @@ export class OrdersList extends Component {
               .map((order) => {
                 let orderDate = new Date(order.createdAt)
                 let dd = orderDate.getDate();
-                let mm = orderDate.getMonth()+1; 
+                let mm = orderDate.getMonth()+1;
                 let yyyy = orderDate.getFullYear();
                 if ( dd < 10 )
                 {
@@ -83,6 +85,9 @@ export class OrdersList extends Component {
           }
           </tbody>
         </table>
+
+        </div>
+        </div>
       </div>
     )
   }
