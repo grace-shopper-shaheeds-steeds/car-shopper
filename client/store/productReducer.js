@@ -9,6 +9,7 @@ const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 const UPDATED_PRODUCT = 'UPDATED_PRODUCT'
 const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
+const TOGGLE_AVAILABILITY = 'TOGGLE_AVAILABILITY'
 
 const addProduct = newProduct => {
   return {
@@ -56,6 +57,13 @@ const removeProduct = productId =>{
   return {
     type: REMOVE_PRODUCT,
     productId
+  }
+}
+
+const toggleAvailability = product =>{
+  return {
+    type: TOGGLE_AVAILABILITY,
+    product
   }
 }
 
@@ -118,6 +126,15 @@ export const addNewCategory = newCategory => {
   }
 }
 
+export const toggleStatus = (updatedProduct, productId) =>{
+  return async (dispatch) => {
+    const res = await axios.put(`/api/admin/products/${productId}`, updatedProduct)
+    const updatedProduct2 = res.data;
+    dispatch(toggleAvailability(updatedProduct2.product))
+
+  }
+}
+
 export const removeProductCategory = (productId, updatedProduct) =>{
   return async dispatch =>{
     await axios.put(`/api/admin/products/${productId}`, updatedProduct)
@@ -166,6 +183,8 @@ export const productReducer = ( state = initialState, action) => {
     case REMOVE_PRODUCT:
       let newArr = state.allProducts.filter(product => product.id !== action.productId)
       return {...state, allProducts: newArr}
+    case TOGGLE_AVAILABILITY: 
+      return {...state, singleProduct: action.product}
     default:
       return state
   }

@@ -42,6 +42,7 @@ a {
   margin-bottom: 2em;
 }
 
+<<<<<<< HEAD
 .product-card ul.product-edit-admin {
   margin: 0;
   padding: 0;
@@ -50,6 +51,11 @@ a {
 
 .product-card ul.product-edit-admin li {
   display: inline-block;
+=======
+.product-single .avg-rating .dv-star-rating  {
+  top: 10px;
+  margin-top: -10px;
+>>>>>>> master
 }
 
 /*
@@ -76,6 +82,7 @@ a {
 }
 
 /*
+<<<<<<< HEAD
 * === Product: Filter ===
 */
 
@@ -90,6 +97,15 @@ a {
 #cat-filter .title a {
   font-weight: bold;
 }
+=======
+* === Search ===
+*/
+#search-no-results {
+  margin: 0 auto;
+  padding: 2em 0;
+}
+
+>>>>>>> master
 /*
 * === Home Landing Page ===
 */

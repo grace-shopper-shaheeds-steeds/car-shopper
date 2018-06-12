@@ -87,17 +87,23 @@ export class ProductCard extends Component {
             }
             </div>
 
-          <div className="col-sm">
+            <div className="col-sm">
 
-          <button
-            onClick={this.handleCartAdd}
-            type="button"
-            className="btn btn-primary">
-            Add to cart
-          </button>
+              <button
+                onClick={this.handleCartAdd}
+                type="button"
+                className="btn btn-primary">
+                Add to cart
+              </button>
 
-          </div>
+              <button
+                onClick={this.deleteProduct}
+                type="button"
+                className="btn btn-danger float-right">
+                Delete Product
+              </button>
 
+            </div>
           </div>
 
         </div>

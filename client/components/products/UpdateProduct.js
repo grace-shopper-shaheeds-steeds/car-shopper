@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Select from 'react-select'
-import {updateProductThunk, getSingleProduct, getAllCategories, removeProductCategory} from '../../store'
+import {updateProductThunk, getSingleProduct, getAllCategories, removeProductCategory, toggleStatus} from '../../store'
+import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 export class UpdateProduct extends Component { // eslint-disable-line react/no-deprecated
   constructor(){
@@ -11,7 +12,7 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
       description: '',
       price: '',
       inventoryQuantity: '',
-      defaultCat: ''
+      defaultCat: '',
     }
   }
 
@@ -49,6 +50,7 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
       description: nextProps.singleProduct.description,
       price: nextProps.singleProduct.price,
       inventoryQuantity: nextProps.singleProduct.inventoryQuantity,
+
     })
   }
 
@@ -57,6 +59,19 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
       return { value: cat.name, label: cat.name  }
     })
   }
+
+  productAvailability = async  () => {
+    await this.props.displaySingleProduct(this.props.match.params.productId)
+    let availability = this.props.singleProduct.available ? false : true
+    let message = {
+      title: this.props.singleProduct.title,
+      description: this.props.singleProduct.description,
+      price: this.props.singleProduct.price,
+      inventoryQuantity: this.props.singleProduct.inventoryQuantity,
+      available: availability
+    }
+    this.props.toggleAvailability(message, this.props.singleProduct.id)
+}
 
   render() {
     return (
@@ -121,6 +136,13 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
 
               <button className="btn btn-primary" type="submit">Submit</button>
             </form>
+            <button
+            onClick={this.productAvailability}
+            type="button"
+            className="btn btn-success float-right">
+            Product Availability
+          </button>
+          <div>{`Is product Available: ${this.props.singleProduct.available}`}</div>
 
           </div>
           </div>
@@ -136,7 +158,7 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = state =>{
   return {
     singleProduct: state.productReducer.singleProduct,
     allCategories: state.productReducer.allCategories,
@@ -150,7 +172,8 @@ const mapDispatchToProps = dispatch => {
     updateProduct: (updatedProduct, productId) => dispatch(updateProductThunk(updatedProduct, productId)),
     displaySingleProduct: (singleProductId) => dispatch(getSingleProduct(singleProductId)),
     displayCategories: () => dispatch(getAllCategories()),
-    removeACategory: (productId, updatedProduct) => dispatch(removeProductCategory(productId, updatedProduct))
+    removeACategory: (productId, updatedProduct) => dispatch(removeProductCategory(productId, updatedProduct)),
+    toggleAvailability: (message, productId) => dispatch(toggleStatus(message, productId))
   }
 }
 
