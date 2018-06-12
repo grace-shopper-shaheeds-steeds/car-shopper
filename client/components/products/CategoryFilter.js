@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Categories = ({categories, catSelect}) => {
 
@@ -22,13 +23,13 @@ const Categories = ({categories, catSelect}) => {
       { categories.map((cat) => {
           return (
             <li key={cat.id} className="nav-item">
-              <a
+              <Link
                 onClick={(event) => { catSelect(event) }}
                 id={cat.id}
                 className="nav-link"
-                href="/">
+                to={`/product/category/${cat.id}`}>
                 {cat.name}
-              </a>
+              </Link>
             </li>
           )
         })
