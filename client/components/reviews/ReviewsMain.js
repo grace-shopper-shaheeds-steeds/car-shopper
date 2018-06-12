@@ -69,10 +69,12 @@ export class ReviewsMain extends Component {
         <div className="row justify-content-md-center">
           <div className="col col-lg-8">
 
-            <ReviewsList
-              reviews={reviews}
-              productId={this.props.productId}
-            />
+            { reviews &&
+              <ReviewsList
+                reviews={reviews}
+                productId={this.props.productId}
+              />
+            }
 
             { reviewAuthStatus ? (
               <ReviewSubmit

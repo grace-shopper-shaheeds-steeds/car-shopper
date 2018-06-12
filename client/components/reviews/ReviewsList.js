@@ -1,27 +1,42 @@
-import React from 'react'
+import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import StarRating from 'react-star-rating-component'
 
-const ReviewsList = ({reviews}) => {
-  return (
-    <div className="review-list">
-      {
-        reviews.map((review) => {
-          return (
-            <div key={review.id} className="card">
-              <div className="card-header">
-                User Id: {review.userId}
+export class ReviewsList extends Component {
+
+  componentDidMount(){}
+
+  render() {
+    const { reviews } = this.props
+    return (
+      <div className="review-list">
+        {
+          reviews.map((review) => {
+            return (
+              <div key={review.id} className="card">
+                <div className="card-header">
+                  User Id: {review.userId} - {review.createdAt}
+                </div>
+                <div className="card-body">
+                  <blockquote className="blockquote mb-0">
+                    <p>{review.content}</p>
+                    <footer>
+                      <StarRating
+                        renderStarIcon={() => <i className="fa fa-star" aria-hidden="true" />}
+                        name="rating"
+                        editing={false}
+                        value={review.rating}
+                      />
+                    </footer>
+                  </blockquote>
+                </div>
               </div>
-              <div className="card-body">
-                <blockquote className="blockquote mb-0">
-                  <p>{review.content}</p>
-                  <footer>Rating: {review.rating}</footer>
-                </blockquote>
-              </div>
-            </div>
-          )
-        })
-      }
-    </div>
-  )
+            )
+          })
+        }
+      </div>
+    )
+  }
 }
 
-export default ReviewsList
+export default connect()(ReviewsList)

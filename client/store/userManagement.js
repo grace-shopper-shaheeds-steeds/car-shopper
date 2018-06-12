@@ -5,7 +5,6 @@ const GET_ALL_USERS = 'GET_ALL_USERS'
 const DELETE_USER = 'DELETE_USER'
 const MAKE_ADMIN = 'MAKE_ADMIN'
 
-
 const getAllUsers = users =>{
     return {
         type: GET_ALL_USERS,
@@ -61,7 +60,7 @@ export const userManagementReducer = (state = initialState, action) =>{
     switch (action.type){
         case GET_ALL_USERS:
             return {...state, allUsers: action.users}
-        case DELETE_USER: 
+        case DELETE_USER:
             let newAllUsers = state.allUsers.filter(user => user.id !== action.id)
             return {...state, allUsers: newAllUsers}
         default:

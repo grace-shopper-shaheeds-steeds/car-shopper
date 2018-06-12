@@ -22,7 +22,7 @@ router.get('/:id', async (req, res, next) => {
   } catch (err) { next(err) }
 })
 
-// POST /api/review - TODO
+// POST /api/review
 router.post('/', async (req, res, next) => {
   const {content, rating, productId, userId} = req.body
   try {
