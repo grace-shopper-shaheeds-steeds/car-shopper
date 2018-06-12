@@ -72,6 +72,7 @@ export class ReviewsMain extends Component {
             { reviews &&
               <ReviewsList
                 reviews={reviews}
+                user={user}
                 productId={this.props.productId}
               />
             }
