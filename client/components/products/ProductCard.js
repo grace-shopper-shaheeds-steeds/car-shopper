@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateWithAdded } from '../../store/cart'
-import {removeAProduct } from '../../store'
+import {removeAProduct,  updateProductThunk} from '../../store'
 
 const style = {
   component: {
@@ -18,29 +18,43 @@ export class ProductCard extends Component {
 
   handleCartAdd= (event) => {
     event.preventDefault()
-
     const userId = this.props.user.id
+    const carId = this.props.product.id
+    const info = { userId, carId }
 
-    const info = {
-      userId,
-      carId: this.props.product.id
-    }
     if (!this.props.user.id) info.userId = window.localStorage.getItem('tempUserId')
 
     this.props.addToCart(info)
   }
 
-  deleteProduct = () => {
-    if(window.confirm(`Are you sure you want to delete ${this.props.product.title}?`)){
+  deleteProduct = (event) => {
+    event.preventDefault()
+    if (window.confirm(`Are you sure you want to delete ${this.props.product.title}?`)){
       this.props.removeProduct(this.props.product.id)
     }
   }
 
+  summary = (str) => {
+    return str.slice(0, 40)
+  }
+
+  productAvailability = () => {
+      let availability = !this.props.product.available
+      let message = {
+        title: this.props.product.title,
+        description: this.props.product.description,
+        price: this.props.product.price,
+        inventoryQuantity: +this.props.product.inventoryQuantity,
+        available: availability
+      }
+      console.log('message: ', message)
+      this.props.toggleAvailability(message, this.props.product.id)
+  }
+
   render(){
     const { product, user } = this.props
-
     return (
-      <div className="card" style={style.component}>
+      <div className="card product-card" style={style.component}>
         <img className="card-img-top" src={product.photo} alt={product.title} />
         <div className="card-body">
 
@@ -53,24 +67,39 @@ export class ProductCard extends Component {
           }
 
           <p className="card-text">ID: {product.id}</p>
-          <p className="card-text">{product.description}</p>
+          <p className="card-text">{this.summary(product.description)}</p>
 
-          { user.userType === 'administrator' &&
-            <Link to={`/updateProduct/${product.id}`} className="float-left" style={style.link}>edit</Link>
-          }
+          <div className="row">
 
-          <button
-            onClick={this.handleCartAdd}
-            type="button"
-            className="btn btn-primary float-right">
-            Add to cart
-          </button>
-          <button
-            onClick={this.deleteProduct}
-            type="button"
-            className="btn btn-danger float-right">
-            Delete Product
-          </button>
+            <div className="col-sm">
+            { user.userType === 'administrator' &&
+              <ul className="product-edit-admin">
+                <li>
+                  <Link
+                    to={`/updateProduct/${product.id}`}
+                    style={style.link}>edit
+                  </Link>
+                </li>
+                <li>
+                  <span className="badge badge-danger">
+                    <a onClick={this.deleteProduct} href="#"> delete </a>
+                  </span>
+                </li>
+              </ul>
+            }
+            </div>
+
+            <div className="col-sm">
+
+              <button
+                onClick={this.handleCartAdd}
+                type="button"
+                className="btn btn-primary">
+                Add to cart
+              </button>
+
+            </div>
+          </div>
 
         </div>
       </div>
@@ -89,7 +118,8 @@ const mapDispatchToProps = (dispatch) => {
     addToCart: (info) => {
       dispatch(updateWithAdded(info))
     },
-    removeProduct: (productId) => dispatch(removeAProduct(productId))
+    removeProduct: (productId) => dispatch(removeAProduct(productId)),
+    toggleAvailability: (message, productId) => dispatch(updateProductThunk(message, productId))
   }
 }
 

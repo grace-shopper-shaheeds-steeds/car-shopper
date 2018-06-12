@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router()
 const Review = require('../db/models/review')
+const User = require('../db/models/user')
 
 // GET - /api/reviews
 router.get('/', async (req, res, next) => {
   try {
-    const allReviews = await Review.findAll()
+    const allReviews = await Review.findAll({
+      include: [{model: User}]
+    })
     res.json(allReviews)
   } catch (err) { next(err) }
 })

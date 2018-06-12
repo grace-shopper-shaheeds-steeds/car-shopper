@@ -10,7 +10,7 @@ const AuthForm = (props) => {
   const {name, displayName, handleSubmit, error} = props
 
   const header = (
-    <h2 className="text-center">
+    <h2 className="text-center page-header">
       Account {name === 'login' ? 'Login' : 'Register'}
     </h2>
   )

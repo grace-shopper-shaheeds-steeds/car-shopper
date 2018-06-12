@@ -16,7 +16,7 @@ describe('UserHome', () => {
     userHome = shallow(<UserHome email="cody@email.com" />)
   })
 
-  it('renders the email in an h3', () => {
-    expect(userHome.find('h3').text()).to.be.equal('Welcome, cody@email.com')
+  it('renders the email in an h2', () => {
+    expect(userHome.find('h2').first().text()).to.be.equal('Welcome, cody@email.com!')
   })
 })

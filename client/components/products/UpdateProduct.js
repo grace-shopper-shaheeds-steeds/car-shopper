@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Select from 'react-select'
-import {updateProductThunk, getSingleProduct, getAllCategories, removeProductCategory} from '../../store'
+import {updateProductThunk, getSingleProduct, getAllCategories, removeProductCategory, toggleStatus} from '../../store'
+import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 export class UpdateProduct extends Component { // eslint-disable-line react/no-deprecated
   constructor(){
@@ -11,7 +12,7 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
       description: '',
       price: '',
       inventoryQuantity: '',
-      defaultCat: ''
+      defaultCat: '',
     }
   }
 
@@ -49,6 +50,7 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
       description: nextProps.singleProduct.description,
       price: nextProps.singleProduct.price,
       inventoryQuantity: nextProps.singleProduct.inventoryQuantity,
+
     })
   }
 
@@ -58,14 +60,30 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
     })
   }
 
+  productAvailability = async  () => {
+    await this.props.displaySingleProduct(this.props.match.params.productId)
+    let availability = !this.props.singleProduct.available
+    let message = {
+      title: this.props.singleProduct.title,
+      description: this.props.singleProduct.description,
+      price: this.props.singleProduct.price,
+      inventoryQuantity: this.props.singleProduct.inventoryQuantity,
+      available: availability
+    }
+    this.props.toggleAvailability(message, this.props.singleProduct.id)
+}
+
   render() {
+    const availability = this.props.singleProduct.available ? 'btn-success' : 'btn-secondary'
+    const availableText = this.props.singleProduct.available ? 'True' : 'False'
+
     return (
       <div className="container">
       {
         this.props.user.userType === 'administrator' ? (
 
         <div>
-          <h2 className="text-center">Update Product</h2>
+          <h2 className="text-center page-header">Update Product</h2>
 
           <div className="row justify-content-md-center">
           <div className="col col-md-6">
@@ -121,6 +139,12 @@ export class UpdateProduct extends Component { // eslint-disable-line react/no-d
 
               <button className="btn btn-primary" type="submit">Submit</button>
             </form>
+            <button
+              onClick={this.productAvailability}
+              type="button"
+              className={`btn ${availability} float-right`}>
+              Product Availability: {availableText}
+            </button>
 
           </div>
           </div>
@@ -150,7 +174,8 @@ const mapDispatchToProps = dispatch => {
     updateProduct: (updatedProduct, productId) => dispatch(updateProductThunk(updatedProduct, productId)),
     displaySingleProduct: (singleProductId) => dispatch(getSingleProduct(singleProductId)),
     displayCategories: () => dispatch(getAllCategories()),
-    removeACategory: (productId, updatedProduct) => dispatch(removeProductCategory(productId, updatedProduct))
+    removeACategory: (productId, updatedProduct) => dispatch(removeProductCategory(productId, updatedProduct)),
+    toggleAvailability: (message, productId) => dispatch(toggleStatus(message, productId))
   }
 }
 

@@ -12,6 +12,17 @@ a {
   text-decoration: none;
 }
 
+.page-header {
+  margin: 1em 0;
+}
+
+/*
+* === Navigation ===
+*/
+.navbar-dark .navbar-nav .dropdown-menu a.nav-link{
+  color: black
+}
+
 /*
 * === Product: Single ===
 */
@@ -29,6 +40,31 @@ a {
 
 .product-single .details {
   margin-bottom: 2em;
+}
+
+.product-single .avg-rating .dv-star-rating  {
+  top: 10px;
+  margin-top: -10px;
+}
+
+ul.product-edit-admin {
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+ul.product-edit-admin li a {
+  color: black
+}
+
+ul.product-edit-admin li span a {
+  color: white
+}
+
+.product-card img {
+  max-width: 100%;
+  max-height: 100%;
+  height: inherit !important;
 }
 
 /*
@@ -54,6 +90,30 @@ a {
   margin-bottom: 1em;
 }
 
+/*
+* === Product: Filter ===
+*/
+
+#cat-filter {
+  padding-bottom: 2em;
+}
+
+#cat-filter a {
+  color: black;
+}
+
+#cat-filter .title a {
+  font-weight: bold;
+}
+
+/*
+* === Product: Search ===
+*/
+
+#search-no-results {
+  margin: 0 auto;
+  padding: 2em 0;
+}
 /*
 * === Home Landing Page ===
 */
@@ -136,9 +196,7 @@ img.google-signin:active {
 .cartMainWrap {
   display: flex;
   flex-direction: column;
-  /* align-content: center; */
   text-align: center;
-  /* justify-content: center; */
   text-align: center;
   
 }
@@ -149,13 +207,9 @@ img.google-signin:active {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 30px;
-  /* padding-bottom: 20px; */
   border: 1px solid rgba(0,0,0,.125);
   border-radius: 25px;
-  /* padding-top: 20px; */
-  /* align-content: center; */
   align-items: center;
-  /* justify-content: center; */
 }
 
 .titleForCart {
@@ -208,4 +262,37 @@ img.google-signin:active {
 #checkoutbutton {
   margin-top: 20px;
   margin-bottom: 70px;
+}
+
+/*
+* === User Management ===
+*/
+
+.user-card button {
+  margin: 0.5em 0 1em 0;
+}
+
+/*
+* === Order Checkout ===
+*/
+#order-create {
+  margin-bottom: 2em;
+}
+
+#order-create .payment {
+  background-color: #efefef;
+  padding: 1em;
+  border-radius: 5px;
+}
+
+#order-create .order-product {
+  margin-bottom: 1em;
+}
+
+#order-single .order-item {
+  margin-bottom: 1em;
+}
+
+.order-user-details {
+  margin-top: 1em;
 }

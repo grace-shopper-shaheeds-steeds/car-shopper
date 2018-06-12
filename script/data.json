@@ -1,15 +1,56 @@
 
 [
   [
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
-    { "title": "Tesla Model X", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
-    { "title": "Tesla Model L", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
-    { "title": "Tesla Model T", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 },
-    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "https://i.imgur.com/5h3gEs5.png", "averageRating": 4.5, "price": 1000, "inventoryQuantity": 1, "soldQuantity": 0 }
+    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "/img/te1.jpg", "averageRating": 4.5, "price": 65950, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Tesla Model X", "description": "Lorem ipsum dolar site emit", "photo": "/img/te2.jpg", "averageRating": 3.5, "price": 47550, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 2 },
+    { "title": "Tesla Model L", "description": "Lorem ipsum dolar site emit", "photo": "/img/te3.jpg", "averageRating": 3.7, "price": 58480, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 2 },
+    { "title": "Tesla Model T", "description": "Lorem ipsum dolar site emit", "photo": "/img/te4.jpg", "averageRating": 4.8, "price": 53750, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 2 },
+    { "title": "Tesla Model A", "description": "Lorem ipsum dolar site emit", "photo": "/img/te5.jpg", "averageRating": 4.3, "price": 35950, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 3 },
+    { "title": "Tesla Model E", "description": "Lorem ipsum dolar site emit", "photo": "/img/te6.jpg", "averageRating": 3.3, "price": 44950, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 3 },
+    { "title": "Tesla Model S", "description": "Lorem ipsum dolar site emit", "photo": "/img/te7.jpg", "averageRating": 4.8, "price": 25750, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 2 },
+    { "title": "Tesla Model L", "description": "Lorem ipsum dolar site emit", "photo": "/img/te8.jpg", "averageRating": 3.6, "price": 34595, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 3 },
+    { "title": "Tesla Model Z", "description": "Lorem ipsum dolar site emit", "photo": "/img/te9.jpg", "averageRating": 3.3, "price": 51459, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 3 },
+    { "title": "Tesla Model Y", "description": "Lorem ipsum dolar site emit", "photo": "/img/te10.jpg", "averageRating": 3.3, "price": 51459, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 4 },
+    
+    { "title": "Aston Martin Spider", "description": "Lorem ipsum dolar site emit", "photo": "/img/am1.jpg", "averageRating": 4.7, "price": 175590, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Aston Martin Avenger", "description": "Lorem ipsum dolar site emit", "photo": "/img/am2.jpg", "averageRating": 4.2, "price": 253890, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Aston Martin Panther", "description": "Lorem ipsum dolar site emit", "photo": "/img/am3.jpg", "averageRating": 4.8, "price": 235290, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    
+    { "title": "Ferrari Spider", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe1.jpg", "averageRating": 4.8, "price": 255295, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Ferrari Giant Ant", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe2.jpg", "averageRating": 4.7, "price": 260395, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Ferrari Stinging Bee", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe3.jpg", "averageRating": 4.6, "price": 275695, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 4 },
+    { "title": "Ferrari MeowMeow Cat", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe4.jpg", "averageRating": 4.5, "price": 285495, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 4 },
+    { "title": "Ferrari Kuala", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe5.jpg", "averageRating": 4.4, "price": 295595, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 2 },
+    { "title": "Ferrari Tiger", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe6.jpg", "averageRating": 4.8, "price": 255295, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Ferrari Blackbear", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe7.jpg", "averageRating": 4.7, "price": 260395, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 2 },
+    { "title": "Ferrari Lion", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe8.jpg", "averageRating": 4.6, "price": 275695, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 4 },
+    { "title": "Ferrari Jaguar", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe9.jpg", "averageRating": 4.5, "price": 285495, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 4 },
+    { "title": "Ferrari Leopard", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe10.jpg", "averageRating": 4.4, "price": 295595, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 4 },
+    { "title": "Ferrari Longhorn", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe11.jpg", "averageRating": 4.8, "price": 255295, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 2 },
+    { "title": "Ferrari Grey Wolf", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe12.jpg", "averageRating": 4.7, "price": 260395, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 4 },
+    { "title": "Ferrari Condor", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe13.jpg", "averageRating": 4.6, "price": 275695, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 4 },
+    { "title": "Ferrari Eagle", "description": "Lorem ipsum dolar site emit", "photo": "/img/fe14.jpg", "averageRating": 4.5, "price": 285495, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 4 },
+
+    { "title": "Koenigsegg Agera Spider", "description": "Lorem ipsum dolar site emit", "photo": "/img/ko1.jpg", "averageRating": 4.8, "price": 455295, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Koenigsegg Agera Condor", "description": "Lorem ipsum dolar site emit", "photo": "/img/ko2.jpg", "averageRating": 4.7, "price": 470395, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Koenigsegg Agera Falcon", "description": "Lorem ipsum dolar site emit", "photo": "/img/ko3.jpg", "averageRating": 4.6, "price": 535695, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Koenigsegg Agera Eagle", "description": "Lorem ipsum dolar site emit", "photo": "/img/ko4.jpg", "averageRating": 4.5, "price": 585495, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Koenigsegg Agera Kuala", "description": "Lorem ipsum dolar site emit", "photo": "/img/ko5.jpg", "averageRating": 4.4, "price": 635595, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Koenigsegg Agera Tiger", "description": "Lorem ipsum dolar site emit", "photo": "/img/ko6.jpg", "averageRating": 4.8, "price": 575295, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Koenigsegg Agera Blackbear", "description": "Lorem ipsum dolar site emit", "photo": "/img/ko7.jpg", "averageRating": 4.7, "price": 630395, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Koenigsegg Agera Lion", "description": "Lorem ipsum dolar site emit", "photo": "/img/ko8.jpg", "averageRating": 4.6, "price": 425695, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Koenigsegg Agera Jaguar", "description": "Lorem ipsum dolar site emit", "photo": "/img/ko9.jpg", "averageRating": 4.5, "price": 515495, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Koenigsegg Agera Leopard", "description": "Lorem ipsum dolar site emit", "photo": "/img/ko10.jpg", "averageRating": 4.4, "price": 545595, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+
+    { "title": "Lamborghini Contact", "description": "Lorem ipsum dolar site emit", "photo": "/img/la1.jpg", "averageRating": 4.8, "price": 255295, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Lamborghini Avengheni", "description": "Lorem ipsum dolar site emit", "photo": "/img/la2.jpg", "averageRating": 4.7, "price": 260395, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Lamborghini Stingaghini", "description": "Lorem ipsum dolar site emit", "photo": "/img/la3.jpg", "averageRating": 4.6, "price": 275695, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 2 },
+    { "title": "Lamborghini Meowameoi", "description": "Lorem ipsum dolar site emit", "photo": "/img/la4.jpg", "averageRating": 4.5, "price": 285495, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 4 },
+    { "title": "Lamborghini Kualaouia", "description": "Lorem ipsum dolar site emit", "photo": "/img/la5.jpg", "averageRating": 4.4, "price": 295595, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Lamborghini Tigerini", "description": "Lorem ipsum dolar site emit", "photo": "/img/la6.jpg", "averageRating": 4.8, "price": 255295, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 1 },
+    { "title": "Lamborghini Blackbearaini", "description": "Lorem ipsum dolar site emit", "photo": "/img/la7.jpg", "averageRating": 4.7, "price": 260395, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 4 },
+    { "title": "Mercedes Benz Roadster X", "description": "Lorem ipsum dolar site emit", "photo": "/img/mb1.jpg", "averageRating": 4.8, "price": 55355, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 2 },
+    { "title": "McClaren Road Warrior", "description": "Lorem ipsum dolar site emit", "photo": "/img/mc1.jpg", "averageRating": 4.8, "price": 295345, "inventoryQuantity": 1, "soldQuantity": 0, "categoryId": 4 }
   ],
   [
     {"name": "Muscle Car" },
@@ -41,10 +82,6 @@
     {"status": "Open", "productId": 8, "orderId": 3},
     {"status": "Open", "productId": 9, "orderId": 3},
     {"status": "Open", "productId": 7, "orderId": 3}
-  ],
-  [
-    {"firstName": "sue", "lastName": "susan", "email": "sue@sue.com", "password": "c9448b13c0386588afa363bb83739ae02ef3fb1a9a8213ef408aed1c6107cf6d", "salt": "HBs2kheb19Un1Ddn6+BytQ==", "userType": "user" },
-    {"firstName": "bob", "lastName": "bobby", "email": "bob@bob.com", "password": "c9448b13c0386588afa363bb83739ae02ef3fb1a9a8213ef408aed1c6107cf6d", "salt": "HBs2kheb19Un1Ddn6+BytQ==", "userType": "administrator" }
   ],
   [
     {"content": "Lorem ipsum dolar sit emit", "rating": 4, "productId": 1, "userId": 1},

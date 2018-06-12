@@ -5,7 +5,6 @@ import UserCard from './UserCard'
 
 export class UserList extends Component {
 
-
     componentDidMount(){
         this.props.displayUsers()
     }
@@ -19,7 +18,11 @@ export class UserList extends Component {
                 <div>
                     <div className="row">
                         {
-                            this.props.userList.map(element =>{
+                            this.props.userList
+                            .sort((a,b) =>{
+                                return ( (a.id < b.id) ? 1 : ((b.id < a.id) ? -1 : 0) );
+                            })
+                            .map(element =>{
                                 return (
                                     <div key={element.id} className="col-md-auto">
                                         <UserCard user={element} />
@@ -27,12 +30,14 @@ export class UserList extends Component {
                                 )
                             })
                         }
+                        </div>
                     </div>
-                </div>
-            </div>: null
-        )
+                </div>: null
+            )
+        }
     }
-}
+
+        
 
 
 const mapStateToProps = state =>{

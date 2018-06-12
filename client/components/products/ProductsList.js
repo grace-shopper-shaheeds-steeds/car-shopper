@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import CategoryFilter from './CategoryFilter'
 import ProductCard from './ProductCard'
 import  { getAllProducts, getAllCategories } from '../../store'
+import history from '../../history'
 
 export class ProductsList extends Component {
 
@@ -21,17 +22,20 @@ export class ProductsList extends Component {
   handleCategoryClick = (event) => {
     event.preventDefault()
     const catId = Number(event.target.id)
+
     this.setState({
       display: catId
     })
+
+    history.push(`/products/category/${catId}`)
   }
 
   render(){
-    const { products, categories } = this.props
+    const { products, categories, user } = this.props
     return (
       <div className="container">
 
-        <h2 className="text-center">Cars Catalog</h2>
+        <h2 className="text-center page-header">Cars Catalog</h2>
 
         { products[0] ? (
         <div>
@@ -64,6 +68,11 @@ export class ProductsList extends Component {
 
               }
             })
+            .filter((product) =>{
+              if (((this.props.user.userType === undefined || this.props.user.userType === 'user') && product.available === true) || this.props.user.userType === 'administrator'){
+                return product
+              }
+            })
             .map((item) => {
               return (
                 <div key={item.id} className="col-md-auto">
@@ -87,7 +96,8 @@ export class ProductsList extends Component {
 const mapStateToProps = (state) => {
   return {
     products: state.productReducer.allProducts,
-    categories: state.productReducer.allCategories
+    categories: state.productReducer.allCategories,
+    user: state.user
   }
 }
 

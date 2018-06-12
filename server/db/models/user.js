@@ -54,7 +54,7 @@ const User = db.define('user', {
     type: Sequelize.VIRTUAL,
     get(){
       if(!!this.getDataValue('firstName')){
-        return this.getDataValue('firstName').slice(0,2) + this.getDataValue('id')
+        return this.getDataValue('email').slice(0,2) + this.getDataValue('id')
       }
     }
   }

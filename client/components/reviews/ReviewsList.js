@@ -4,10 +4,12 @@ import StarRating from 'react-star-rating-component'
 
 export class ReviewsList extends Component {
 
-  componentDidMount(){}
+  componentDidMount(){
+
+  }
 
   render() {
-    const { reviews } = this.props
+    const { reviews, user } = this.props
     return (
       <div className="review-list">
         {
@@ -15,7 +17,7 @@ export class ReviewsList extends Component {
             return (
               <div key={review.id} className="card">
                 <div className="card-header">
-                  User Id: {review.userId} - {review.createdAt}
+                  User Name: {review.user.userName} - {review.createDate}
                 </div>
                 <div className="card-body">
                   <blockquote className="blockquote mb-0">
@@ -38,5 +40,6 @@ export class ReviewsList extends Component {
     )
   }
 }
+
 
 export default connect()(ReviewsList)
