@@ -15,7 +15,7 @@ export class ReviewsList extends Component {
             return (
               <div key={review.id} className="card">
                 <div className="card-header">
-                  User Id: {review.userId} - {review.createdAt}
+                  User Id: {review.userId} - {review.createDate}
                 </div>
                 <div className="card-body">
                   <blockquote className="blockquote mb-0">

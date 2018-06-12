@@ -7,7 +7,15 @@ const Review = db.define('review', {
   },
   rating: {
     type: Sequelize.FLOAT
+  },
+  createDate: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW,
+    get(){
+      return this.getDataValue('createDate').toString().slice(0, 15)
+    }
   }
 })
+
 
 module.exports = Review

@@ -19,7 +19,11 @@ export class UserList extends Component {
                 <div>
                     <div className="row">
                         {
-                            this.props.userList.map(element =>{
+                            this.props.userList
+                            .sort((a,b) =>{
+                                return ( (a.id < b.id) ? 1 : ((b.id < a.id) ? -1 : 0) );
+                            })
+                            .map(element =>{
                                 return (
                                     <div key={element.id} className="col-md-auto">
                                         <UserCard user={element} />
