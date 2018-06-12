@@ -23,7 +23,7 @@ class Routes extends Component {
     }
   }
 
-  
+
   render () {
     const {isLoggedIn} = this.props
     return (
@@ -39,8 +39,9 @@ class Routes extends Component {
 
 
         <Route exact path="/products/search/:value" component={ProductSearchResults} />
+        <Route path="/products/category/:id" component={ProductsList} />
         <Route exact path="/products" component={ProductsList} />
-        <Route path="/products/:id" component={ProductSingle} />
+        <Route exact path="/products/:id" component={ProductSingle} />
 
         {
           isLoggedIn &&
