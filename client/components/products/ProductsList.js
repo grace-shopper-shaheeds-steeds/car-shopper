@@ -64,8 +64,8 @@ export class ProductsList extends Component {
 
               }
             })
-            .filter((product) => {
-              if ( (this.props.user.userType === 'user' && product.available === true) || this.props.user.userType === 'administrator' ){
+            .filter((product) =>{
+              if (((this.props.user.userType === undefined || this.props.user.userType === 'user') && product.available === true) || this.props.user.userType === 'administrator'){
                 return product
               }
             })
