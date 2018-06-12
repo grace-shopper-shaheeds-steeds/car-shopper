@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import CategoryFilter from './CategoryFilter'
 import ProductCard from './ProductCard'
 import  { getAllProducts, getAllCategories } from '../../store'
+import history from '../../history'
 
 export class ProductsList extends Component {
 
@@ -21,9 +22,12 @@ export class ProductsList extends Component {
   handleCategoryClick = (event) => {
     event.preventDefault()
     const catId = Number(event.target.id)
+
     this.setState({
       display: catId
     })
+
+    history.push(`/products/category/${catId}`)
   }
 
   render(){
