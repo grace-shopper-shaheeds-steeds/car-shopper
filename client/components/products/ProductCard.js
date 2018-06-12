@@ -84,12 +84,6 @@ export class ProductCard extends Component {
             className="btn btn-danger float-right">
             Delete Product
           </button>
-          <button
-            onClick={this.productAvailability}
-            type="button"
-            className="btn btn-success float-right">
-            Product Availability
-          </button>
         </div>
       </div>
     )
