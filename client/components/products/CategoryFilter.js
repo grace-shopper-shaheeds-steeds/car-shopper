@@ -3,9 +3,9 @@ import React from 'react'
 const Categories = ({categories, catSelect}) => {
 
   return (
-    <ul className="nav">
+    <ul className="nav" id="cat-filter">
 
-      <li className="nav-item">
+      <li className="nav-item title">
         <a className="nav-link disabled" href="#">Sort:</a>
       </li>
 
