@@ -17,6 +17,6 @@ describe('UserHome', () => {
   })
 
   it('renders the email in an h2', () => {
-    expect(userHome.find('h2').text()).to.be.equal('Welcome, cody@email.com!')
+    expect(userHome.find('h2').first().text()).to.be.equal('Welcome, cody@email.com!')
   })
 })
