@@ -28,7 +28,7 @@ class OrderCart extends Component {
                 }
                 <li className="list-group-item d-flex justify-content-between">
                   <span>Total (USD)</span>
-                  <strong>{cart.total}</strong>
+                  <strong>${cart.total}</strong>
                 </li>
  
             </ul>

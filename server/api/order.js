@@ -6,6 +6,8 @@ const User = require('../db/models/user')
 const Address = require('../db/models/address')
 const OrderItem = require('../db/models/orderItem')
 const Cart = require('../db/models/cart')
+const gsSendMail = require('@sendgrid/mail')
+gsSendMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 
 module.exports = router
@@ -70,7 +72,7 @@ router.post('/', async (req, res, next ) => {
       // if the user wants to save this address, then we'll update the user record with this new address
 
       const order = {
-        totalAmt: cart.total * 100,
+        totalAmt: cart.total,
         addressId: addressId,
         userId: userId
       }
@@ -88,6 +90,19 @@ router.post('/', async (req, res, next ) => {
       // clear out the cart
       const cartRecord = await Cart.findById(cart.id)
       await cartRecord.update({products: null})
+
+      // send out email
+      let confirmMessage = '<h5>Hello '+ address.firstName + ' ' + address.lastName + '.</h5> <br/>Thank you for shopping with us.  Your order number is<strong>: ' + newOrder.id + '</strong><br/>'
+      confirmMessage += '<br/><br/>We will send a confirmation when your order ships.'
+
+      const message = {
+        to: address.email,
+        from: 'Grace.Shopper.Admin@graceshopper.com',
+        subject: 'Your graceshopper.com order',
+        html: confirmMessage
+      };
+      
+      await gsSendMail.send(message);
 
       newOrder = await Order.findOne({ 
         where: { id: newOrder.dataValues.id },

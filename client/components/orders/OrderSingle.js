@@ -47,7 +47,7 @@ class OrderSingle extends Component {
               <h5 className="card-header">Order Number: {order.id}</h5>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">Status: {order.status} </li>
-                <li className="list-group-item">Total: ${order.totalAmt / 100.00}</li>
+                <li className="list-group-item">Total: ${order.totalAmt}</li>
               </ul>
             </div>
 

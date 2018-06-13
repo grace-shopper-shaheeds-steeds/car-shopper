@@ -76,7 +76,7 @@ export class OrdersList extends Component {
                     </th>
 
                     <td>{dStr}</td>
-                    <td>${order.totalAmt / 100.00 }</td>
+                    <td>${order.totalAmt}</td>
                     <td>{user.email}</td>
                     <td>{order.status}</td>
                   </tr>
