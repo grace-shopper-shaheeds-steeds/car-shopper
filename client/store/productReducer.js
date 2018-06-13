@@ -177,6 +177,7 @@ const initialState = {
   },
   allCategory: [],
   error: ''
+
 }
 
 export const productReducer = ( state = initialState, action) => {
@@ -184,7 +185,7 @@ export const productReducer = ( state = initialState, action) => {
     case ADD_PRODUCT:
       return {...state, allProducts: [...state.allProducts, action.newProduct]}
     case ADD_CATEGORY:
-      return {...state, allCategory: [...state.allCategory, action.category]}
+      return {...state, allCategory: [...state.allCategories, action.category]}
     case GET_ALL_PRODUCTS:
       return {...state, allProducts: action.products}
     case GET_ALL_CATEGORIES:
@@ -203,7 +204,7 @@ export const productReducer = ( state = initialState, action) => {
       return {...state, allProducts: newArr}
     case ERROR_MESSAGE:
       return {...state, error: action.error}
-    case TOGGLE_AVAILABILITY: 
+    case TOGGLE_AVAILABILITY:
       return {...state, singleProduct: action.product}
     default:
       return state

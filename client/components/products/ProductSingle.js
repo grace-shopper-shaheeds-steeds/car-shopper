@@ -27,7 +27,6 @@ export class ProductSingle extends Component {
   render () {
     const { product, user } = this.props
     const quantity = product.inventoryQuantity - product.soldQuantity
-
     return (
       <div className="container product-single">
           {
