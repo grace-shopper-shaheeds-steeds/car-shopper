@@ -19,6 +19,9 @@ const Review = db.define('review', {
 })
 
 Review.afterCreate( async (instance) => {
+
+  if (!instance.productId) return ''
+
   const productId = instance.productId
 
   const reviews = await Review.findAll({
@@ -27,15 +30,12 @@ Review.afterCreate( async (instance) => {
     }
   })
 
-  let reviewCount = 0
-
   const total = reviews.reduce((acc, review) => {
-    reviewCount++
     acc += review.rating
     return acc
   }, 0)
 
-  const averageRating = Math.round( (total / reviewCount ) * 10 ) / 10
+  const averageRating = Math.round( (total / reviews.length ) * 10 ) / 10
 
   await Product.update({
     averageRating
