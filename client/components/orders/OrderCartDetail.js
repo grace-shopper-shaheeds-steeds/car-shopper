@@ -23,7 +23,7 @@ function OrderCartDetail(props) {
           <p>Qty: {props.qty}</p>
         </div>
         <div className="col-3">
-          ${insertDecimal(product.price)}
+          ${product.price}
         </div>
     </div>
   )

@@ -80,14 +80,14 @@ class Cart extends React.Component {
                   <button className='btn btn-danger' onClick={() => this.handleDelete(product.id)}>Remove</button>
                 </div>
                 <div className='cartdescrip'>Description: {product.description}</div>
-                <div>Unit Price: {product.price}</div>
+                <div>Unit Price: ${product.price}</div>
                 <div>
                   <div className='cartQuant'>quantity {cart.quantity[product.id]}</div>
                   <div className='incDecParent'>
                     <button id='dec' className='btn btn-warning' onClick={() => this.handleDecrement(product.id)}>- 1</button>
                     <button id='inc' className='btn btn-primary' onClick={() => this.handleIncrement(product.id)}>+ 1</button>
                   </div>
-                  <h4 className='cartSubtotal'>Subtotal: {subTotal}</h4>
+                  <h4 className='cartSubtotal'>Subtotal: ${subTotal}</h4>
                 </div>
               </div>
               
@@ -95,7 +95,7 @@ class Cart extends React.Component {
           )
         })
       }
-      <h2>Total: {cart.total}</h2>
+      <h2>Total: ${cart.total}</h2>
       <Link to='/orders/create/'>
       <button id='checkoutbutton' className='btn btn-success'>Proceed to Checkout</button>
       </Link>
