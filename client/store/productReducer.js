@@ -157,8 +157,7 @@ const initialState = {
   searchResult: {
     value: '',
     matches: []
-  },
-  allCategory: []
+  }
 }
 
 export const productReducer = ( state = initialState, action) => {
@@ -166,7 +165,7 @@ export const productReducer = ( state = initialState, action) => {
     case ADD_PRODUCT:
       return {...state, allProducts: [...state.allProducts, action.newProduct]}
     case ADD_CATEGORY:
-      return {...state, allCategory: [...state.allCategory, action.category]}
+      return {...state, allCategory: [...state.allCategories, action.category]}
     case GET_ALL_PRODUCTS:
       return {...state, allProducts: action.products}
     case GET_ALL_CATEGORIES:
@@ -183,7 +182,7 @@ export const productReducer = ( state = initialState, action) => {
     case REMOVE_PRODUCT:
       let newArr = state.allProducts.filter(product => product.id !== action.productId)
       return {...state, allProducts: newArr}
-    case TOGGLE_AVAILABILITY: 
+    case TOGGLE_AVAILABILITY:
       return {...state, singleProduct: action.product}
     default:
       return state

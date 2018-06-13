@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import ReviewSubmit from './ReviewSubmit'
 import ReviewsList from './ReviewsList'
 import ReviewLogin from './ReviewLogin'
-import {addProductReview, getProductReviews} from '../../store'
+import {addProductReview, getProductReviews, getSingleProduct} from '../../store'
 
 export class ReviewsMain extends Component {
   constructor(){
@@ -40,6 +40,8 @@ export class ReviewsMain extends Component {
       rating: 0,
       content: ''
     })
+
+    this.props.getSingleProduct(this.props.productId)
   }
 
   componentDidUpdate (prevProps) {
@@ -114,6 +116,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     productReviews: (id) => {
       dispatch(getProductReviews(id))
+    },
+    getSingleProduct: (id) => {
+      dispatch(getSingleProduct(id))
     }
   }
 }

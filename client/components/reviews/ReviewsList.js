@@ -1,15 +1,7 @@
-import React, {Component} from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import StarRating from 'react-star-rating-component'
 
-export class ReviewsList extends Component {
-
-  componentDidMount(){
-
-  }
-
-  render() {
-    const { reviews, user } = this.props
+const ReviewsList = ({ reviews }) => {
     return (
       <div className="review-list">
         {
@@ -38,8 +30,6 @@ export class ReviewsList extends Component {
         }
       </div>
     )
-  }
 }
 
-
-export default connect()(ReviewsList)
+export default ReviewsList
