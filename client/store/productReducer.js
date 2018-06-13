@@ -10,6 +10,7 @@ const UPDATED_PRODUCT = 'UPDATED_PRODUCT'
 const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 const TOGGLE_AVAILABILITY = 'TOGGLE_AVAILABILITY'
+const ERROR_MESSAGE = 'ERROR_MESSAGE'
 
 const addProduct = newProduct => {
   return {
@@ -67,11 +68,23 @@ const toggleAvailability = product =>{
   }
 }
 
+const errorCreator = error => {
+  return {
+    type: ERROR_MESSAGE,
+    error
+  }
+}
+
 export const addNewProduct = newProduct => {
   return async(dispatch) => {
     const res = await axios.post('/api/admin/products', newProduct)
     const createdProduct = res.data
-    dispatch(addProduct(createdProduct))
+    if(createdProduct.errorMessage){
+      dispatch(errorCreator(createdProduct.errorMessage))
+    } else {
+      dispatch(addProduct(createdProduct))
+      history.push(`/products`)
+    }
   }
 }
 
@@ -120,8 +133,12 @@ export const addNewCategory = newCategory => {
   return async dispatch =>{
     const res = await axios.post('/api/admin/category', newCategory)
     const category = res.data
-    dispatch(addCategory(category))
-    history.push("/products")
+    if(category.errorMessage){
+      dispatch(errorCreator(category.errorMessage))
+    } else {
+      dispatch(addCategory(category))
+      history.push("/products")
+    }
 
   }
 }
@@ -157,7 +174,10 @@ const initialState = {
   searchResult: {
     value: '',
     matches: []
-  }
+  },
+  allCategory: [],
+  error: ''
+
 }
 
 export const productReducer = ( state = initialState, action) => {
@@ -182,6 +202,8 @@ export const productReducer = ( state = initialState, action) => {
     case REMOVE_PRODUCT:
       let newArr = state.allProducts.filter(product => product.id !== action.productId)
       return {...state, allProducts: newArr}
+    case ERROR_MESSAGE:
+      return {...state, error: action.error}
     case TOGGLE_AVAILABILITY:
       return {...state, singleProduct: action.product}
     default:

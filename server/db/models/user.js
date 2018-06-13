@@ -93,12 +93,9 @@ User.encryptPassword = function (plainText, salt) {
 
 User.isAdmin = async function (userId){
   const user = await User.findById(userId)
-  console.log('user.userType: ', user.userType)
   if(user.userType === 'administrator'){
-    console.log(true)
     return true;
   } 
-  console.log(false)
   return false
 }
 

@@ -58,8 +58,6 @@ class Cart extends React.Component {
       return false
     })
 
-    console.log('trying to commit')
-
     return (
     <div className='cartMainWrap'>
       {

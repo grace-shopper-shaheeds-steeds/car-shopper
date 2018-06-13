@@ -29,12 +29,15 @@ class AddCategory extends Component {
         <div className="row justify-content-md-center">
         <div className="col col-md-6">
         { this.props.user.userType === 'administrator' ? (
+          <div>
           <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
             <div className="form-group">
               <input name="name" type="text" className="form-control" placeholder="Category Name" />
             </div>
             <button type="submit" className="btn btn-secondary btn-block">Submit</button>
           </form>
+            {(this.props.error) ? <div id="error">{this.props.error}</div> : null}
+          </div>
           ) : (
           <div><h1>You are not an admin</h1></div>
           )
@@ -50,7 +53,8 @@ class AddCategory extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    categoryList: state.allCategories
+    categoryList: state.allCategories,
+    error: state.productReducer.error
   }
 }
 

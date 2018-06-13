@@ -14,7 +14,6 @@ import axios from 'axios'
 class Routes extends Component {
 
   async componentDidMount () {
-    console.log('window.localStorage: ', window.localStorage)
     this.props.loadInitialData()
     if (!(window.localStorage.getItem('tempUserId')) && !this.props.isLoggedIn) {
       const response = await axios.get('/api/cart/temp')

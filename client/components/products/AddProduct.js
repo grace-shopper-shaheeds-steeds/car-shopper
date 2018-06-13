@@ -10,10 +10,10 @@ class AddProduct extends Component {
   constructor() {
     super();
     this.state = {
-      title: '',
-      description: '',
-      price: '',
-      inventoryQuantity: ''
+      // title: '',
+      // description: '',
+      // price: '',
+      // inventoryQuantity: ''
     }
   }
 
@@ -30,17 +30,6 @@ class AddProduct extends Component {
   handleSubmit = async event => {
     event.preventDefault()
     await this.props.createProduct(this.state)
-
-    this.setState({
-      title: '',
-      description: '',
-      price: '',
-      photo: '',
-      inventoryQuantity: '',
-      category: ''
-    })
-
-    history.push(`/products`)
   }
 
   categoryOptions = () => {
@@ -50,6 +39,8 @@ class AddProduct extends Component {
   }
 
   render() {
+    let errorArr = this.props.error.split(',').map(elem => elem.slice(27))
+        // .map(elem => elem.split(' ').map(elem => elem === 'null' ? 'empty' : elem)
     return ( this.props.user.userType === 'administrator' ?
       <div className="container">
 
@@ -101,6 +92,7 @@ class AddProduct extends Component {
 
             <button className="btn btn-primary" type="submit">Submit</button>
           </form>
+          {(this.props.error) ? errorArr.map(elem => elem[0] === '.' ? <div id="error">{elem.slice(1)}</div> : <div id="error">{elem}</div>): null}
 
           </div>
 
@@ -119,7 +111,8 @@ class AddProduct extends Component {
 const mapStateToProps = state =>{
     return {
         allCategories: state.productReducer.allCategories,
-        user: state.user
+        user: state.user,
+        error: state.productReducer.error
     }
 }
 

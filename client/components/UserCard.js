@@ -16,7 +16,8 @@ const style = {
 export class UserCard extends Component{
 
     deleteUser = () => {
-        if (window.confirm(`Are you sure you want to delete ${this.props.user.fullName}?`)){
+        let confirmName = !!this.props.user.firstName ? this.props.user.fullName : this.props.user.email
+        if (window.confirm(`Are you sure you want to delete ${confirmName}?`)){
           this.props.deleteAUser(this.props.user.id)
         }
     }
@@ -31,8 +32,6 @@ export class UserCard extends Component{
         let email = title !== this.props.user.email ?  this.props.user.email : null
         //User name logic for Oauth Login
         // let userName = this.props.user.userName ? this.props.user.userName : this.props.user.email.slice(0, 2) + this.props.user.id
-        console.log('email: ', this.props.user.email)
-        console.log('userName: ', this.props.user.userName)
         return (
 
         <div className="card user-card" style={style.component}>

@@ -131,7 +131,6 @@ describe('Admin Product Routes', () =>{
                 .send(changeAvailability)
                 .expect(200)
                 .then((res) =>{
-                    console.log('res.body in available update test')
                     expect(res.body.product.available).to.equal(false)
                 })
             })
@@ -210,7 +209,6 @@ describe('Admin Product Routes', () =>{
                     .send(newTitle)
                     .expect(403)
                     .then((res) =>{
-                        console.log('res.body in put route test: ', res.body)
                         expect(res.body).to.eql({})
                     })
             })
