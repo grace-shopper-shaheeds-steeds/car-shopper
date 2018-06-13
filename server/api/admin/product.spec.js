@@ -31,7 +31,7 @@ describe('Admin Product Routes', () =>{
             const sampleProduct = {
                 title: 'Prius',
                 description: 'fastest car alive',
-                price: 11,
+                price: 1100,
                 inventoryQuantity: 1,
             };
             it('Adding a new product to the database', () => {
@@ -42,7 +42,7 @@ describe('Admin Product Routes', () =>{
                     .then((res)=>{
                         expect(res.body.product.title).to.equal('Prius')
                         expect(res.body.product.description).to.equal('fastest car alive')
-                        expect(res.body.product.price).to.equal(11)
+                        expect(res.body.product.price).to.equal(11.00)
                         expect(res.body.product.inventoryQuantity).to.equal(1)
                     })
             })
