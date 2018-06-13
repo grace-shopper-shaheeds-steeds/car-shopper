@@ -76,7 +76,7 @@ class Cart extends React.Component {
               <img className='cartImage' src={product.photo} />
               <div className='halfCartItem'>
                 <div>
-                  <h3 classname='cartTitle'>Title: {product.title}</h3>
+                  <h3 className='cartTitle'>{product.title}</h3>
                   <button className='btn btn-danger' onClick={() => this.handleDelete(product.id)}>Remove</button>
                 </div>
                 <div className='cartdescrip'>Description: {product.description}</div>
