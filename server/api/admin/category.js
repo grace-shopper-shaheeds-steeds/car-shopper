@@ -52,4 +52,10 @@ router.delete('/:id', (req, res, next) => {
     .catch(next);
 });
 
+router.use((err, req, res, next) =>{
+  if(err.message === 'Validation error'){
+    res.send({errorMessage: 'This category already exists'})
+  }
+})
+
 

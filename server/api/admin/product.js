@@ -40,7 +40,6 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) =>{
     try{
-        console.log('req.body in admin put route: ', req.body)
         if(!!req.body.category){
             const category = await Category.findOne({
                 where: {
@@ -100,6 +99,13 @@ router.delete('/:id', async (req, res, next) =>{
         }
     })
     res.json({message: 'Successfully deleted'})
+})
+
+router.use((err, req, res, next) =>{
+    if(err.message.indexOf('notNull Violation') !== -1){
+        console.error('ERROR MESSAGE IN ERROR HANDLER: ', err.message) 
+        res.send({errorMessage: err.message})
+    }
 })
 
 module.exports = router

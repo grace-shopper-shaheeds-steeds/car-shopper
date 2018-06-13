@@ -32,7 +32,6 @@ describe('Admin User Routes', ()=>{
                 .get('/api/admin/user')
                 .expect(200)
                 .then((res)=>{
-                    console.log('res.body: ', res.body)
                     expect(res.body).to.be.an('array')
                     expect(res.body[0].firstName).to.equal('dan')
                     expect(res.body[0].lastName).to.equal('gutt')
@@ -59,7 +58,6 @@ describe('Admin User Routes', ()=>{
                 .send({userType: 'administrator'})
                 .expect(200)
                 .then((res) =>{
-                    //console.log('res.body', res.body)
                     expect(res.body.user).to.equal('administrator')
                 })
             })
@@ -116,7 +114,6 @@ describe('Admin User Routes', ()=>{
                 .send({userType: 'administrator'})
                 .expect(403)
                 .then((res) =>{
-                    //console.log('res.body', res.body)
                     expect(res.body).to.eql({})
                 })
             })

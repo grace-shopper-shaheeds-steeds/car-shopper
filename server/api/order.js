@@ -57,7 +57,6 @@ router.get('/:id', (req, res, next) => {
 
 // post a new order to product
 router.post('/', async (req, res, next ) => {
-  console.log(req.body)
   let {address, addressId, cart, userId, saveAddress, quantities, cartProducts} = req.body
   let products = req.body.cart.products
 

@@ -69,7 +69,6 @@ router.get('/:userId/products', async (req, res, next) => {
 
 router.put('/:userId/add', async (req, res, next) => {
   try {
-    console.log('req.body', req.body)
     let carId = req.body.carId
     const foundUser = await User.findById(req.params.userId)
     const foundCart = await Cart.findById(foundUser.cartId)

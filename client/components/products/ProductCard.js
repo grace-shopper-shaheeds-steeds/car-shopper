@@ -47,7 +47,6 @@ export class ProductCard extends Component {
         inventoryQuantity: +this.props.product.inventoryQuantity,
         available: availability
       }
-      console.log('message: ', message)
       this.props.toggleAvailability(message, this.props.product.id)
   }
 

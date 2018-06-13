@@ -37,7 +37,6 @@ router.get('/:id', (req, res, next) => {
 
 // post a new orderItem
 router.post('/', (req, res, next ) => {
-  console.log(req.body)
 
   OrderItem.create(req.body)
     .then(item => {

@@ -58,7 +58,6 @@ class Cart extends React.Component {
       return false
     })
 
-    console.log('uniqueProducts: ', uniqueProducts)
 
     return (
     <div>
