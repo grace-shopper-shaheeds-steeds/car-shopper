@@ -66,9 +66,9 @@ class Cart extends React.Component {
       <h3 className='titleForCart' >Cart for User {currentUser.email}</h3>
       {
         uniqueProducts.map(product => {
-          const subTotal = product.price * cart.quantity[product.id]
+          const subTotal = (product.price * cart.quantity[product.id]).toFixed(2)
 
-          if (!subTotal) return ''
+          if (!subTotal || isNaN(subTotal)) return ''
           return (
             <div key={product.id} className='eachProductInCart'>
               <img className='cartImage' src={product.photo} />
